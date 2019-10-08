@@ -1,0 +1,327 @@
+@font-face {
+    font-family: fuente;
+    src: url(CODE_Bold.otf);
+}
+html{
+    scroll-behavior: smooth;
+}
+body{
+    font-family: fuente !important;
+    overflow-x: hidden;
+    font-weight: bold;
+}
+.item {
+    width: 200px;
+    height: 200px;
+    margin: 50px auto;
+    padding-top: 75px;
+    background: #ccc;
+    text-align: center;
+    color: #FFF;
+    font-size: 3em;
+  }
+a:hover{
+    color: #fff !important;
+}
+p{
+    font-family: 'Helvetica';
+}
+.navbar{
+    transition: 0.4s ease;
+    background: transparent;
+}
+.navbar a{
+    color: white !important;
+}
+.scrolled{
+    background: black;
+    color: white;
+}
+.appear{
+    transition: all 1s ease;
+}
+.hidden{
+    opacity: 0;
+    transform: translate3d(0, 200px, 200px);
+}
+#primera-seccion{
+    height: 100vh;
+    /*background: url('https://cybermill.co.uk/wp-content/uploads/2017/01/webdesign-york.jpg') no-repeat center center;
+    background-position: cover;*/
+}
+#intro1{
+    padding: 50px;
+    text-align: center;
+}
+#intro2{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding: 100px 30px 100px 30px;
+    text-align: left;
+    background: #262626;
+    color: #fff;
+}
+.intro2-texto{
+    padding: 20px;
+}
+.titulo{
+    padding: 50px;
+    text-transform: uppercase;
+}
+#intro1, #intro2{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+#proyectos{
+    padding: 20px;
+    text-align: center;
+}
+.col-lg-4{
+    height: 400px;
+    /*background: url('https://cdn.pixabay.com/photo/2018/05/18/15/30/webdesign-3411373_960_720.jpg') no-repeat center center;*/
+}
+#integrantes{
+    margin: 20px;
+    padding: 20px;
+}
+.persona-container{
+    width: 100%;
+    margin-right: auto;
+      margin-left: auto;
+    /*top: 50%;
+    left: 50%;
+    vertical-align: middle;
+    transform:translate(-50%,-50%);*/
+}
+.persona{
+    color: grey;
+    padding: 20px;
+    text-align: center;
+    width: 10%;
+    word-wrap: break-word;
+    overflow: hidden;
+}
+.persona p{
+    font-style: italic;
+    font-size: 0.8em;
+}
+.img-persona{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 5px black solid;
+    padding: 2px;
+    margin: 15px;
+    box-shadow: 0px 0px 6px black;
+}
+.item-intro{
+    color: grey;
+    padding: 20px;
+    text-align: center;
+    width: 10%;
+    word-wrap: break-word;
+    overflow: hidden;
+}
+.item-intro i{
+    font-size: 5em;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+#contacto{
+    padding: 50px;
+}
+#footer{
+    margin-top: 40px;
+    text-align: center;
+    padding: 30px;
+    background-color: grey !important;
+}
+.texto-footer{
+    text-align: center;
+    width: 100%;
+}
+.image {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+    background-color: grey;
+}
+.container-proyectos{
+    margin: 0;
+    padding: 0;
+    /*background: url('abogada.jpg');*/
+}
+.container-proyectos:hover .overlay {
+    opacity: 1;
+}
+.img-proyectos{
+    /*width: 100%;
+    height: 100%;*/
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    padding: 0;
+    /*filter: grayscale(100%);*/
+}
+.img-proyectos-adentro{
+    width: 100%;
+    height: 100%;
+    opacity: .4;
+    filter: grayscale(100%);
+}
+.text-img-proyectos{
+    font-size: 0.7em;
+    font-family: Helvetica;
+    font-style: italic;
+    font-weight: 100;
+    color: grey;
+}
+.text{
+    color: white;
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background: black;
+    padding: 20px;
+    border-radius: 10px;
+}
+.text a{
+    color: #fff;
+}
+/******************/
+
+#particles-js {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #b61924;
+    background-image: url("../img/wave.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: 0% 100%;
+
+}
+
+/* ---- stats.js ---- */
+@keyframes slideAutoTitulo {
+    0% {
+      top: 25%;
+      opacity: 0;
+    }
+    100% {
+      top: 50%;
+      opacity: 1;
+    }
+  }
+.count-particles{
+    animation: 0.8s ease-out 0s 1 slideAutoTitulo;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    vertical-align: middle;
+    transform:translate(-50%,-50%);
+    color: #fff;
+    font-size: 5em;
+    text-align: center;
+    text-indent: 4px;
+    font-weight: bold;
+}
+#particles-js{
+    height: 100%;
+    background-color: #262626;
+}
+.redes{
+    font-size: 3em;
+    width: 100%;
+    text-align: center;
+}
+.row-form{
+    margin-bottom: 15px;
+}
+@keyframes brand-particle{
+    0%{
+        color: orange;
+        margin-bottom: -40px;
+    }
+    30%{
+        letter-spacing: 25px;
+        margin-bottom: -40px;
+    }
+    85%{
+        letter-spacing: 8px;
+        margin-bottom: -40px;
+    }
+}
+.sticky {
+    position: fixed;
+    top: 0;
+    background-color: black;
+    color: #fff;
+}
+.nuestro-equipo{
+    text-align: center;
+    font-size: 2em;
+}
+.vera{
+    font-size: 2em;
+    font-family: Georgia;
+    font-weight: 100;
+    text-shadow: 1px 1px 2px grey;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    vertical-align: middle;
+    transform:translate(-50%,-50%);
+}
+.boton{
+    padding: 10px;
+    background-color: #FFD800;
+    border-radius: 10px;
+    color: black;
+}
+
+/* form */
+input, textarea{
+    font-family: Helvetica !important;
+    display: block;
+    width: 100%;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    background-color: #fff;
+    background-clip: padding-box;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+input:focus{
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 4px solid #ced4da;
+}
