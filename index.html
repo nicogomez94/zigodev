@@ -9,6 +9,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/contacto.css">
 </head>
 <body>
 
@@ -19,14 +20,12 @@
 			</div>
 			<nav>
 				<ul>
-					<li><a href="#">Inicio</a></li>
-					<li><a href="#">Todas las p&aacute;ginas</a></li>
-					<li><a href="#">Precios</a></li>
-					<li><a href="#">Blog</a></li>
-					<li><a href="#">Contacto</a></li>
+					<li><a href="index.html">Inicio</a></li>
+					<li><a href="servicios.html">Servicios</a></li>
+					<li><a href="contacto.html">Acerca De</a></li>
 				</ul>
 			</nav>
-			<a href="#" class="cta-button header-cta">Obtener esta plantilla</a>
+			<a href="contacto.html" class="cta-button header-cta">Ponete en Contacto</a>
 		</div>
 	</header>
 
@@ -37,7 +36,7 @@
 				<h1>El <span class="rehanced">SaaS con IA</span> que tu producto necesita<span class="rehanced">.</span></h1>
 				<p>Nuestra soluci&oacute;n SaaS con inteligencia artificial mejora tu producto con IA avanzada, optimizando operaciones e impulsando la eficiencia e innovaci&oacute;n.</p>
 				<div class="hero-buttons">
-					<a href="#" class="cta-button hero-cta-main">Obtener plantilla</a>
+					<a href="#" class="cta-button hero-cta-main">Ponete en Contacto</a>
 					<a href="#" class="cta-button cta-button-outline hero-cta-secondary">Saber m&aacute;s</a>
 				</div>
 				<div class="hero-graphic">
@@ -67,8 +66,7 @@
 					<p>Escala tus operaciones f&aacute;cilmente seg&uacute;n tus necesidades, sin limitaciones de hardware ni configuraciones complejas, todo impulsado por nuestro n&uacute;cleo de IA inteligente.</p>
 				</div>
 				<div class="image-content">
-					<img src="https://via.placeholder.com/600x400/555/eee?text=Video+Thumbnail" alt="Persona usando computadora port&aacute;til">
-					<button class="play-button" aria-label="Reproducir video"><i class="fas fa-play"></i></button>
+					<img src="img/chabon.png" alt="Persona usando computadora port&aacute;til">
 				</div>
 			</div>
 		</section>
@@ -99,6 +97,33 @@
 				</div>
 			</div>
 		</section>
+
+		<section id="formu_contacto_df">
+			<div class="contact-form-container">
+				<h2>Ponerse en Contacto</h2>
+				<form action="#" method="POST"> <div class="form-group">
+						<label for="name">Nombre</label>
+						<input type="text" id="name" name="name" placeholder="Tu nombre completo" required>
+					</div>
+					<div class="form-group">
+						<label for="email">Correo Electrónico</label>
+						<input type="email" id="email" name="email" placeholder="tuemail@ejemplo.com" required>
+					</div>
+					<div class="form-group">
+						<label for="subject">Asunto</label>
+						<input type="text" id="subject" name="subject" placeholder="Motivo de tu consulta">
+					</div>
+					<div class="form-group">
+						<label for="message">Mensaje</label>
+						<textarea id="message" name="message" placeholder="Escribe tu mensaje aquí..." required></textarea>
+					</div>
+					<button type="submit" class="submit-button">
+						Enviar Mensaje <span class="arrow">&rarr;</span>
+					</button>
+				</form>
+			</div>
+		</section>
+
 	</main>
 
 	<footer>
