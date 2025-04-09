@@ -267,6 +267,7 @@
     display: grid;
     grid-template-columns: 1fr 1.5fr; /* Columna de info más pequeña */
     gap: 50px; /* Espacio entre columnas */
+    margin-top: 40px;
 }
 .contact-info {
     padding: 35px;

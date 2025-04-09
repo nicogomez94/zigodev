@@ -27,6 +27,10 @@ body {
     overflow-x: hidden;
 }
 
+.logo a:link{
+    color: #FFFFFF;
+}
+
 h1, h2, h3, h4, h5, h6 {
     color: var(--text-headings);
     margin-bottom: 0.7em;
@@ -319,7 +323,6 @@ nav ul li a:hover::after {
     position: relative; /* Para el botón play */
     border-radius: 12px;
     overflow: hidden; /* Para que el borde redondeado afecte a la imagen */
-     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
 
  .image-content img {
