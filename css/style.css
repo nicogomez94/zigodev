@@ -45,8 +45,8 @@ a {
     transition: color 0.3s ease;
 }
 
-.logo a:link{
-    color: #FFFFFF;
+.logo a:link, a:visited, a:hover{
+    color: #FFFFFF !important;
 }
 
 a:hover {
