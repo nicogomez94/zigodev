@@ -27,10 +27,6 @@ body {
     overflow-x: hidden;
 }
 
-.logo a:link{
-    color: #FFFFFF;
-}
-
 h1, h2, h3, h4, h5, h6 {
     color: var(--text-headings);
     margin-bottom: 0.7em;
@@ -47,6 +43,10 @@ a {
     color: var(--accent-violet);
     text-decoration: none;
     transition: color 0.3s ease;
+}
+
+.logo a:link{
+    color: #FFFFFF;
 }
 
 a:hover {
