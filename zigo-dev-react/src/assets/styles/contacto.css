@@ -1,0 +1,455 @@
+
+.contact-page{
+    margin-top: 40px;
+}
+
+ /* Contenedor del Formulario */
+        .contact-form-container {
+            background-color: var(--bg-card);
+            padding: 40px 35px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            max-width: 600px; /* Ancho máximo del formulario */
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .contact-form-container h2 {
+            color: var(--text-headings);
+            font-size: 2em;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        /* Grupo de Formulario (Label + Input) */
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block; /* Label encima del input */
+            color: var(--text-medium);
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 0.9em;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            background-color: #2f2f3d; /* Un poco más claro que el fondo de tarjeta */
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-light);
+            font-family: var(--font-primary);
+            font-size: 1em;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-group input[type="text"]::placeholder,
+        .form-group input[type="email"]::placeholder,
+        .form-group textarea::placeholder {
+            color: var(--text-medium);
+            opacity: 0.7;
+        }
+
+        /* Estilo de Foco */
+        .form-group input[type="text"]:focus,
+        .form-group input[type="email"]:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-purple);
+            box-shadow: 0 0 0 3px rgba(138, 43, 226, 0.3); /* Sutil brillo morado */
+        }
+
+        .form-group textarea {
+            min-height: 120px; /* Altura mínima para el área de texto */
+            resize: vertical; /* Permitir redimensionar verticalmente */
+        }
+
+        /* Botón de Envío */
+        .submit-button {
+            display: block; /* Ocupar ancho completo */
+            width: 100%;
+            padding: 14px 25px;
+            background-color: var(--accent-purple);
+            color: var(--text-headings);
+            border: none;
+            border-radius: 6px;
+            font-family: var(--font-primary);
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            text-align: center;
+        }
+
+        .submit-button:hover {
+            background-color: var(--accent-purple-darker);
+            transform: translateY(-2px); /* Ligero levantamiento */
+        }
+
+        .submit-button .arrow {
+            margin-left: 8px; /* Espacio antes de la flecha */
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .submit-button:hover .arrow {
+            transform: translateX(3px); /* Mover flecha al pasar el ratón */
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 480px) {
+            .contact-form-container {
+                padding: 30px 25px;
+            }
+            .contact-form-container h2 {
+                font-size: 1.8em;
+            }
+            .form-group input[type="text"],
+            .form-group input[type="email"],
+            .form-group textarea {
+                padding: 10px 12px;
+                font-size: 0.95em;
+            }
+             .submit-button {
+                 padding: 12px 20px;
+                 font-size: 1em;
+             }
+        }
+
+
+
+
+        /*conbtactoi*/
+
+
+/* Contenedor del Formulario */
+.contact-form-container {
+    background-color: var(--bg-card);
+    padding: 40px 35px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    max-width: 600px; /* Ancho máximo del formulario */
+    width: 100%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.contact-form-container h2 {
+    color: var(--text-headings);
+    font-size: 2em;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Grupo de Formulario (Label + Input) */
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block; /* Label encima del input */
+    color: var(--text-medium);
+    margin-bottom: 8px;
+    font-weight: 500;
+    font-size: 0.9em;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    background-color: #2f2f3d; /* Un poco más claro que el fondo de tarjeta */
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    color: var(--text-light);
+    font-family: var(--font-primary);
+    font-size: 1em;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input[type="text"]::placeholder,
+.form-group input[type="email"]::placeholder,
+.form-group textarea::placeholder {
+    color: var(--text-medium);
+    opacity: 0.7;
+}
+
+/* Estilo de Foco */
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent-purple);
+    box-shadow: 0 0 0 3px rgba(138, 43, 226, 0.3); /* Sutil brillo morado */
+}
+
+.form-group textarea {
+    min-height: 120px; /* Altura mínima para el área de texto */
+    resize: vertical; /* Permitir redimensionar verticalmente */
+}
+
+/* Botón de Envío */
+.submit-button {
+    display: block; /* Ocupar ancho completo */
+    width: 100%;
+    padding: 14px 25px;
+    background-color: var(--accent-purple);
+    color: var(--text-headings);
+    border: none;
+    border-radius: 6px;
+    font-family: var(--font-primary);
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-align: center;
+}
+
+.submit-button:hover {
+    background-color: var(--accent-purple-darker);
+    transform: translateY(-2px); /* Ligero levantamiento */
+}
+
+.submit-button .arrow {
+    margin-left: 8px; /* Espacio antes de la flecha */
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.submit-button:hover .arrow {
+    transform: translateX(3px); /* Mover flecha al pasar el ratón */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 480px) {
+    .contact-form-container {
+        padding: 30px 25px;
+    }
+    .contact-form-container h2 {
+        font-size: 1.8em;
+    }
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group textarea {
+        padding: 10px 12px;
+        font-size: 0.95em;
+    }
+     .submit-button {
+         padding: 12px 20px;
+         font-size: 1em;
+     }
+}
+
+/*pagina de contacto*/
+
+/* --- Layout de Contacto (Info + Form) --- */
+.contact-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr; /* Columna de info más pequeña */
+    gap: 50px; /* Espacio entre columnas */
+    margin-top: 40px;
+}
+.contact-info {
+    padding: 35px;
+}
+/* --- Columna de Información --- */
+.contact-info h3 {
+    font-size: 1.6em;
+    margin-bottom: 15px;
+    border-left: 4px solid var(--accent-purple); /* Detalle visual */
+    padding-left: 10px;
+}
+
+.contact-info p {
+    margin-bottom: 25px;
+}
+
+.contact-info ul {
+    list-style: none;
+    margin-bottom: 30px;
+}
+
+.contact-info li {
+    display: flex;
+    align-items: flex-start; /* Alinear al inicio si el texto tiene varias líneas */
+    margin-bottom: 20px;
+    color: var(--text-light);
+    font-size: 1.05em;
+}
+
+.contact-info .icon {
+    color: var(--accent-purple);
+    font-size: 1.3em;
+    margin-right: 15px;
+    margin-top: 3px; /* Ajuste vertical */
+    width: 25px; /* Ancho fijo para alineación */
+    text-align: center;
+}
+
+/* --- Mapa Placeholder --- */
+.map-placeholder h4 {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+    color: var(--text-medium);
+}
+
+.map-placeholder img,
+.map-placeholder iframe {
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    width: 100%;
+    height: 250px;
+    object-fit: cover; /* Para la imagen placeholder */
+}
+
+/* --- Contenedor y Formulario de Contacto --- */
+.contact-form-wrapper {
+    background-color: var(--bg-card);
+    padding: 35px 30px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+.contact-form-wrapper h3 {
+    font-size: 1.6em;
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    color: var(--text-medium);
+    margin-bottom: 8px;
+    font-weight: 500;
+    font-size: 0.9em;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    color: var(--text-light);
+    font-family: var(--font-primary);
+    font-size: 1em;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input[type="text"]::placeholder,
+.form-group input[type="email"]::placeholder,
+.form-group textarea::placeholder {
+    color: var(--text-medium);
+    opacity: 0.7;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent-purple);
+    box-shadow: 0 0 0 3px rgba(138, 43, 226, 0.3);
+}
+
+.form-group textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* --- Botón de Envío --- */
+.submit-button {
+    display: inline-block; /* O block si prefieres ancho completo */
+    padding: 13px 30px;
+    background-color: var(--accent-purple);
+    color: var(--text-headings);
+    border: none;
+    border-radius: 6px;
+    font-family: var(--font-primary);
+    font-size: 1.05em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-align: center;
+}
+
+.submit-button:hover {
+    background-color: var(--accent-purple-darker);
+    transform: translateY(-2px);
+}
+
+.submit-button .arrow {
+    margin-left: 8px;
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.submit-button:hover .arrow {
+    transform: translateX(3px);
+}
+
+/* --- Footer Simple (Opcional) --- */
+.site-footer-bottom {
+    text-align: center;
+    padding: 30px 0;
+    margin-top: 60px;
+    border-top: 1px solid var(--border-color);
+    color: var(--text-medium);
+    font-size: 0.9em;
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 992px) {
+    .contact-layout {
+        grid-template-columns: 1fr; /* Apilar columnas */
+        gap: 40px;
+    }
+    .page-title {
+        font-size: 2.4em;
+    }
+}
+
+@media (max-width: 768px) {
+    .site-header .container {
+        flex-direction: column;
+        gap: 15px;
+    }
+     .site-header nav ul {
+        justify-content: center;
+        flex-wrap: wrap;
+     }
+    .page-title {
+        font-size: 2.1em;
+    }
+     .page-subtitle {
+         font-size: 1em;
+         margin-bottom: 40px;
+     }
+    .contact-info h3, .contact-form-wrapper h3 {
+        font-size: 1.4em;
+    }
+    .contact-form-wrapper {
+        padding: 30px 25px;
+    }
+}
+
+@media (max-width: 480px) {
+     .page-title { font-size: 1.9em; }
+     .contact-info li { font-size: 1em; }
+     .contact-info .icon { font-size: 1.2em; }
+     .form-group input, .form-group textarea { font-size: 0.95em; }
+     .submit-button { width: 100%; } /* Botón ancho completo en móviles */
+}
