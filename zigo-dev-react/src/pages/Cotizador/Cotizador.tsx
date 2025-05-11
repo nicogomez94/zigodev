@@ -171,7 +171,8 @@ const Cotizador: React.FC = () => {
     if (currentStep <= 3) {
       const stepKey = `step${currentStep}` as keyof Selections;
       const stepValue = selections[stepKey];
-      if (!Array.isArray(stepValue) && !stepValue.value) {
+      // Check if the step value exists and has a value property
+      if (!stepValue || (typeof stepValue === 'object' && !Array.isArray(stepValue) && !stepValue.value)) {
         alert('Por favor, selecciona una opción para continuar.');
         return;
       }
@@ -188,6 +189,12 @@ const Cotizador: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     alert('¡Gracias por tu interés! Pronto nos pondremos en contacto contigo.');
+  };
+
+  const handleVerResumen = (e: React.MouseEvent) => {
+    e.preventDefault();  // Prevent any default behavior
+    e.stopPropagation(); // Stop event bubbling
+    setCurrentStep(prev => prev + 1);
   };
 
   const getOptionName = (step: string, value: string): string => {
@@ -393,7 +400,10 @@ const Cotizador: React.FC = () => {
               <button type="button" className="prev cta-button hero-cta-main" onClick={prevStep}>
                 Anterior
               </button>
-              <button type="button" className="next cta-button hero-cta-main" onClick={nextStep}>
+              <button 
+                type="button" 
+                className="next cta-button hero-cta-main" 
+                onClick={handleVerResumen}>
                 Ver resumen
               </button>
             </div>
