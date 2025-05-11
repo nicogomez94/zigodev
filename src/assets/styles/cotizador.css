@@ -1,5 +1,5 @@
 .cotizador-container {
-    max-width: 800px;
+    max-width: 1000px;
     margin: 40px auto;
     padding: 30px;
     background-color: #fff;
@@ -11,7 +11,8 @@
 .progress-bar {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 30px;
+    margin-top: 25px;
+    margin-bottom: 35px;
     position: relative;
 }
 
@@ -110,6 +111,12 @@
     margin-bottom: 10px;
 }
 
+.option-card img {
+    max-width: 80%;
+    height: auto;
+    margin: 0 auto;
+}
+
 .option-card p {
     color: #666;
     font-size: 14px;
@@ -182,5 +189,11 @@ button:hover {
 }
 
 .checkbox-item input {
+    margin-right: 10px;
+}
+
+.checkbox-item img {
+    width: 100px;
+    height: 100px;
     margin-right: 10px;
 }

@@ -15,8 +15,8 @@ const Home: React.FC = () => {
         <BuildScalable />
         <StatsFeatures />
         <ContactForm />
-        <Footer />
       </main>
+      <Footer />
     </>
   );
 };

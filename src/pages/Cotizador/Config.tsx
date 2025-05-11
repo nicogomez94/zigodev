@@ -22,7 +22,7 @@ export interface Selections {
 export const pricingConfig = {
     // Precios base para tipos de sitio
     step1: {
-        'institucional': { basePrice: 800, baseTime: 3 },
+        'institucional': { basePrice: 800, baseTime: 1 },
         'ecommerce': { basePrice: 1500, baseTime: 5 },
         'landing': { basePrice: 500, baseTime: 2 },
         'complejo': { basePrice: 2000, baseTime: 8 }

@@ -40,7 +40,6 @@
         .form-group textarea {
             width: 100%;
             padding: 12px 15px;
-            background-color: #2f2f3d; /* Un poco más claro que el fondo de tarjeta */
             border: 1px solid var(--border-color);
             border-radius: 6px;
             color: var(--text-light);
@@ -165,7 +164,6 @@
 .form-group textarea {
     width: 100%;
     padding: 12px 15px;
-    background-color: #2f2f3d; /* Un poco más claro que el fondo de tarjeta */
     border: 1px solid var(--border-color);
     border-radius: 6px;
     color: var(--text-light);
@@ -254,7 +252,7 @@
     display: grid;
     grid-template-columns: 1fr 1.5fr; /* Columna de info más pequeña */
     gap: 50px; /* Espacio entre columnas */
-    margin-top: 40px;
+    margin-top: 50px;
 }
 .contact-info {
     padding: 35px;
@@ -273,7 +271,7 @@
 
 .contact-info ul {
     list-style: none;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
 }
 
 .contact-info li {
@@ -375,7 +373,7 @@
     display: inline-block; /* O block si prefieres ancho completo */
     padding: 13px 30px;
     background-color: var(--accent-purple);
-    color: var(--text-headings);
+    color: #fff;
     border: none;
     border-radius: 6px;
     font-family: var(--font-primary);

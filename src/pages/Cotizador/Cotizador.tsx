@@ -3,6 +3,7 @@ import { pricingConfig, optionNames } from './Config';
 import type { Selection, Selections } from './Config';
 import Header from '../../components/Header';
 import '../../assets/styles/cotizador.css';
+import Footer from '../../components/Footer';
 
 const Cotizador: React.FC = () => {
   const totalSteps = 5;
@@ -214,6 +215,7 @@ const Cotizador: React.FC = () => {
                   className={`option-card${selections.step1.value === 'institucional' ? ' selected' : ''}`}
                   onClick={() => handleOptionSelect('step1', 'institucional')}
                 >
+                  <img src="/img/cotizador/step1/3.png" alt="Sitio web institucional" />
                   <h4>Sitio web institucional</h4>
                   <p>Ideal para presentar tu empresa o marca de manera profesional.</p>
                 </div>
@@ -221,6 +223,7 @@ const Cotizador: React.FC = () => {
                   className={`option-card${selections.step1.value === 'ecommerce' ? ' selected' : ''}`}
                   onClick={() => handleOptionSelect('step1', 'ecommerce')}
                 >
+                  <img src="/img/cotizador/step1/2.png" alt="Sitio web institucional" />
                   <h4>E-commerce o catálogo</h4>
                   <p>Para vender productos o mostrar un catálogo online.</p>
                 </div>
@@ -228,6 +231,7 @@ const Cotizador: React.FC = () => {
                   className={`option-card${selections.step1.value === 'landing' ? ' selected' : ''}`}
                   onClick={() => handleOptionSelect('step1', 'landing')}
                 >
+                  <img src="/img/cotizador/step1/4.png" alt="Sitio web institucional" />
                   <h4>Landing page</h4>
                   <p>Página única enfocada en conversión para campañas específicas.</p>
                 </div>
@@ -235,6 +239,7 @@ const Cotizador: React.FC = () => {
                   className={`option-card${selections.step1.value === 'complejo' ? ' selected' : ''}`}
                   onClick={() => handleOptionSelect('step1', 'complejo')}
                 >
+                  <img src="/img/cotizador/step1/1.png" alt="Sitio web institucional" />
                   <h4>Sitio web complejo</h4>
                   <p>Con funcionalidades avanzadas y secciones personalizadas.</p>
                 </div>
@@ -259,6 +264,7 @@ const Cotizador: React.FC = () => {
                   className={`option-card${selections.step2.value === 'estandar' ? ' selected' : ''}`}
                   onClick={() => handleOptionSelect('step2', 'estandar')}
                 >
+                  <img src="/img/cotizador/step2/4.png" alt="Sitio web institucional" />
                   <h4>Diseño estándar sobre plantilla</h4>
                   <p>Diseño profesional basado en plantillas predeterminadas.</p>
                 </div>
@@ -266,6 +272,7 @@ const Cotizador: React.FC = () => {
                   className={`option-card${selections.step2.value === 'medida' ? ' selected' : ''}`}
                   onClick={() => handleOptionSelect('step2', 'medida')}
                 >
+                  <img src="/img/cotizador/step2/3.png" alt="Sitio web institucional" />
                   <h4>Diseño a medida</h4>
                   <p>Diseño personalizado según tus necesidades específicas.</p>
                 </div>
@@ -273,6 +280,7 @@ const Cotizador: React.FC = () => {
                   className={`option-card${selections.step2.value === 'tengo' ? ' selected' : ''}`}
                   onClick={() => handleOptionSelect('step2', 'tengo')}
                 >
+                  <img src="/img/cotizador/step2/2.png" alt="Sitio web institucional" />
                   <h4>Ya lo tengo</h4>
                   <p>Ya dispones del diseño y solo necesitas implementación.</p>
                 </div>
@@ -280,6 +288,7 @@ const Cotizador: React.FC = () => {
                   className={`option-card${selections.step2.value === 'nose' ? ' selected' : ''}`}
                   onClick={() => handleOptionSelect('step2', 'nose')}
                 >
+                  <img src="/img/cotizador/step2/1.png" alt="Sitio web institucional" />
                   <h4>No lo sé</h4>
                   <p>Necesitas asesoramiento para definir el diseño adecuado.</p>
                 </div>
@@ -533,6 +542,7 @@ const Cotizador: React.FC = () => {
           </form>
         </div>
       </main>
+      <Footer />
     </>
   );
 };

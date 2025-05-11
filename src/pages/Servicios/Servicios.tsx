@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import '../../assets/styles/servicios.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPalette, faCartShopping, faChartLine, faServer, faHeadset, faLightbulb } from '@fortawesome/free-solid-svg-icons';
 
 const Servicios: React.FC = () => {
   return (
@@ -17,7 +19,7 @@ const Servicios: React.FC = () => {
             <div className="services-container">
               <div className="service-category-card">
                 <div className="card-header">
-                  <i className="fas fa-palette icon"></i>
+                  <FontAwesomeIcon icon={faPalette} className="icon" />
                   <h2>Diseño y Desarrollo Web</h2>
                 </div>
                 <p>Creamos experiencias web atractivas, funcionales y a medida de tus necesidades.</p>
@@ -34,7 +36,7 @@ const Servicios: React.FC = () => {
 
               <div className="service-category-card">
                 <div className="card-header">
-                  <i className="fas fa-cart-shopping icon"></i>
+                  <FontAwesomeIcon icon={faCartShopping} className="icon" />
                   <h2>E-commerce</h2>
                 </div>
                 <p>Construimos y optimizamos tu tienda online para maximizar ventas y conversiones.</p>
@@ -48,7 +50,7 @@ const Servicios: React.FC = () => {
 
               <div className="service-category-card">
                 <div className="card-header">
-                  <i className="fas fa-chart-line icon"></i>
+                  <FontAwesomeIcon icon={faChartLine} className="icon" />
                   <h2>Marketing Digital y SEO</h2>
                 </div>
                 <p>Aumentamos tu visibilidad online y atraemos tráfico cualificado a tu sitio web.</p>
@@ -64,7 +66,7 @@ const Servicios: React.FC = () => {
 
               <div className="service-category-card">
                 <div className="card-header">
-                  <i className="fas fa-server icon"></i>
+                  <FontAwesomeIcon icon={faServer} className="icon" />
                   <h2>Servicios Técnicos Avanzados</h2>
                 </div>
                 <p>Aprovechamos nuestra experiencia para ofrecer soluciones robustas de hosting, rendimiento y seguridad.</p>
@@ -80,7 +82,7 @@ const Servicios: React.FC = () => {
 
               <div className="service-category-card">
                 <div className="card-header">
-                  <i className="fas fa-headset icon"></i>
+                  <FontAwesomeIcon icon={faHeadset} className="icon" />
                   <h2>Mantenimiento y Soporte</h2>
                 </div>
                 <p>Mantenemos tu sitio web seguro, actualizado y funcionando sin problemas.</p>
@@ -95,7 +97,7 @@ const Servicios: React.FC = () => {
 
               <div className="service-category-card">
                 <div className="card-header">
-                  <i className="fas fa-lightbulb icon"></i>
+                  <FontAwesomeIcon icon={faLightbulb} className="icon" />
                   <h2>Consultoría y Estrategia</h2>
                 </div>
                 <p>Te guiamos en la toma de decisiones para asegurar el éxito de tu proyecto digital.</p>
