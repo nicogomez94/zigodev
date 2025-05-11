@@ -1,0 +1,737 @@
+<!DOCTYPE html> 
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>&Iacute;ndice - Servicios Digitales</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/contacto.css">
+	<style>
+		.cotizador-container {
+			max-width: 800px;
+			margin: 40px auto;
+			padding: 30px;
+			background-color: #fff;
+			border-radius: 10px;
+			box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            color: #333 !important;
+		}
+		
+		.progress-bar {
+			display: flex;
+			justify-content: space-between;
+			margin-bottom: 30px;
+			position: relative;
+		}
+		
+		.progress-bar::before {
+			content: '';
+			position: absolute;
+			top: 50%;
+			left: 0;
+			transform: translateY(-50%);
+			height: 4px;
+			width: 100%;
+			background-color: #e0e0e0;
+			z-index: 1;
+		}
+		
+		.progress {
+			position: absolute;
+			top: 50%;
+			left: 0;
+			transform: translateY(-50%);
+			height: 4px;
+			background-color: #3498db;
+			transition: width 0.3s ease;
+			z-index: 2;
+		}
+		
+		.step {
+			width: 30px;
+			height: 30px;
+			background-color: #fff;
+			border: 2px solid #e0e0e0;
+			border-radius: 50%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-weight: bold;
+			position: relative;
+			z-index: 3;
+		}
+		
+		.step.active {
+			border-color: #3498db;
+			background-color: #3498db;
+			color: white;
+		}
+		
+		.step.complete {
+			border-color: #3498db;
+			background-color: #3498db;
+			color: white;
+		}
+		
+		.form-step {
+			display: none;
+		}
+		
+		.form-step.active {
+			display: block;
+		}
+		
+		.form-group {
+			margin-bottom: 20px;
+		}
+		
+		.form-group h2 {
+			margin-bottom: 15px;
+			color: #333;
+		}
+		
+		.options {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+			gap: 15px;
+		}
+		
+		.option-card {
+			border: 2px solid #e0e0e0;
+			border-radius: 8px;
+			padding: 15px;
+			cursor: pointer;
+			transition: all 0.3s ease;
+		}
+		
+		.option-card:hover {
+			transform: translateY(-5px);
+			box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+		}
+		
+		.option-card.selected {
+			border-color: #3498db;
+			background-color: rgba(52, 152, 219, 0.1);
+		}
+		
+		.option-card h4 {
+			margin-top: 0;
+			margin-bottom: 10px;
+		}
+		
+		.option-card p {
+			color: #666;
+			font-size: 14px;
+			margin: 0;
+		}
+		
+		.buttons {
+			display: flex;
+			justify-content: space-between;
+			margin-top: 30px;
+		}
+		
+		button {
+			padding: 10px 20px;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			font-weight: 600;
+			transition: all 0.3s ease;
+		}
+		
+		button.prev {
+			background-color: #e0e0e0;
+			color: #333;
+		}
+		
+		button.next, button.submit {
+			background-color: #3498db;
+			color: white;
+		}
+		
+		button:hover {
+			opacity: 0.8;
+		}
+		
+		.summary-card {
+			border: 1px solid #e0e0e0;
+			border-radius: 8px;
+			padding: 20px;
+			margin-top: 20px;
+		}
+		
+		.summary-detail {
+			display: flex;
+			justify-content: space-between;
+			margin-bottom: 10px;
+			padding-bottom: 10px;
+			border-bottom: 1px solid #f0f0f0;
+		}
+		
+		.summary-total {
+			display: flex;
+			justify-content: space-between;
+			font-weight: bold;
+			margin-top: 15px;
+			padding-top: 15px;
+			border-top: 2px solid #e0e0e0;
+		}
+		
+		.checkboxes {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+			gap: 10px;
+		}
+		
+		.checkbox-item {
+			display: flex;
+			align-items: center;
+			margin-bottom: 10px;
+		}
+		
+		.checkbox-item input {
+			margin-right: 10px;
+		}
+	</style>
+</head>
+<body>
+
+	<header>
+		<div class="container">
+			<div class="logo">
+				<i class="fas fa-wave-square logo-icon"></i><a style="color: white !important;" href="index.html">Zigo Dev</a> 
+			</div>
+			<nav>
+				<ul>
+					<li><a href="index.html">Inicio</a></li>
+					<li><a href="servicios.html">Servicios</a></li>
+					<li><a href="contacto.html">Acerca De</a></li>
+				</ul>
+			</nav>
+			<a href="contacto.html" class="cta-button header-cta">Ponete en Contacto</a>
+		</div>
+	</header>
+
+	<main>
+		<div class="cotizador-container">
+			<h1>Cotizador de Servicios Web</h1>
+			<p>Completa los siguientes pasos para obtener una cotización personalizada para tu proyecto.</p>
+			
+			<div class="progress-bar">
+				<div class="progress" id="progress"></div>
+				<div class="step active">1</div>
+				<div class="step">2</div>
+				<div class="step">3</div>
+				<div class="step">4</div>
+				<div class="step">5</div>
+				<div class="step">✓</div>
+			</div>
+			
+			<form id="cotizador-form">
+				<!-- Step 1: Tipo de sitio -->
+				<div class="form-step active" id="step1">
+					<div class="form-group">
+						<h2>¿Qué tipo de sitio web necesitas?</h2>
+						<div class="options">
+							<div class="option-card" data-value="institucional" data-price="800" data-time="3">
+								<h4>Sitio web institucional</h4>
+								<p>Ideal para presentar tu empresa o marca de manera profesional.</p>
+							</div>
+							<div class="option-card" data-value="ecommerce" data-price="1500" data-time="5">
+								<h4>E-commerce o catálogo</h4>
+								<p>Para vender productos o mostrar un catálogo online.</p>
+							</div>
+							<div class="option-card" data-value="landing" data-price="500" data-time="2">
+								<h4>Landing page</h4>
+								<p>Página única enfocada en conversión para campañas específicas.</p>
+							</div>
+							<div class="option-card" data-value="complejo" data-price="2000" data-time="8">
+								<h4>Sitio web complejo</h4>
+								<p>Con funcionalidades avanzadas y secciones personalizadas.</p>
+							</div>
+						</div>
+					</div>
+					<div class="buttons">
+						<div></div>
+						<button type="button" class="next">Siguiente</button>
+					</div>
+				</div>
+				
+				<!-- Step 2: Diseño -->
+				<div class="form-step" id="step2">
+					<div class="form-group">
+						<h2>¿Qué tipo de diseño necesitas?</h2>
+						<div class="options">
+							<div class="option-card" data-value="estandar" data-price="300" data-time="1">
+								<h4>Diseño estándar sobre plantilla</h4>
+								<p>Diseño profesional basado en plantillas predeterminadas.</p>
+							</div>
+							<div class="option-card" data-value="medida" data-price="800" data-time="3">
+								<h4>Diseño a medida</h4>
+								<p>Diseño personalizado según tus necesidades específicas.</p>
+							</div>
+							<div class="option-card" data-value="tengo" data-price="0" data-time="0">
+								<h4>Ya lo tengo</h4>
+								<p>Ya dispones del diseño y solo necesitas implementación.</p>
+							</div>
+							<div class="option-card" data-value="nose" data-price="400" data-time="1.5">
+								<h4>No lo sé</h4>
+								<p>Necesitas asesoramiento para definir el diseño adecuado.</p>
+							</div>
+						</div>
+					</div>
+					<div class="buttons">
+						<button type="button" class="prev">Anterior</button>
+						<button type="button" class="next">Siguiente</button>
+					</div>
+				</div>
+				
+				<!-- Step 3: Tamaño -->
+				<div class="form-step" id="step3">
+					<div class="form-group">
+						<h2>¿Qué tamaño de proyecto estimas?</h2>
+						<div class="options">
+							<div class="option-card" data-value="normal" data-price="400" data-time="1">
+								<h4>Normal</h4>
+								<p>Hasta 5 páginas o secciones.</p>
+							</div>
+							<div class="option-card" data-value="mediano" data-price="800" data-time="2">
+								<h4>Mediano</h4>
+								<p>De 6 a 10 páginas o secciones.</p>
+							</div>
+							<div class="option-card" data-value="grande" data-price="1600" data-time="4">
+								<h4>Grande</h4>
+								<p>Más de 10 páginas o secciones.</p>
+							</div>
+							<div class="option-card" data-value="noselo" data-price="600" data-time="1.5">
+								<h4>No lo sé</h4>
+								<p>Necesitas asesoramiento para definir el alcance.</p>
+							</div>
+						</div>
+					</div>
+					<div class="buttons">
+						<button type="button" class="prev">Anterior</button>
+						<button type="button" class="next">Siguiente</button>
+					</div>
+				</div>
+				
+				<!-- Step 4: Características adicionales -->
+				<div class="form-step" id="step4">
+					<div class="form-group">
+						<h2>¿Qué características adicionales necesitas?</h2>
+						<div class="checkboxes">
+							<div class="checkbox-item">
+								<input type="checkbox" id="logo" name="features" value="logo" data-price="300" data-time="2">
+								<label for="logo">Diseño de logo</label>
+							</div>
+							<div class="checkbox-item">
+								<input type="checkbox" id="marca" name="features" value="marca" data-price="500" data-time="3">
+								<label for="marca">Apertura de marca</label>
+							</div>
+							<div class="checkbox-item">
+								<input type="checkbox" id="idioma" name="features" value="idioma" data-price="400" data-time="1.5">
+								<label for="idioma">Multiidioma</label>
+							</div>
+							<div class="checkbox-item">
+								<input type="checkbox" id="contenidos" name="features" value="contenidos" data-price="350" data-time="2">
+								<label for="contenidos">Redacción de contenidos</label>
+							</div>
+							<div class="checkbox-item">
+								<input type="checkbox" id="imagenes" name="features" value="imagenes" data-price="200" data-time="1">
+								<label for="imagenes">Imágenes</label>
+							</div>
+							<div class="checkbox-item">
+								<input type="checkbox" id="mercadopago" name="features" value="mercadopago" data-price="250" data-time="1">
+								<label for="mercadopago">Integración con Mercado Pago</label>
+							</div>
+							<div class="checkbox-item">
+								<input type="checkbox" id="ninguna" name="features" value="ninguna" data-price="0" data-time="0">
+								<label for="ninguna">Ninguna</label>
+							</div>
+						</div>
+					</div>
+					<div class="buttons">
+						<button type="button" class="prev">Anterior</button>
+						<button type="button" class="next">Siguiente</button>
+					</div>
+				</div>
+				
+				<!-- Step 5: Servicios recurrentes -->
+				<div class="form-step" id="step5">
+					<div class="form-group">
+						<h2>¿Qué servicios adicionales necesitas?</h2>
+						<div class="checkboxes">
+							<div class="checkbox-item">
+								<input type="checkbox" id="email" name="services" value="email" data-price="15" data-time="0">
+								<label for="email">Casillas de email (mensual)</label>
+							</div>
+							<div class="checkbox-item">
+								<input type="checkbox" id="soporte" name="services" value="soporte" data-price="50" data-time="0">
+								<label for="soporte">Soporte de autogestión (mensual)</label>
+							</div>
+							<div class="checkbox-item">
+								<input type="checkbox" id="seo" name="services" value="seo" data-price="300" data-time="2">
+								<label for="seo">Optimización SEO premium</label>
+							</div>
+							<div class="checkbox-item">
+								<input type="checkbox" id="productos" name="services" value="productos" data-price="200" data-time="1.5">
+								<label for="productos">Carga de productos</label>
+							</div>
+							<div class="checkbox-item">
+								<input type="checkbox" id="blog" name="services" value="blog" data-price="150" data-time="1">
+								<label for="blog">Redacción para blog</label>
+							</div>
+							<div class="checkbox-item">
+								<input type="checkbox" id="hosting" name="services" value="hosting" data-price="20" data-time="0">
+								<label for="hosting">Hosting (mensual)</label>
+							</div>
+							<div class="checkbox-item">
+								<input type="checkbox" id="ninguno" name="services" value="ninguno" data-price="0" data-time="0">
+								<label for="ninguno">Ninguno</label>
+							</div>
+						</div>
+					</div>
+					<div class="buttons">
+						<button type="button" class="prev">Anterior</button>
+						<button type="button" class="next">Ver resumen</button>
+					</div>
+				</div>
+				
+				<!-- Step 6: Resumen -->
+				<div class="form-step" id="step6">
+					<div class="form-group">
+						<h2>Resumen de tu cotización</h2>
+						<div class="summary-card">
+							<div id="summary-content">
+								<!-- El contenido del resumen se generará dinámicamente -->
+							</div>
+							<div class="summary-total">
+								<div>Total estimado:</div>
+								<div id="total-price"></div>
+							</div>
+							<div class="summary-total">
+								<div>Tiempo estimado:</div>
+								<div id="total-time"></div>
+							</div>
+							<div class="summary-total">
+								<div>Servicios mensuales:</div>
+								<div id="monthly-services"></div>
+							</div>
+						</div>
+					</div>
+					<div class="buttons">
+						<button type="button" class="prev">Anterior</button>
+						<button type="button" class="submit">Solicitar cotización formal</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</main>
+
+	<footer>
+		<div class="container">
+			<p>&copy; 2025 Zigo Dev. Todos los derechos reservados. By <a href="#">Nicolás Gómez</a></p>
+		</div>
+	</footer>
+
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			// Variables globales
+			let currentStep = 1;
+			const totalSteps = 5;
+			let selections = {
+				step1: { value: '', price: 0, time: 0 },
+				step2: { value: '', price: 0, time: 0 },
+				step3: { value: '', price: 0, time: 0 },
+				step4: [],
+				step5: []
+			};
+			
+			// Seleccionar elementos del DOM
+			const steps = document.querySelectorAll('.step');
+			const formSteps = document.querySelectorAll('.form-step');
+			const progress = document.getElementById('progress');
+			const nextButtons = document.querySelectorAll('.next');
+			const prevButtons = document.querySelectorAll('.prev');
+			const optionCards = document.querySelectorAll('.option-card');
+			const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+			const submitButton = document.querySelector('.submit');
+			
+			// Actualizar la barra de progreso
+			function updateProgress() {
+				const percent = ((currentStep - 1) / totalSteps) * 100;
+				progress.style.width = `${percent}%`;
+				
+				steps.forEach((step, idx) => {
+					if (idx < currentStep) {
+						step.classList.add('active');
+					} else {
+						step.classList.remove('active');
+					}
+					
+					if (idx < currentStep - 1) {
+						step.classList.add('complete');
+					} else {
+						step.classList.remove('complete');
+					}
+				});
+			}
+			
+			// Mostrar el paso actual
+			function showStep(step) {
+				formSteps.forEach(formStep => {
+					formStep.classList.remove('active');
+				});
+				
+				document.getElementById(`step${step}`).classList.add('active');
+				currentStep = step;
+				updateProgress();
+			}
+			
+			// Manejar selección de opciones en tarjetas
+			optionCards.forEach(card => {
+				card.addEventListener('click', function() {
+					const step = this.closest('.form-step').id;
+					const stepNumber = step.replace('step', '');
+					
+					// Desactivar selección previa
+					const siblings = this.parentNode.querySelectorAll('.option-card');
+					siblings.forEach(sib => sib.classList.remove('selected'));
+					
+					// Activar selección actual
+					this.classList.add('selected');
+					
+					// Guardar selección
+					selections[`step${stepNumber}`] = {
+						value: this.dataset.value,
+						price: parseInt(this.dataset.price),
+						time: parseFloat(this.dataset.time)
+					};
+				});
+			});
+			
+			// Manejar selección de checkboxes
+			checkboxes.forEach(checkbox => {
+				checkbox.addEventListener('change', function() {
+					const step = this.closest('.form-step').id;
+					const stepNumber = step.replace('step', '');
+					
+					// Si es el checkbox "Ninguna/Ninguno", desmarcar los demás
+					if (this.value === 'ninguna' || this.value === 'ninguno') {
+						if (this.checked) {
+							const siblings = this.closest('.checkboxes').querySelectorAll('input[type="checkbox"]');
+							siblings.forEach(sib => {
+								if (sib !== this) {
+									sib.checked = false;
+								}
+							});
+						}
+					} else {
+						// Si se marca otro checkbox, desmarcar "Ninguna/Ninguno"
+						const noneOption = this.closest('.checkboxes').querySelector('input[value="ninguna"], input[value="ninguno"]');
+						if (noneOption) {
+							noneOption.checked = false;
+						}
+					}
+					
+					// Guardar selecciones
+					selections[`step${stepNumber}`] = [];
+					const selectedCheckboxes = document.querySelectorAll(`#step${stepNumber} input[type="checkbox"]:checked`);
+					selectedCheckboxes.forEach(selected => {
+						selections[`step${stepNumber}`].push({
+							value: selected.value,
+							price: parseInt(selected.dataset.price),
+							time: parseFloat(selected.dataset.time)
+						});
+					});
+				});
+			});
+			
+			// Manejar botón siguiente
+			nextButtons.forEach(button => {
+				button.addEventListener('click', function() {
+					if (currentStep === totalSteps + 1) {
+						return;
+					}
+					
+					// Validar que haya una selección en pasos 1, 2 y 3
+					if (currentStep <= 3) {
+						const stepKey = `step${currentStep}`;
+						if (!selections[stepKey].value) {
+							alert('Por favor, selecciona una opción para continuar.');
+							return;
+						}
+					}
+					
+					// Si es el último paso, generar resumen
+					if (currentStep === totalSteps) {
+						generateSummary();
+					}
+					
+					showStep(currentStep + 1);
+				});
+			});
+			
+			// Manejar botón anterior
+			prevButtons.forEach(button => {
+				button.addEventListener('click', function() {
+					if (currentStep === 1) {
+						return;
+					}
+					showStep(currentStep - 1);
+				});
+			});
+			
+			// Generar resumen
+			function generateSummary() {
+				const summaryContent = document.getElementById('summary-content');
+				const totalPriceEl = document.getElementById('total-price');
+				const totalTimeEl = document.getElementById('total-time');
+				const monthlyServicesEl = document.getElementById('monthly-services');
+				
+				// Calcular totales
+				let totalPrice = 0;
+				let totalTime = 0;
+				let monthlyPrice = 0;
+				let summaryHTML = '';
+				
+				// Tipo de sitio
+				summaryHTML += `<div class="summary-detail">
+					<div>Tipo de sitio: <strong>${getOptionName('step1', selections.step1.value)}</strong></div>
+					<div>$${selections.step1.price}</div>
+				</div>`;
+				totalPrice += selections.step1.price;
+				totalTime += selections.step1.time;
+				
+				// Diseño
+				summaryHTML += `<div class="summary-detail">
+					<div>Diseño: <strong>${getOptionName('step2', selections.step2.value)}</strong></div>
+					<div>$${selections.step2.price}</div>
+				</div>`;
+				totalPrice += selections.step2.price;
+				totalTime += selections.step2.time;
+				
+				// Tamaño
+				summaryHTML += `<div class="summary-detail">
+					<div>Tamaño: <strong>${getOptionName('step3', selections.step3.value)}</strong></div>
+					<div>$${selections.step3.price}</div>
+				</div>`;
+				totalPrice += selections.step3.price;
+				totalTime += selections.step3.time;
+				
+				// Características adicionales
+				if (selections.step4.length > 0) {
+					summaryHTML += `<div class="summary-detail">
+						<div>Características adicionales:</div>
+						<div></div>
+					</div>`;
+					
+					selections.step4.forEach(feature => {
+						if (feature.value !== 'ninguna') {
+							summaryHTML += `<div class="summary-detail">
+								<div> - ${getOptionName('step4', feature.value)}</div>
+								<div>$${feature.price}</div>
+							</div>`;
+							totalPrice += feature.price;
+							totalTime += feature.time;
+						}
+					});
+				}
+				
+				// Servicios recurrentes
+				if (selections.step5.length > 0) {
+					summaryHTML += `<div class="summary-detail">
+						<div>Servicios adicionales:</div>
+						<div></div>
+					</div>`;
+					
+					selections.step5.forEach(service => {
+						if (service.value !== 'ninguno') {
+							const isMonthly = ['email', 'soporte', 'hosting'].includes(service.value);
+							
+							if (isMonthly) {
+								monthlyPrice += service.price;
+								summaryHTML += `<div class="summary-detail">
+									<div> - ${getOptionName('step5', service.value)}</div>
+									<div>$${service.price}/mes</div>
+								</div>`;
+							} else {
+								summaryHTML += `<div class="summary-detail">
+									<div> - ${getOptionName('step5', service.value)}</div>
+									<div>$${service.price}</div>
+								</div>`;
+								totalPrice += service.price;
+								totalTime += service.time;
+							}
+						}
+					});
+				}
+				
+				// Actualizar el DOM
+				summaryContent.innerHTML = summaryHTML;
+				totalPriceEl.textContent = `$${totalPrice}`;
+				totalTimeEl.textContent = `${totalTime} semanas`;
+				monthlyServicesEl.textContent = monthlyPrice > 0 ? `$${monthlyPrice}/mes` : 'Ninguno';
+			}
+			
+			// Obtener nombre de la opción para el resumen
+			function getOptionName(step, value) {
+				const optionNames = {
+					'step1': {
+						'institucional': 'Sitio web institucional',
+						'ecommerce': 'E-commerce o catálogo',
+						'landing': 'Landing page',
+						'complejo': 'Sitio web complejo'
+					},
+					'step2': {
+						'estandar': 'Diseño estándar sobre plantilla',
+						'medida': 'Diseño a medida',
+						'tengo': 'Ya lo tengo',
+						'nose': 'No lo sé'
+					},
+					'step3': {
+						'normal': 'Normal',
+						'mediano': 'Mediano',
+						'grande': 'Grande',
+						'noselo': 'No lo sé'
+					},
+					'step4': {
+						'logo': 'Diseño de logo',
+						'marca': 'Apertura de marca',
+						'idioma': 'Multiidioma',
+						'contenidos': 'Redacción de contenidos',
+						'imagenes': 'Imágenes',
+						'mercadopago': 'Integración con Mercado Pago',
+						'ninguna': 'Ninguna'
+					},
+					'step5': {
+						'email': 'Casillas de email',
+						'soporte': 'Soporte de autogestión',
+						'seo': 'Optimización SEO premium',
+						'productos': 'Carga de productos',
+						'blog': 'Redacción para blog',
+						'hosting': 'Hosting',
+						'ninguno': 'Ninguno'
+					}
+				};
+				
+				return optionNames[step][value] || value;
+			}
+			
+			// Manejar envío del formulario
+			submitButton.addEventListener('click', function(e) {
+				e.preventDefault();
+				alert('¡Gracias por tu interés! Pronto nos pondremos en contacto contigo para brindarte una cotización detallada.');
+			});
+			
+			// Inicializar
+			showStep(1);
+		});
+	</script>
+</body>
+</html>
