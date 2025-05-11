@@ -1,17 +1,4 @@
 
-:root {
-    --bg-dark: #12121c;
-    --bg-card: #252532;
-    --bg-input: #2f2f3d;
-    --text-light: #e0e0e0;
-    --text-headings: #ffffff;
-    --text-medium: #a0a0b0;
-    --accent-purple: rgb(98, 0, 234); /* Morado vibrante */
-    --accent-purple-darker: #682abf;
-    --border-color: #3a3a4a;
-    --font-primary: 'Poppins', sans-serif;
-}
-
 .contact-page{
     margin-top: 40px;
 }

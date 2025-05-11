@@ -23,7 +23,7 @@
 }
 
 body {
-    font-family: var(--font-primary);
+    font-family: var(--font-primary) !important;
     background-color: var(--bg-secondary);
     color: var(--text-primary);
     line-height: 1.6;
@@ -140,6 +140,7 @@ nav ul li a:hover::after {
 
 
 .cta-button {
+    font-family: 'Inter', sans-serif;;
     padding: 10px 25px;
     border-radius: 6px;
     font-weight: 600;

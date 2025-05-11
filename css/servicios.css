@@ -3,8 +3,8 @@
     --bg-dark: #12121c;
     --bg-card: #252532;
     --bg-input: #2f2f3d;
-    --text-light: #e0e0e0;
-    --text-headings: #ffffff;
+    --text-light: #484848;
+    --text-headings: #000;
     --text-medium: #a0a0b0;
     --accent-purple: rgb(98, 0, 234); /* Morado vibrante */
     --accent-purple-darker: #682abf;
@@ -15,6 +15,7 @@
 /* --- Estilos de la Página de Servicios --- */
 .services-page {
     padding: 60px 0;
+    color: var(--bg-dark);
 }
 
 /* Hereda .page-title y .page-subtitle de la página de contacto si tienen el mismo estilo */

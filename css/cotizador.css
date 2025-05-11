@@ -33,7 +33,7 @@
     left: 0;
     transform: translateY(-50%);
     height: 4px;
-    background-color: #3498db;
+    background-color: var(--accent-violet);
     transition: width 0.3s ease;
     z-index: 2;
 }
@@ -53,14 +53,14 @@
 }
 
 .step.active {
-    border-color: #3498db;
-    background-color: #3498db;
+    border-color: var(--accent-violet);
+    background-color: var(--accent-violet);
     color: white;
 }
 
 .step.complete {
-    border-color: #3498db;
-    background-color: #3498db;
+    border-color: var(--accent-violet);
+    background-color: var(--accent-violet);
     color: white;
 }
 
@@ -101,8 +101,8 @@
 }
 
 .option-card.selected {
-    border-color: #3498db;
-    background-color: rgba(52, 152, 219, 0.1);
+    border-color: var(--accent-violet);
+    background-color: rgba(125, 74, 246, 0.1);
 }
 
 .option-card h4 {
@@ -137,7 +137,7 @@ button.prev {
 }
 
 button.next, button.submit {
-    background-color: #3498db;
+    background-color: var(--accent-violet);
     color: white;
 }
 
