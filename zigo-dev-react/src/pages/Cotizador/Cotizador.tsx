@@ -31,7 +31,6 @@ const Cotizador: React.FC = () => {
 
   // Calcular precios aplicando reglas especiales
   const calculatePrices = () => {
-    // Crear copia de selecciones para trabajar
     const calculatedPrices = {
       step1: { ...selections.step1 },
       step2: { ...selections.step2 },
@@ -40,7 +39,6 @@ const Cotizador: React.FC = () => {
       step5: [...selections.step5.map(item => ({ ...item }))]
     };
 
-    // Aplicar reglas especiales
     pricingConfig.specialRules.forEach(rule => {
       const selectionsCopy = {
         step1: { ...selections.step1 },
@@ -58,17 +56,14 @@ const Cotizador: React.FC = () => {
     return calculatedPrices;
   };
 
-  // Calcular totales de precio y tiempo
   const calculateTotals = (prices: Selections) => {
     let totalPrice = 0;
     let totalTime = 0;
     let monthlyPrice = 0;
 
-    // Sumar precios de pasos 1-3
     totalPrice += prices.step1.price + prices.step2.price + prices.step3.price;
     totalTime += prices.step1.time + prices.step2.time + prices.step3.time;
 
-    // Sumar precios de características adicionales
     prices.step4.forEach(feature => {
       if (feature.value !== 'ninguna') {
         totalPrice += feature.price;
@@ -76,7 +71,6 @@ const Cotizador: React.FC = () => {
       }
     });
 
-    // Sumar precios de servicios
     prices.step5.forEach(service => {
       if (service.value !== 'ninguno') {
         if (service.isMonthly) {
@@ -91,14 +85,12 @@ const Cotizador: React.FC = () => {
     return { totalPrice, totalTime, monthlyPrice };
   };
 
-  // Actualizar precios cuando cambian selecciones
   useEffect(() => {
     const prices = calculatePrices();
     setCalculatedPrices(prices);
     setTotals(calculateTotals(prices));
   }, [selections]);
 
-  // Manejar selección de opciones (pasos 1-3)
   const handleOptionSelect = (step: string, value: string) => {
     const stepConfig = pricingConfig[step as keyof typeof pricingConfig] as Record<string, any>;
     const optionConfig = stepConfig[value as keyof typeof stepConfig];
@@ -113,7 +105,6 @@ const Cotizador: React.FC = () => {
     }));
   };
 
-  // Manejar cambio de checkboxes (pasos 4-5)
   const handleCheckboxChange = (step: string, value: string, isChecked: boolean) => {
     const stepKey = step as keyof Selections;
 
@@ -121,7 +112,6 @@ const Cotizador: React.FC = () => {
       const newSelections = { ...prev };
       const currentSelections = [...(newSelections[stepKey] as Selection[])];
 
-      // Si es ninguna/ninguno y está checkeado
       if ((value === 'ninguna' || value === 'ninguno') && isChecked) {
         return {
           ...prev,
@@ -134,14 +124,11 @@ const Cotizador: React.FC = () => {
         };
       }
 
-      // Si se marca otra opción
       if (isChecked) {
-        // Quitar ninguna/ninguno si existe
         const filteredSelections = currentSelections.filter(s =>
           s.value !== 'ninguna' && s.value !== 'ninguno'
         );
 
-        // Agregar la nueva selección
         const stepConfig = pricingConfig[stepKey as keyof typeof pricingConfig] as Record<string, any>;
         const optionConfig = stepConfig[value as keyof typeof stepConfig];
 
@@ -158,10 +145,8 @@ const Cotizador: React.FC = () => {
           ]
         };
       } else {
-        // Si se desmarca, remover de la lista
         const filteredSelections = currentSelections.filter(s => s.value !== value);
 
-        // Si no queda ninguna selección, agregar ninguna/ninguno
         if (filteredSelections.length === 0) {
           return {
             ...prev,
@@ -182,13 +167,10 @@ const Cotizador: React.FC = () => {
     });
   };
 
-  // Ir al siguiente paso
   const nextStep = () => {
-    // Validación solo para los pasos 1, 2 y 3
     if (currentStep <= 3) {
       const stepKey = `step${currentStep}` as keyof Selections;
       const stepValue = selections[stepKey];
-      // Solo si es un objeto (no array)
       if (!Array.isArray(stepValue) && !stepValue.value) {
         alert('Por favor, selecciona una opción para continuar.');
         return;
@@ -197,26 +179,22 @@ const Cotizador: React.FC = () => {
     setCurrentStep(prev => prev + 1);
   };
 
-  // Ir al paso anterior
   const prevStep = () => {
     if (currentStep > 1) {
       setCurrentStep(prev => prev - 1);
     }
   };
 
-  // Enviar formulario
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     alert('¡Gracias por tu interés! Pronto nos pondremos en contacto contigo.');
   };
 
-  // Obtener nombre de opción
   const getOptionName = (step: string, value: string): string => {
     const stepOptions = optionNames[step as keyof typeof optionNames] as Record<string, string>;
     return stepOptions[value] || value;
   };
 
-  // Renderizar cada paso según currentStep
   const renderStep = () => {
     switch (currentStep) {
       case 1:
@@ -225,21 +203,41 @@ const Cotizador: React.FC = () => {
             <div className="form-group">
               <h2>¿Qué tipo de sitio web necesitas?</h2>
               <div className="options">
-                {Object.keys(pricingConfig.step1).map(value => (
-                  <div
-                    key={value}
-                    className={`option-card ${selections.step1.value === value ? 'selected' : ''}`}
-                    onClick={() => handleOptionSelect('step1', value)}
-                  >
-                    <h4>{getOptionName('step1', value)}</h4>
-                    <p>{value === 'institucional' && 'Ideal para presentar tu empresa o marca de manera profesional.'}
-                      {value === 'ecommerce' && 'Para vender productos o mostrar un catálogo online.'}
-                      {value === 'landing' && 'Página única enfocada en conversión para campañas específicas.'}
-                      {value === 'complejo' && 'Con funcionalidades avanzadas y secciones personalizadas.'}
-                    </p>
-                  </div>
-                ))}
+                <div
+                  className={`option-card${selections.step1.value === 'institucional' ? ' selected' : ''}`}
+                  onClick={() => handleOptionSelect('step1', 'institucional')}
+                >
+                  <h4>Sitio web institucional</h4>
+                  <p>Ideal para presentar tu empresa o marca de manera profesional.</p>
+                </div>
+                <div
+                  className={`option-card${selections.step1.value === 'ecommerce' ? ' selected' : ''}`}
+                  onClick={() => handleOptionSelect('step1', 'ecommerce')}
+                >
+                  <h4>E-commerce o catálogo</h4>
+                  <p>Para vender productos o mostrar un catálogo online.</p>
+                </div>
+                <div
+                  className={`option-card${selections.step1.value === 'landing' ? ' selected' : ''}`}
+                  onClick={() => handleOptionSelect('step1', 'landing')}
+                >
+                  <h4>Landing page</h4>
+                  <p>Página única enfocada en conversión para campañas específicas.</p>
+                </div>
+                <div
+                  className={`option-card${selections.step1.value === 'complejo' ? ' selected' : ''}`}
+                  onClick={() => handleOptionSelect('step1', 'complejo')}
+                >
+                  <h4>Sitio web complejo</h4>
+                  <p>Con funcionalidades avanzadas y secciones personalizadas.</p>
+                </div>
               </div>
+            </div>
+            <div className="buttons">
+              <div></div>
+              <button type="button" className="next cta-button hero-cta-main" onClick={nextStep}>
+                Siguiente
+              </button>
             </div>
           </div>
         );
@@ -250,66 +248,189 @@ const Cotizador: React.FC = () => {
             <div className="form-group">
               <h2>¿Qué tipo de diseño necesitas?</h2>
               <div className="options">
-                {Object.keys(pricingConfig.step2).map(value => (
-                  <div
-                    key={value}
-                    className={`option-card ${selections.step2.value === value ? 'selected' : ''}`}
-                    onClick={() => handleOptionSelect('step2', value)}
-                  >
-                    <h4>{getOptionName('step2', value)}</h4>
-                    <p>{value === 'estandar' && 'Diseño profesional basado en plantillas predeterminadas.'}
-                      {value === 'medida' && 'Diseño personalizado según tus necesidades específicas.'}
-                      {value === 'tengo' && 'Ya dispones del diseño y solo necesitas implementación.'}
-                      {value === 'nose' && 'Necesitas asesoramiento para definir el diseño adecuado.'}
-                    </p>
-                  </div>
-                ))}
+                <div
+                  className={`option-card${selections.step2.value === 'estandar' ? ' selected' : ''}`}
+                  onClick={() => handleOptionSelect('step2', 'estandar')}
+                >
+                  <h4>Diseño estándar sobre plantilla</h4>
+                  <p>Diseño profesional basado en plantillas predeterminadas.</p>
+                </div>
+                <div
+                  className={`option-card${selections.step2.value === 'medida' ? ' selected' : ''}`}
+                  onClick={() => handleOptionSelect('step2', 'medida')}
+                >
+                  <h4>Diseño a medida</h4>
+                  <p>Diseño personalizado según tus necesidades específicas.</p>
+                </div>
+                <div
+                  className={`option-card${selections.step2.value === 'tengo' ? ' selected' : ''}`}
+                  onClick={() => handleOptionSelect('step2', 'tengo')}
+                >
+                  <h4>Ya lo tengo</h4>
+                  <p>Ya dispones del diseño y solo necesitas implementación.</p>
+                </div>
+                <div
+                  className={`option-card${selections.step2.value === 'nose' ? ' selected' : ''}`}
+                  onClick={() => handleOptionSelect('step2', 'nose')}
+                >
+                  <h4>No lo sé</h4>
+                  <p>Necesitas asesoramiento para definir el diseño adecuado.</p>
+                </div>
               </div>
+            </div>
+            <div className="buttons">
+              <button type="button" className="prev cta-button hero-cta-main" onClick={prevStep}>
+                Anterior
+              </button>
+              <button type="button" className="next cta-button hero-cta-main" onClick={nextStep}>
+                Siguiente
+              </button>
             </div>
           </div>
         );
 
-      // Puedes seguir agregando los pasos 3, 4, 5 aquí de forma similar
+      case 3:
+        return (
+          <div className="form-step active" id="step3">
+            <div className="form-group">
+              <h2>¿Qué tamaño de proyecto estimas?</h2>
+              <div className="options">
+                <div
+                  className={`option-card${selections.step3.value === 'normal' ? ' selected' : ''}`}
+                  onClick={() => handleOptionSelect('step3', 'normal')}
+                >
+                  <h4>Normal</h4>
+                  <p>Hasta 5 páginas o secciones.</p>
+                </div>
+                <div
+                  className={`option-card${selections.step3.value === 'mediano' ? ' selected' : ''}`}
+                  onClick={() => handleOptionSelect('step3', 'mediano')}
+                >
+                  <h4>Mediano</h4>
+                  <p>De 6 a 10 páginas o secciones.</p>
+                </div>
+                <div
+                  className={`option-card${selections.step3.value === 'grande' ? ' selected' : ''}`}
+                  onClick={() => handleOptionSelect('step3', 'grande')}
+                >
+                  <h4>Grande</h4>
+                  <p>Más de 10 páginas o secciones.</p>
+                </div>
+                <div
+                  className={`option-card${selections.step3.value === 'noselo' ? ' selected' : ''}`}
+                  onClick={() => handleOptionSelect('step3', 'noselo')}
+                >
+                  <h4>No lo sé</h4>
+                  <p>Necesitas asesoramiento para definir el alcance.</p>
+                </div>
+              </div>
+            </div>
+            <div className="buttons">
+              <button type="button" className="prev cta-button hero-cta-main" onClick={prevStep}>
+                Anterior
+              </button>
+              <button type="button" className="next cta-button hero-cta-main" onClick={nextStep}>
+                Siguiente
+              </button>
+            </div>
+          </div>
+        );
 
-      case 6: // Resumen
+      case 4:
+        return (
+          <div className="form-step active" id="step4">
+            <div className="form-group">
+              <h2>¿Qué características adicionales necesitas?</h2>
+              <div className="checkboxes">
+                {Object.keys(pricingConfig.step4).map(value => (
+                  <div className="checkbox-item" key={value}>
+                    <input
+                      type="checkbox"
+                      id={value}
+                      name="features"
+                      value={value}
+                      checked={selections.step4.some(s => s.value === value)}
+                      onChange={e => handleCheckboxChange('step4', value, e.target.checked)}
+                    />
+                    <label htmlFor={value}>{getOptionName('step4', value)}</label>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="buttons">
+              <button type="button" className="prev cta-button hero-cta-main" onClick={prevStep}>
+                Anterior
+              </button>
+              <button type="button" className="next cta-button hero-cta-main" onClick={nextStep}>
+                Siguiente
+              </button>
+            </div>
+          </div>
+        );
+
+      case 5:
+        return (
+          <div className="form-step active" id="step5">
+            <div className="form-group">
+              <h2>¿Qué servicios adicionales necesitas?</h2>
+              <div className="checkboxes">
+                {Object.keys(pricingConfig.step5).map(value => (
+                  <div className="checkbox-item" key={value}>
+                    <input
+                      type="checkbox"
+                      id={value}
+                      name="services"
+                      value={value}
+                      checked={selections.step5.some(s => s.value === value)}
+                      onChange={e => handleCheckboxChange('step5', value, e.target.checked)}
+                    />
+                    <label htmlFor={value}>{getOptionName('step5', value)}</label>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="buttons">
+              <button type="button" className="prev cta-button hero-cta-main" onClick={prevStep}>
+                Anterior
+              </button>
+              <button type="button" className="next cta-button hero-cta-main" onClick={nextStep}>
+                Ver resumen
+              </button>
+            </div>
+          </div>
+        );
+
+      case 6:
         return (
           <div className="form-step active" id="step6">
             <div className="form-group">
               <h2>Resumen de tu cotización</h2>
               <div className="summary-card">
                 <div id="summary-content">
-                  {/* Tipo de sitio */}
                   {calculatedPrices.step1.value && (
                     <div className="summary-detail">
                       <div>Tipo de sitio: <strong>{getOptionName('step1', calculatedPrices.step1.value)}</strong></div>
                       <div>${calculatedPrices.step1.price}</div>
                     </div>
                   )}
-
-                  {/* Diseño */}
                   {calculatedPrices.step2.value && (
                     <div className="summary-detail">
                       <div>Diseño: <strong>{getOptionName('step2', calculatedPrices.step2.value)}</strong></div>
                       <div>${calculatedPrices.step2.price}</div>
                     </div>
                   )}
-
-                  {/* Tamaño */}
                   {calculatedPrices.step3.value && (
                     <div className="summary-detail">
                       <div>Tamaño: <strong>{getOptionName('step3', calculatedPrices.step3.value)}</strong></div>
                       <div>${calculatedPrices.step3.price}</div>
                     </div>
                   )}
-
-                  {/* Características adicionales */}
                   {calculatedPrices.step4.some(f => f.value !== 'ninguna') && (
                     <>
                       <div className="summary-detail">
                         <div>Características adicionales:</div>
                         <div></div>
                       </div>
-
                       {calculatedPrices.step4
                         .filter(f => f.value !== 'ninguna')
                         .map((feature, index) => (
@@ -321,15 +442,12 @@ const Cotizador: React.FC = () => {
                       }
                     </>
                   )}
-
-                  {/* Servicios recurrentes */}
                   {calculatedPrices.step5.some(s => s.value !== 'ninguno') && (
                     <>
                       <div className="summary-detail">
                         <div>Servicios adicionales:</div>
                         <div></div>
                       </div>
-
                       {calculatedPrices.step5
                         .filter(s => s.value !== 'ninguno')
                         .map((service, index) => (
@@ -344,7 +462,6 @@ const Cotizador: React.FC = () => {
                     </>
                   )}
                 </div>
-
                 <div className="summary-total">
                   <div>Total estimado:</div>
                   <div id="total-price">${totals.totalPrice}</div>
@@ -361,6 +478,14 @@ const Cotizador: React.FC = () => {
                 </div>
               </div>
             </div>
+            <div className="buttons">
+              <button type="button" className="prev cta-button hero-cta-main" onClick={prevStep}>
+                Anterior
+              </button>
+              <button type="submit" className="submit cta-button hero-cta-main">
+                Solicitar cotización formal
+              </button>
+            </div>
           </div>
         );
 
@@ -375,7 +500,7 @@ const Cotizador: React.FC = () => {
       <main>
         <div className="cotizador-container">
           <h1>Cotizador de Servicios Web</h1>
-          <p>Completa los siguientes pasos para obtener una cotización personalizada.</p>
+          <p>Completa los siguientes pasos para obtener una cotización personalizada para tu proyecto.</p>
 
           <div className="progress-bar">
             <div
@@ -386,7 +511,7 @@ const Cotizador: React.FC = () => {
             {[...Array(totalSteps + 1)].map((_, idx) => (
               <div
                 key={idx}
-                className={`step ${idx < currentStep ? 'active' : ''} ${idx < currentStep - 1 ? 'complete' : ''}`}
+                className={`step${idx < currentStep ? ' active' : ''}`}
               >
                 {idx === totalSteps ? '✓' : idx + 1}
               </div>
@@ -395,26 +520,6 @@ const Cotizador: React.FC = () => {
 
           <form id="cotizador-form" onSubmit={handleSubmit}>
             {renderStep()}
-
-            <div className="buttons">
-              {currentStep > 1 && (
-                <button type="button" className="prev cta-button hero-cta-main" onClick={prevStep}>
-                  Anterior
-                </button>
-              )}
-
-              {currentStep <= totalSteps && (
-                <button type="button" className="next cta-button hero-cta-main" onClick={nextStep}>
-                  {currentStep === totalSteps ? 'Ver resumen' : 'Siguiente'}
-                </button>
-              )}
-
-              {currentStep === totalSteps + 1 && (
-                <button type="submit" className="submit cta-button hero-cta-main">
-                  Solicitar cotización formal
-                </button>
-              )}
-            </div>
           </form>
         </div>
       </main>
