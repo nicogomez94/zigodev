@@ -551,29 +551,6 @@ footer {
     -webkit-text-fill-color: transparent;
 }
 
-/* Cotizador Styles */
-.cotizador-section {
-    padding: 80px 0;
-    background-color: var(--bg-primary); /* Ensure light background */
-}
-
-.cotizador-container { /* This class is also in cotizador.html with its own light styles */
-    display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    gap: 40px;
-    margin-top: 40px;
-}
-
-.cotizador-grupo {
-    margin-bottom: 30px;
-}
-
-.cotizador-grupo h3 {
-    font-size: 1.2rem;
-    margin-bottom: 15px;
-    color: var(--text-primary);
-}
-
 .opciones-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -724,95 +701,7 @@ input[type="range"]::-webkit-slider-thumb {
     cursor: pointer;
 }
 
-#mantenimiento-description {
-    margin-top: 10px;
-    font-size: 0.9rem;
-    font-style: italic;
-    color: var(--text-muted);
-}
 
-.cotizador-resumen {
-    background-color: var(--bg-card);
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 5px 20px var(--shadow-color);
-    height: fit-content;
-    position: sticky;
-    top: 80px; /* Adjusted sticky position if header height changed */
-}
-
-.cotizador-resumen h3 {
-    margin-bottom: 20px;
-    font-size: 1.3rem;
-    text-align: center;
-    color: var(--text-primary);
-}
-
-.resumen-items {
-    margin-bottom: 30px;
-}
-
-.resumen-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 0;
-    border-bottom: 1px solid var(--border-color);
-    color: var(--text-secondary);
-}
-.resumen-item > div:last-child {
-    color: var(--text-primary); /* Make price part of item darker */
-}
-
-
-.precio-total {
-    display: flex;
-    justify-content: space-between;
-    padding: 15px 0;
-    font-weight: bold;
-    font-size: 1.1rem;
-    border-top: 2px solid var(--border-color);
-    color: var(--text-primary);
-}
-
-#precio-final {
-    color: var(--accent-violet);
-    font-size: 1.3rem;
-}
-
-.cotizador-accion {
-    margin-top: 20px;
-    text-align: center;
-}
-
-.cotizador-accion .cta-button {
-    width: 100%;
-    margin-bottom: 15px;
-    /* CTA button styles are already defined, ensure they work well */
-}
-
-.cotizador-nota {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    font-style: italic;
-}
-
-@media (max-width: 992px) {
-    .cotizador-container {
-        grid-template-columns: 1fr;
-    }
-    
-    .opciones-grid {
-        grid-template-columns: 1fr; /* Consider 2 columns if space allows: repeat(auto-fit, minmax(200px, 1fr)); */
-    }
-    
-    .opciones-checkbox {
-        grid-template-columns: 1fr;
-    }
-    
-    .cotizador-resumen {
-        position: static; /* Or adjust top value for sticky if header is smaller/larger */
-    }
-}
 
 /* Responsive Adjustments */
 @media (max-width: 992px) {
