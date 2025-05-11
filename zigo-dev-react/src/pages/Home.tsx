@@ -4,6 +4,7 @@ import Hero from '../components/Hero';
 import BuildScalable from '../components/BuildScalable';
 import StatsFeatures from '../components/StatsFeatures';
 import ContactForm from '../components/ContactForm';
+import Footer from '../components/Footer';
 
 const Home: React.FC = () => {
   return (
@@ -14,6 +15,7 @@ const Home: React.FC = () => {
         <BuildScalable />
         <StatsFeatures />
         <ContactForm />
+        <Footer />
       </main>
     </>
   );
