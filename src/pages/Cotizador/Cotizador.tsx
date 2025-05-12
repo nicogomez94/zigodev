@@ -548,28 +548,28 @@ const Cotizador: React.FC = () => {
             {renderStep()}
           </form>
         </div>
-                      <div className="review-slider-container">
-                <div className="review-item">
-                  <div className="review-stars">⭐⭐⭐⭐⭐</div>
-                  <p className="review-text">“Me encantó saber el precio sin hablar con nadie.” – Juan P., Buenos Aires</p>
-                </div>
-                <div className="review-item">
-                  <div className="review-stars">⭐⭐⭐⭐☆</div>
-                  <p className="review-text">“Muy intuitivo y fácil de usar. El resumen es claro.” – María L., Córdoba</p>
-                </div>
-                <div className="review-item">
-                  <div className="review-stars">⭐⭐⭐⭐⭐</div>
-                  <p className="review-text">“Excelente herramienta para tener una idea rápida de costos.” – Carlos G., Rosario</p>
-                </div>
-                <div className="review-item">
-                  <div className="review-stars">⭐⭐⭐⭐☆</div>
-                  <p className="review-text">“El proceso es rápido y las opciones son variadas.” – Ana S., Mendoza</p>
-                </div>
-                <div className="review-item">
-                  <div className="review-stars">⭐⭐⭐⭐⭐</div>
-                  <p className="review-text">“¡Justo lo que necesitaba para mi emprendimiento!” – Lucía F., La Plata</p>
-                </div>
-              </div>
+        <div className="review-slider-container">
+			<div className="review-item">
+				<div className="review-stars">⭐⭐⭐⭐⭐</div>
+				<p className="review-text">“Me encantó saber el precio sin hablar con nadie.” – Juan P., Buenos Aires</p>
+			</div>
+			<div className="review-item">
+				<div className="review-stars">⭐⭐⭐⭐☆</div>
+				<p className="review-text">“Muy intuitivo y fácil de usar. El resumen es claro.” – María L., Córdoba</p>
+			</div>
+			<div className="review-item">
+				<div className="review-stars">⭐⭐⭐⭐⭐</div>
+				<p className="review-text">“Excelente herramienta para tener una idea rápida de costos.” – Carlos G., Rosario</p>
+			</div>
+			<div className="review-item">
+				<div className="review-stars">⭐⭐⭐⭐☆</div>
+				<p className="review-text">“El proceso es rápido y las opciones son variadas.” – Ana S., Mendoza</p>
+			</div>
+			<div className="review-item">
+				<div className="review-stars">⭐⭐⭐⭐⭐</div>
+				<p className="review-text">“¡Justo lo que necesitaba para mi emprendimiento!” – Lucía F., La Plata</p>
+			</div>
+        </div>
       </main>
       <Footer />
     </>

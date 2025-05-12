@@ -1,6 +1,6 @@
 .cotizador-container {
     max-width: 1000px;
-    margin: 40px auto;
+    margin: 30px auto 10px;
     padding: 30px;
     background-color: #fff;
     border-radius: 10px;
@@ -206,7 +206,7 @@ button:hover {
 }
 
 .review-slider-container {
-  margin: -15px auto 30px;
+  margin: 10px auto 30px;
   max-width: 600px;
   height: 60px;
   overflow: hidden;
@@ -283,6 +283,11 @@ button:hover {
 @media (max-width: 900px) {
     .checkboxes {
         max-width: 550px;
+    }
+}
+@media (max-width: 768px) {
+    .cotizador-container {
+        margin: 5px auto 5px;
     }
 }
 @media (max-width: 565px) {
