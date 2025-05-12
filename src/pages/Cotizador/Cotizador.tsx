@@ -89,7 +89,7 @@ const Cotizador: React.FC = () => {
       }
     });
 
-    return { totalPrice, totalTime, monthlyPrice };
+    return { totalPrice, totalTime: Math.ceil(totalTime), monthlyPrice };
   };
 
   useEffect(() => {

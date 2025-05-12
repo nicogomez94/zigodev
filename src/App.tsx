@@ -4,6 +4,8 @@ import Home from './pages/Home';
 import Cotizador from './pages/Cotizador/Cotizador';
 import Servicios from './pages/Servicios/Servicios';
 import Contacto from './pages/Contacto/Contacto';
+import Trabajos from './pages/Trabajos/Trabajos';
+import WhatsAppButton from './components/WhatsAppButton'; // Import the new component
 import './assets/styles/style.css';
 import './assets/styles/contacto.css';
 import './assets/styles/servicios.css';
@@ -16,7 +18,9 @@ const App: React.FC = () => {
         <Route path="/cotizador" element={<Cotizador />} />
         <Route path="/servicios" element={<Servicios />} />
         <Route path="/contacto" element={<Contacto />} />
+        <Route path="/trabajos" element={<Trabajos />} />
       </Routes>
+      <WhatsAppButton />
     </Router>
   );
 };
