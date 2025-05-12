@@ -224,8 +224,16 @@ const Cotizador: React.FC = () => {
           <div className="form-step active" id="step1">
             <div className="form-group">
               <h2 id="que_tipo">¿Qué tipo de sitio web necesitas?</h2>
-
               <div className="options">
+                <div
+                  className={`option-card discount${selections.step1.value === 'landing' ? ' selected' : ''}`}
+                  onClick={() => handleOptionSelect('step1', 'landing')}
+                >
+                  <span className="discount-badge">15% OFF</span>
+                  <img src="/img/cotizador/step1/4.png" alt="Landing page" />
+                  <h4>Landing page</h4>
+                  <p>Página única diseñada para conversión de clientes.</p>
+                </div>
                 <div
                   className={`option-card${selections.step1.value === 'institucional' ? ' selected' : ''}`}
                   onClick={() => handleOptionSelect('step1', 'institucional')}
@@ -241,14 +249,6 @@ const Cotizador: React.FC = () => {
                   <img src="/img/cotizador/step1/2.png" alt="Sitio web institucional" />
                   <h4>E-commerce o catálogo</h4>
                   <p>Para vender productos o mostrar un catálogo online.</p>
-                </div>
-                <div
-                  className={`option-card${selections.step1.value === 'landing' ? ' selected' : ''}`}
-                  onClick={() => handleOptionSelect('step1', 'landing')}
-                >
-                  <img src="/img/cotizador/step1/4.png" alt="Sitio web institucional" />
-                  <h4>Landing page</h4>
-                  <p>Página única enfocada en conversión para campañas específicas.</p>
                 </div>
                 <div
                   className={`option-card${selections.step1.value === 'complejo' ? ' selected' : ''}`}
@@ -331,14 +331,14 @@ const Cotizador: React.FC = () => {
                   onClick={() => handleOptionSelect('step3', 'normal')}
                 >
                   <h4>Normal</h4>
-                  <p>Hasta 5 páginas o secciones.</p>
+                  <p>Hasta 3 páginas o secciones.</p>
                 </div>
                 <div
                   className={`option-card${selections.step3.value === 'mediano' ? ' selected' : ''}`}
                   onClick={() => handleOptionSelect('step3', 'mediano')}
                 >
                   <h4>Mediano</h4>
-                  <p>De 6 a 10 páginas o secciones.</p>
+                  <p>De 3 a 10 páginas o secciones.</p>
                 </div>
                 <div
                   className={`option-card${selections.step3.value === 'grande' ? ' selected' : ''}`}
@@ -352,7 +352,7 @@ const Cotizador: React.FC = () => {
                   onClick={() => handleOptionSelect('step3', 'noselo')}
                 >
                   <h4>No lo sé</h4>
-                  <p>Necesitas asesoramiento para definir el alcance.</p>
+                  <p>Asumimos que es de tamaño normal</p>
                 </div>
               </div>
             </div>
@@ -441,12 +441,26 @@ const Cotizador: React.FC = () => {
               <h2>Resumen de tu cotización</h2>
               <div className="summary-card">
                 <div id="summary-content">
-                  {calculatedPrices.step1.value && (
+                  {calculatedPrices.step1.value === 'landing' && (
+                    <div className="summary-detail discount-item">
+                      <div>
+                        Tipo de sitio: <strong>{getOptionName('step1', calculatedPrices.step1.value)}</strong>
+                        <span className="discount-tag">15% OFF</span>
+                      </div>
+                      <div>
+                        <span className="original-price">AR${formatNumber(Math.round(calculatedPrices.step1.price / 0.85))}</span>
+                        AR${formatNumber(calculatedPrices.step1.price)}
+                      </div>
+                    </div>
+                  )}
+
+                  {calculatedPrices.step1.value !== 'landing' && calculatedPrices.step1.value && (
                     <div className="summary-detail">
                       <div>Tipo de sitio: <strong>{getOptionName('step1', calculatedPrices.step1.value)}</strong></div>
                       <div>AR${formatNumber(calculatedPrices.step1.price)}</div>
                     </div>
                   )}
+
                   {calculatedPrices.step2.value && (
                     <div className="summary-detail">
                       <div>Diseño: <strong>{getOptionName('step2', calculatedPrices.step2.value)}</strong></div>

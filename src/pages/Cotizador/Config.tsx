@@ -24,7 +24,7 @@ export const pricingConfig = {
             'landing':       { basePrice: 128000, baseTime: 1 },    // 0.3 weeks * 5 days/week = 1.5 days
             'institucional': { basePrice: 320000, baseTime: 3.5 },    // 0.7 weeks * 5 days/week = 3.5 days
             'ecommerce':     { basePrice: 640000, baseTime: 10 },     // 2 weeks * 5 days/week = 10 days
-            'complejo':      { basePrice: 736000, baseTime: 15 }      // 3 weeks * 5 days/week = 15 days
+            'complejo':      { basePrice: 736000, baseTime: 10 }      // 3 weeks * 5 days/week = 15 days
         },
 
         step2: {
@@ -36,33 +36,46 @@ export const pricingConfig = {
 
         step3: {
             'normal':   { basePrice: 160000, baseTime: 1 },           // 0.5 weeks * 5 days/week = 2.5 days
-            'mediano':  { basePrice: 320000, baseTime: 5 },              // 1 week * 5 days/week = 5 days
-            'grande':   { basePrice: 640000, baseTime: 10 },             // 2 weeks * 5 days/week = 10 days
-            'noselo':   { basePrice: 256000, baseTime: 4 }              // 0.8 weeks * 5 days/week = 4 days
+            'mediano':  { basePrice: 320000, baseTime: 4 },              // 1 week * 5 days/week = 5 days
+            'grande':   { basePrice: 640000, baseTime: 7 },             // 2 weeks * 5 days/week = 10 days
+            'noselo':   { basePrice: 256000, baseTime: 1 }              // 0.8 weeks * 5 days/week = 4 days
         },
 
         step4: {
-            'logo':         { basePrice: 160000, baseTime: 5 },              // 1 week * 5 days/week = 5 days
+            'logo':         { basePrice: 160000, baseTime: 1 },              // 1 week * 5 days/week = 5 days
             // 'marca':        { basePrice: 240000, baseTime: 7.5 },            // 1.5 weeks * 5 days/week = 7.5 days
-            'idioma':       { basePrice: 112000, baseTime: 3.5 },            // 0.7 weeks * 5 days/week = 3.5 days
-            'contenidos':   { basePrice: 160000, baseTime: 5 },              // 1 week * 5 days/week = 5 days
-            'imagenes':     { basePrice: 80000, baseTime: 2.5 },             // 0.5 weeks * 5 days/week = 2.5 days
-            'mercadopago':  { basePrice: 80000, baseTime: 2.5 },             // 0.5 weeks * 5 days/week = 2.5 days
+            'idioma':       { basePrice: 112000, baseTime: 1 },            // 0.7 weeks * 5 days/week = 3.5 days
+            'contenidos':   { basePrice: 160000, baseTime: 1 },              // 1 week * 5 days/week = 5 days
+            'imagenes':     { basePrice: 80000, baseTime: 0 },             // 0.5 weeks * 5 days/week = 2.5 days
+            'mercadopago':  { basePrice: 80000, baseTime: 3 },             // 0.5 weeks * 5 days/week = 2.5 days
             'ninguna':      { basePrice: 0, baseTime: 0 }
         },
 
         step5: {
             'email':     { basePrice: 10000, baseTime: 0, isMonthly: true },
             'soporte':   { basePrice: 30000, baseTime: 0, isMonthly: true },
-            'seo':       { basePrice: 400000, baseTime: 5, isMonthly: false }, // 1 week * 5 days/week = 5 days
-            'productos': { basePrice: 224000, baseTime: 3.5, isMonthly: false },// 0.7 weeks * 5 days/week = 3.5 days
-            'blog':      { basePrice: 160000, baseTime: 2.5, isMonthly: false },// 0.5 weeks * 5 days/week = 2.5 days
+            'seo':       { basePrice: 400000, baseTime: 3, isMonthly: false }, // 1 week * 5 days/week = 5 days
+            'productos': { basePrice: 224000, baseTime: 5, isMonthly: false },// 0.7 weeks * 5 days/week = 3.5 days
+            'blog':      { basePrice: 160000, baseTime: 5, isMonthly: false },// 0.5 weeks * 5 days/week = 2.5 days
             'hosting':   { basePrice: 15000, baseTime: 0, isMonthly: true },
             'ninguno':   { basePrice: 0, baseTime: 0, isMonthly: false }
         },
 
     // Reglas especiales para modificar precios
     specialRules: [
+        // Agregar esta nueva regla para el descuento de landing page
+        {
+            condition: (selections: Selections) =>
+                selections.step1.value === 'landing',
+            apply: (_: Selections, prices: any) => {
+                // Aplicar 15% de descuento al precio de landing page
+                const discount = 0.15;
+                prices.step1.price = Math.round(prices.step1.price * (1 - discount));
+                // Opcionalmente, podemos añadir una propiedad para indicar visualmente el descuento
+                prices.step1.hasDiscount = true;
+                prices.step1.discountPercentage = 15;
+            }
+        },
         {
             condition: (selections: Selections) =>
                 selections.step1.value === 'ecommerce' &&

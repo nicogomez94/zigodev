@@ -245,6 +245,7 @@ header nav ul li a:hover {
     background-color: var(--accent-violet);
     color: #fff;
     padding: 12px 30px;
+    border-radius: 5px;
 }
  .hero-cta-main:hover {
     background-color: var(---violet-oscuro);
@@ -695,8 +696,8 @@ footer {
   position: fixed;
   width: 80px;
   height: 80px;
-  bottom: 40px;
-  right: 40px;
+  bottom: 20px;
+  right: 20px;
   background-color: var(---violet-oscuro);
   color: #FFF;
   border-radius: 50px;
@@ -755,6 +756,9 @@ input[type="range"]::-webkit-slider-thumb {
 .cotiza-mobile{
     display: none;
 }
+.cotiza-desk{
+    display: block;
+}
 
 /* Responsive Adjustments */
 @media (max-width: 992px) {
@@ -769,6 +773,9 @@ input[type="range"]::-webkit-slider-thumb {
 @media (max-width: 768px) {
     .cotiza-mobile{
         display: block;
+    }
+    .cotiza-desk{
+        display: none;
     }
     header .container { flex-direction: row; gap: 15px; }
     nav { margin-top: 10px; }

@@ -214,6 +214,43 @@
     background-color: rgba(125, 74, 246, 0.1);
 }
 
+/* Estilos para la opción con descuento */
+.option-card.discount {
+  border: 2px solid #6c5ce7;
+  box-shadow: 0 5px 15px rgba(108, 92, 231, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.option-card.discount::before {
+  content: "15% OFF";
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #6c5ce7;
+  color: white;
+  padding: 5px 15px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  transform: rotate(45deg) translate(15px, -15px);
+  transform-origin: top right;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.discount-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #6c5ce7;
+  color: white;
+  padding: 5px 10px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  z-index: 1;
+  border-radius: 0 0 0 5px;
+}
+
 .option-card h4 {
     margin-top: 0;
     margin-bottom: 10px;
@@ -363,7 +400,7 @@ button:hover {
 
 .review-item {
   animation-name: cycleReviews;
-  animation-duration: 25s;
+  animation-duration: 20s;
   animation-iteration-count: infinite;
 }
 
@@ -371,18 +408,43 @@ button:hover {
   animation-delay: 0s;
 }
 .review-item:nth-child(2) {
-  animation-delay: 5s;
+  animation-delay: 4s;
 }
 .review-item:nth-child(3) {
-  animation-delay: 10s;
+  animation-delay: 8s;
 }
 .review-item:nth-child(4) {
-  animation-delay: 15s;
+  animation-delay: 12s;
 }
 .review-item:nth-child(5) {
-  animation-delay: 20s;
+  animation-delay: 16s;
 }
 
+/* Estilos para mostrar el descuento en el resumen */
+.discount-item {
+  background-color: rgba(108, 92, 231, 0.05);
+  border-radius: 5px;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+}
+
+.discount-tag {
+  display: inline-block;
+  background-color: #6c5ce7;
+  color: white;
+  font-size: 0.7rem;
+  padding: 2px 6px;
+  border-radius: 3px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+.original-price {
+  text-decoration: line-through;
+  color: #999;
+  font-size: 0.9em;
+  margin-right: 10px;
+}
 
 @media (max-width: 900px) {
     .checkboxes {
