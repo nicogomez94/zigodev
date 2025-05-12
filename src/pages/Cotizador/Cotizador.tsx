@@ -36,6 +36,14 @@ const Cotizador: React.FC = () => {
     monthlyPrice: 0
   });
 
+  // Add this function to handle step clicks
+  const handleStepClick = (stepIndex: number) => {
+    // Only allow navigating backward
+    if (stepIndex < currentStep) {
+      setCurrentStep(stepIndex);
+    }
+  };
+
   // Calcular precios aplicando reglas especiales
   const calculatePrices = () => {
     const calculatedPrices = {
@@ -532,16 +540,33 @@ const Cotizador: React.FC = () => {
             <div
               className="progress"
               id="progress"
-              style={{ width: `${((currentStep - 1) / totalSteps) * 100}%` }}
+              style={{ 
+                width: `${
+                  // Si estamos en el paso 6 (resumen), muestra la barra completa
+                  currentStep >= 6 
+                    ? 100 
+                    : ((currentStep - 1) / (totalSteps - 1)) * 100
+                }%` 
+              }}
             ></div>
-            {[...Array(totalSteps + 1)].map((_, idx) => (
-              <div
-                key={idx}
-                className={`step${idx < currentStep ? ' active' : ''}`}
-              >
-                {idx === totalSteps ? '✓' : idx + 1}
-              </div>
-            ))}
+            {[...Array(totalSteps)].map((_, idx) => {
+              const stepNum = idx + 1;
+              const isCurrent = currentStep === stepNum || (currentStep === 6 && stepNum === 5);  // El paso 6 destaca el 5 en la barra
+              const isPrevious = stepNum < currentStep || (currentStep === 6 && stepNum < 6);
+              const isFuture = stepNum > currentStep && currentStep < 6;
+              
+              return (
+                <div
+                  key={idx}
+                  className={`step${isCurrent ? ' active' : ''}${isPrevious ? ' completed clickable' : ''}${isFuture ? ' future' : ''}`}
+                  onClick={() => handleStepClick(stepNum > 5 ? 5 : stepNum)}
+                  role={isPrevious ? "button" : undefined}
+                  aria-label={isPrevious ? `Volver al paso ${stepNum}` : undefined}
+                >
+                  {stepNum}
+                </div>
+              );
+            })}
           </div>
 
           <form id="cotizador-form" onSubmit={handleSubmit}>

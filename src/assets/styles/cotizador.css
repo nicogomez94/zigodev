@@ -69,6 +69,110 @@
     color: white;
 }
 
+/* Add these styles for the clickable steps */
+.step.clickable {
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.2s ease;
+  border-color: var(--accent-violet);
+  background-color: var(--accent-violet);
+  color: white;
+}
+
+.step.clickable:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 5px rgba(108, 92, 231, 0.5);
+}
+
+.step.clickable::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 6px;
+  height: 6px;
+  background-color: white;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.step.clickable:hover::after {
+  opacity: 0.7;
+}
+
+/* Add a tooltip-like effect for better UX */
+.step.clickable::before {
+  content: "Volver a este paso";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 5px 10px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  font-size: 12px;
+  border-radius: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+  pointer-events: none;
+  margin-bottom: 8px;
+}
+
+.step.clickable:hover::before {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Future steps (non-clickable) */
+.step.future {
+  cursor: not-allowed;
+}
+
+/* Add arrow for tooltip */
+.step.clickable::before {
+  content: "Volver a este paso";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 5px 10px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  font-size: 12px;
+  border-radius: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+  pointer-events: none;
+  margin-bottom: 8px;
+}
+
+.step.clickable::after {
+  content: "";
+  position: absolute;
+  bottom: calc(100% - 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 5px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.7) transparent transparent transparent;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+  pointer-events: none;
+}
+
+.step.clickable:hover::before,
+.step.clickable:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
+
 .form-step {
     display: none;
 }
