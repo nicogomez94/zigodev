@@ -215,7 +215,8 @@ const Cotizador: React.FC = () => {
         return (
           <div className="form-step active" id="step1">
             <div className="form-group">
-              <h2>¿Qué tipo de sitio web necesitas?</h2>
+              <h2 id="que_tipo">¿Qué tipo de sitio web necesitas?</h2>
+
               <div className="options">
                 <div
                   className={`option-card${selections.step1.value === 'institucional' ? ' selected' : ''}`}
@@ -524,7 +525,7 @@ const Cotizador: React.FC = () => {
       <Header />
       <main>
         <div className="cotizador-container">
-          <h1>Cotizador de Servicios Web</h1>
+          <h1>Cotizá tu web en minutos. Sin vueltas. </h1>
           <p>Completa los siguientes pasos para obtener una cotización personalizada para tu proyecto.</p>
 
           <div className="progress-bar">
@@ -547,6 +548,28 @@ const Cotizador: React.FC = () => {
             {renderStep()}
           </form>
         </div>
+                      <div className="review-slider-container">
+                <div className="review-item">
+                  <div className="review-stars">⭐⭐⭐⭐⭐</div>
+                  <p className="review-text">“Me encantó saber el precio sin hablar con nadie.” – Juan P., Buenos Aires</p>
+                </div>
+                <div className="review-item">
+                  <div className="review-stars">⭐⭐⭐⭐☆</div>
+                  <p className="review-text">“Muy intuitivo y fácil de usar. El resumen es claro.” – María L., Córdoba</p>
+                </div>
+                <div className="review-item">
+                  <div className="review-stars">⭐⭐⭐⭐⭐</div>
+                  <p className="review-text">“Excelente herramienta para tener una idea rápida de costos.” – Carlos G., Rosario</p>
+                </div>
+                <div className="review-item">
+                  <div className="review-stars">⭐⭐⭐⭐☆</div>
+                  <p className="review-text">“El proceso es rápido y las opciones son variadas.” – Ana S., Mendoza</p>
+                </div>
+                <div className="review-item">
+                  <div className="review-stars">⭐⭐⭐⭐⭐</div>
+                  <p className="review-text">“¡Justo lo que necesitaba para mi emprendimiento!” – Lucía F., La Plata</p>
+                </div>
+              </div>
       </main>
       <Footer />
     </>

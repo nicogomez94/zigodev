@@ -668,16 +668,16 @@ footer {
 
 .whatsapp-float {
   position: fixed;
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   bottom: 40px;
   right: 40px;
-  background-color: #25D366; /* WhatsApp Green */
+  background-color: var(---violet-oscuro);
   color: #FFF;
   border-radius: 50px;
   text-align: center;
-  font-size: 30px;
-  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+  font-size: 40px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
   z-index: 1000;
   display: flex;
   align-items: center;
@@ -686,7 +686,7 @@ footer {
 }
 
 .whatsapp-float:hover {
-  background-color: #128C7E; /* Darker WhatsApp Green */
+  background-color: var(---violet-oscuro); /* Darker WhatsApp Green */
   transform: scale(1.1);
   color: white;
 }

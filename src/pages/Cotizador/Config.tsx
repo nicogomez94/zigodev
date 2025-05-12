@@ -43,7 +43,7 @@ export const pricingConfig = {
 
         step4: {
             'logo':         { basePrice: 160000, baseTime: 5 },              // 1 week * 5 days/week = 5 days
-            'marca':        { basePrice: 240000, baseTime: 7.5 },            // 1.5 weeks * 5 days/week = 7.5 days
+            // 'marca':        { basePrice: 240000, baseTime: 7.5 },            // 1.5 weeks * 5 days/week = 7.5 days
             'idioma':       { basePrice: 112000, baseTime: 3.5 },            // 0.7 weeks * 5 days/week = 3.5 days
             'contenidos':   { basePrice: 160000, baseTime: 5 },              // 1 week * 5 days/week = 5 days
             'imagenes':     { basePrice: 80000, baseTime: 2.5 },             // 0.5 weeks * 5 days/week = 2.5 days
@@ -119,11 +119,11 @@ export const optionNames = {
     },
     'step4': {
         'logo': 'Diseño de logo',
-        'marca': 'Apertura de marca',
+        // 'marca': 'Apertura de marca',
         'idioma': 'Multiidioma',
         'contenidos': 'Redacción de contenidos',
         'imagenes': 'Imágenes',
-        'mercadopago': 'Integración con Mercado Pago',
+        'mercadopago': 'Mercado Pago',
         'ninguna': 'Ninguna'
     },
     'step5': {

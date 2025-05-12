@@ -16,10 +16,10 @@ const Header: React.FC = () => {
                         <li><Link to="/">Inicio</Link></li>
                         <li><Link to="/servicios">Servicios</Link></li>
                         <li><Link to="/cotizador">Cotizador</Link></li>
-                        <li><Link to="/contacto">Acerca De</Link></li>
+                        <li><Link to="/trabajos">Acerca De</Link></li>
                     </ul>
                 </nav>
-                <Link to="/contacto" className="cta-button header-cta">Ponete en Contacto</Link>
+                <Link to="/cotizador" className="cta-button header-cta">Cotizá tu Sistema</Link>
             </div>
         </header>
     );

@@ -6,6 +6,7 @@
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     color: #333 !important;
+    text-align: center;
 }
 
 .progress-bar {
@@ -183,7 +184,8 @@ button:hover {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 10px;
-    margin-top: 30px;
+    margin: 30px auto;
+    max-width: 771px;
 }
 
 .checkbox-item {
@@ -201,4 +203,91 @@ button:hover {
 #cotizador-form .form-group label{
     cursor: pointer;
     margin-bottom: 0;
+}
+
+.review-slider-container {
+  margin: -15px auto 30px;
+  max-width: 600px;
+  height: 60px;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .8em;
+}
+
+.review-item {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  box-sizing: border-box;
+  height: 100%;
+}
+
+.review-stars {
+  font-size: 1.1em;
+  color: #FFD700;
+  margin-bottom: 5px;
+}
+
+.review-text {
+  font-style: italic;
+  color: #555;
+  margin-bottom: 0;
+  font-size: 0.9em;
+  line-height: 1.3;
+  text-align: center;
+}
+
+@keyframes cycleReviews {
+  0% { transform: translateX(100%); opacity: 0; }
+  5%, 15% { transform: translateX(0); opacity: 1; }
+  20%, 100% { transform: translateX(-100%); opacity: 0; }
+}
+
+.review-item {
+  animation-name: cycleReviews;
+  animation-duration: 25s;
+  animation-iteration-count: infinite;
+}
+
+.review-item:nth-child(1) {
+  animation-delay: 0s;
+}
+.review-item:nth-child(2) {
+  animation-delay: 5s;
+}
+.review-item:nth-child(3) {
+  animation-delay: 10s;
+}
+.review-item:nth-child(4) {
+  animation-delay: 15s;
+}
+.review-item:nth-child(5) {
+  animation-delay: 20s;
+}
+
+
+@media (max-width: 900px) {
+    .checkboxes {
+        max-width: 550px;
+    }
+}
+@media (max-width: 565px) {
+    .checkboxes {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        max-width: 550px;
+    }
 }
