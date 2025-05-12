@@ -5,6 +5,12 @@ import Header from '../../components/Header';
 import '../../assets/styles/cotizador.css';
 import Footer from '../../components/Footer';
 
+// Helper function to format numbers with dots
+const formatNumber = (num: number): string => {
+  if (num === undefined || num === null) return '0';
+  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+};
+
 const Cotizador: React.FC = () => {
   const totalSteps = 5;
   const [currentStep, setCurrentStep] = useState<number>(1);
@@ -429,19 +435,19 @@ const Cotizador: React.FC = () => {
                   {calculatedPrices.step1.value && (
                     <div className="summary-detail">
                       <div>Tipo de sitio: <strong>{getOptionName('step1', calculatedPrices.step1.value)}</strong></div>
-                      <div>${calculatedPrices.step1.price}</div>
+                      <div>AR${formatNumber(calculatedPrices.step1.price)}</div>
                     </div>
                   )}
                   {calculatedPrices.step2.value && (
                     <div className="summary-detail">
                       <div>Diseño: <strong>{getOptionName('step2', calculatedPrices.step2.value)}</strong></div>
-                      <div>${calculatedPrices.step2.price}</div>
+                      <div>AR${formatNumber(calculatedPrices.step2.price)}</div>
                     </div>
                   )}
                   {calculatedPrices.step3.value && (
                     <div className="summary-detail">
                       <div>Tamaño: <strong>{getOptionName('step3', calculatedPrices.step3.value)}</strong></div>
-                      <div>${calculatedPrices.step3.price}</div>
+                      <div>AR${formatNumber(calculatedPrices.step3.price)}</div>
                     </div>
                   )}
                   {calculatedPrices.step4.some(f => f.value !== 'ninguna') && (
@@ -455,7 +461,7 @@ const Cotizador: React.FC = () => {
                         .map((feature, index) => (
                           <div className="summary-detail" key={`feature-${index}`}>
                             <div> - {getOptionName('step4', feature.value)}</div>
-                            <div>${feature.price}</div>
+                            <div>AR${formatNumber(feature.price)}</div>
                           </div>
                         ))
                       }
@@ -473,7 +479,7 @@ const Cotizador: React.FC = () => {
                           <div className="summary-detail" key={`service-${index}`}>
                             <div> - {getOptionName('step5', service.value)}</div>
                             <div>
-                              ${service.price}{service.isMonthly ? '/mes' : ''}
+                              AR${formatNumber(service.price)}{service.isMonthly ? '/mes' : ''}
                             </div>
                           </div>
                         ))
@@ -483,16 +489,16 @@ const Cotizador: React.FC = () => {
                 </div>
                 <div className="summary-total">
                   <div>Total estimado:</div>
-                  <div id="total-price">${totals.totalPrice}</div>
+                  <div id="total-price">AR${formatNumber(totals.totalPrice)}</div>
                 </div>
                 <div className="summary-total">
                   <div>Tiempo estimado:</div>
-                  <div id="total-time">{totals.totalTime} semanas</div>
+                  <div id="total-time">{totals.totalTime} días</div>
                 </div>
                 <div className="summary-total">
                   <div>Servicios mensuales:</div>
                   <div id="monthly-services">
-                    {totals.monthlyPrice > 0 ? `$${totals.monthlyPrice}/mes` : 'Ninguno'}
+                    {totals.monthlyPrice > 0 ? `AR$${formatNumber(totals.monthlyPrice)}/mes` : 'Ninguno'}
                   </div>
                 </div>
               </div>

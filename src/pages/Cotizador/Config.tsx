@@ -20,47 +20,42 @@ export interface Selections {
 }
 
 export const pricingConfig = {
-    // Precios base para tipos de sitio
-    step1: {
-        'institucional': { basePrice: 800, baseTime: 1 },
-        'ecommerce': { basePrice: 1500, baseTime: 5 },
-        'landing': { basePrice: 500, baseTime: 2 },
-        'complejo': { basePrice: 2000, baseTime: 8 }
-    },
-    // Precios para diseño
-    step2: {
-        'estandar': { basePrice: 300, baseTime: 1 },
-        'medida': { basePrice: 800, baseTime: 3 },
-        'tengo': { basePrice: 0, baseTime: 0 },
-        'nose': { basePrice: 400, baseTime: 1.5 }
-    },
-    // Precios por tamaño
-    step3: {
-        'normal': { basePrice: 400, baseTime: 1 },
-        'mediano': { basePrice: 800, baseTime: 2 },
-        'grande': { basePrice: 1600, baseTime: 4 },
-        'noselo': { basePrice: 600, baseTime: 1.5 }
-    },
-    // Características adicionales
-    step4: {
-        'logo': { basePrice: 300, baseTime: 2 },
-        'marca': { basePrice: 500, baseTime: 3 },
-        'idioma': { basePrice: 400, baseTime: 1.5 },
-        'contenidos': { basePrice: 350, baseTime: 2 },
-        'imagenes': { basePrice: 200, baseTime: 1 },
-        'mercadopago': { basePrice: 250, baseTime: 1 },
-        'ninguna': { basePrice: 0, baseTime: 0 }
-    },
-    // Servicios adicionales
-    step5: {
-        'email': { basePrice: 15, baseTime: 0, isMonthly: true },
-        'soporte': { basePrice: 50, baseTime: 0, isMonthly: true },
-        'seo': { basePrice: 300, baseTime: 2, isMonthly: false },
-        'productos': { basePrice: 200, baseTime: 1.5, isMonthly: false },
-        'blog': { basePrice: 150, baseTime: 1, isMonthly: false },
-        'hosting': { basePrice: 20, baseTime: 0, isMonthly: true },
-        'ninguno': { basePrice: 0, baseTime: 0, isMonthly: false }
-    },
+        step1: {
+            'institucional': { basePrice: 480000, baseTime: 0.7 },    // 5 días
+            'ecommerce':     { basePrice: 960000, baseTime: 2 },      // 10 días
+            'landing':       { basePrice: 192000, baseTime: 0.3 },    // 2 días
+            'complejo':      { basePrice: 1104000, baseTime: 2.3 }    // 11.5 días
+        },
+        step2: {
+            'estandar': { basePrice: 180000, baseTime: 0.5 },         // 3-4 días
+            'medida':   { basePrice: 480000, baseTime: 1 },           // 5 días
+            'tengo':    { basePrice: 0, baseTime: 0 },
+            'nose':     { basePrice: 180000, baseTime: 0.5 }
+        },
+        step3: {
+            'normal':   { basePrice: 240000, baseTime: 0.5 },
+            'mediano':  { basePrice: 480000, baseTime: 1 },
+            'grande':   { basePrice: 960000, baseTime: 2 },
+            'noselo':   { basePrice: 384000, baseTime: 0.8 }
+        },
+        step4: {
+            'logo':         { basePrice: 240000, baseTime: 1 },
+            // 'marca':        { basePrice: 360000, baseTime: 1.5 },
+            'idioma':       { basePrice: 168000, baseTime: 0.7 },
+            'contenidos':   { basePrice: 240000, baseTime: 1 },
+            'imagenes':     { basePrice: 120000, baseTime: 0.5 },
+            'mercadopago':  { basePrice: 120000, baseTime: 0.5 },
+            'ninguna':      { basePrice: 0, baseTime: 0 }
+        },
+        step5: {
+            'email':     { basePrice: 15000, baseTime: 0, isMonthly: true },
+            'soporte':   { basePrice: 50000, baseTime: 0, isMonthly: true },
+            'seo':       { basePrice: 600000, baseTime: 1, isMonthly: false },
+            'productos': { basePrice: 336000, baseTime: 0.7, isMonthly: false },
+            'blog':      { basePrice: 240000, baseTime: 0.5, isMonthly: false },
+            'hosting':   { basePrice: 20000, baseTime: 0, isMonthly: true },
+            'ninguno':   { basePrice: 0, baseTime: 0, isMonthly: false }
+        },
     // Reglas especiales para modificar precios
     specialRules: [
         {
@@ -119,7 +114,7 @@ export const optionNames = {
     },
     'step4': {
         'logo': 'Diseño de logo',
-        'marca': 'Apertura de marca',
+        // 'marca': 'Apertura de marca',
         'idioma': 'Multiidioma',
         'contenidos': 'Redacción de contenidos',
         'imagenes': 'Imágenes',
@@ -132,7 +127,7 @@ export const optionNames = {
         'seo': 'Optimización SEO premium',
         'productos': 'Carga de productos',
         'blog': 'Redacción para blog',
-        'hosting': 'Hosting',
+        'hosting': 'Hosting (mensual)',
         'ninguno': 'Ninguno'
     }
 };

@@ -715,6 +715,9 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 @media (max-width: 768px) {
+    .header-cta{
+        display: none;
+    }
     header .container { flex-direction: column; gap: 15px; }
     nav { margin-top: 10px; }
     nav ul { justify-content: center; flex-wrap: wrap; gap: 20px;}
@@ -733,6 +736,8 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
  @media (max-width: 480px) {
+    .progress-bar {max-width: 100%;}
+    .option-card img{ max-width: 60%;} 
      .logo { font-size: 1.4em; }
      .hero h1 { font-size: 2.1em; }
      .hero-buttons { flex-direction: column; gap: 15px; align-items: center;}

@@ -11,9 +11,12 @@
 .progress-bar {
     display: flex;
     justify-content: space-between;
-    margin-top: 25px;
+    margin-top: 35px;
     margin-bottom: 35px;
     position: relative;
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .progress-bar::before {
@@ -180,20 +183,22 @@ button:hover {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 10px;
+    margin-top: 30px;
 }
 
 .checkbox-item {
+    cursor: pointer;
     display: flex;
     align-items: center;
     margin-bottom: 10px;
 }
 
 .checkbox-item input {
+    cursor: pointer;
     margin-right: 10px;
 }
 
-.checkbox-item img {
-    width: 100px;
-    height: 100px;
-    margin-right: 10px;
+#cotizador-form .form-group label{
+    cursor: pointer;
+    margin-bottom: 0;
 }
