@@ -126,7 +126,7 @@
     background-color: var(--accent-purple);
     color: var(--text-headings);
     border: none;
-    border-radius: 6px;
+    border-radius: var(--suave-btn);
     font-family: var(--font-primary);
     font-size: 1.05em;
     font-weight: 600;

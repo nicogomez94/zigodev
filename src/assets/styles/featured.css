@@ -1,0 +1,50 @@
+/* Estilos para secciones destacadas en Home */
+.featured-services, .featured-projects {
+  padding: 80px 0;
+}
+
+.view-all-link {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.view-all-link a {
+  color: var(--primary-color, #6c5ce7);
+  font-weight: 600;
+  font-size: 1.1rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+}
+
+.view-all-link a:hover {
+  opacity: 0.8;
+}
+
+.view-all-link .arrow {
+  display: inline-block;
+  margin-left: 8px;
+  transition: transform 0.3s ease;
+}
+
+.view-all-link a:hover .arrow {
+  transform: translateX(5px);
+}
+
+/* Asegurarnos que los estilos de la sección de proyectos 
+   funcionan correctamente en la Home */
+.featured-projects .project-card {
+  background: white;
+}
+
+.featured-projects.bg-alt {
+  background-color: #f8f9fa;
+}
+
+/* Para cuando se muestra en la Home */
+.featured-projects .project-info p {
+  margin-bottom: 15px;
+  font-size: 0.95rem;
+  color: var(--text-medium, #666);
+}
