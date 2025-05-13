@@ -17,10 +17,16 @@ interface Project {
   year?: string;
 }
 
+interface CategoryGroup {
+  id: string;
+  name: string;
+  description: string;
+  projects: Project[];
+}
+
 const Trabajos: React.FC = () => {
-  const [selectedCategory, setSelectedCategory] = useState('all');
   const [projects, setProjects] = useState<Project[]>([]);
-  const [filteredProjects, setFilteredProjects] = useState<Project[]>([]);
+  const [categorizedProjects, setCategorizedProjects] = useState<CategoryGroup[]>([]);
   const [activeProject, setActiveProject] = useState<Project | null>(null);
 
   // Sample projects data
@@ -40,7 +46,7 @@ const Trabajos: React.FC = () => {
       {
         id: 2,
         title: 'Landing Page agencia de viajes',
-        category: 'landing',
+        category: 'ecommerce',
         description: 'Landing de alta conversión para promoción de paquetes turísticos con integración de formulario de reserva. Optimizamos cada sección para maximizar la tasa de conversión y captar leads de calidad.',
         image: '/img/trabajos/2.png',
         url: 'https://travelagency.com',
@@ -92,29 +98,82 @@ const Trabajos: React.FC = () => {
         client: 'Industrias Modernas',
         year: '2022'
       },
+      {
+        id: 7,
+        title: 'Landing Page servicio financiero',
+        category: 'landing',
+        description: 'Landing page para servicio de finanzas personales con calculadoras interactivas y formulario de contacto optimizado para captar leads cualificados.',
+        image: '/img/trabajos/2.png',
+        url: 'https://financeservice.com',
+        technologies: ['JavaScript', 'Bootstrap', 'PHP'],
+        client: 'Finanzas Personales',
+        year: '2023'
+      },
+      {
+        id: 8,
+        title: 'Web institucional constructora',
+        category: 'institucional',
+        description: 'Sitio web para empresa constructora con galería de proyectos, formulario de consultas y sección de noticias del sector. Diseño atractivo que resalta la calidad de sus construcciones.',
+        image: '/img/trabajos/3.png',
+        url: 'https://constructora.com',
+        technologies: ['WordPress', 'CSS3', 'jQuery'],
+        client: 'Construye Seguro',
+        year: '2022'
+      },
+      {
+        id: 9,
+        title: 'Portal de contenido educativo',
+        category: 'plataforma',
+        description: 'Portal de recursos educativos con búsqueda avanzada, sistema de membresías y descargas de materiales. Enfocado a profesores y estudiantes del nivel secundario.',
+        image: '/img/trabajos/4.png',
+        url: 'https://educaportal.edu',
+        technologies: ['React', 'Express', 'MySQL'],
+        client: 'Red Educativa Nacional',
+        year: '2023'
+      },
     ];
 
     setProjects(projectsData);
-    setFilteredProjects(projectsData);
+    
+    // Agrupar proyectos por categoría
+    const categoryDefinitions = {
+      ecommerce: {
+        name: 'E-commerce',
+        description: 'Tiendas online y plataformas de venta digital que maximizan los resultados del negocio'
+      },
+      landing: {
+        name: 'Landing Pages',
+        description: 'Páginas optimizadas para la conversión que capturan leads y aumentan tus ventas'
+      },
+      institucional: {
+        name: 'Sitios Institucionales',
+        description: 'Páginas corporativas que representan profesionalmente la imagen de tu empresa'
+      },
+      plataforma: {
+        name: 'Plataformas Web',
+        description: 'Sistemas web completos que automatizan procesos y mejoran la eficiencia del negocio'
+      },
+      aplicacion: {
+        name: 'Aplicaciones Web',
+        description: 'Soluciones digitales personalizadas para necesidades específicas de cada cliente'
+      }
+    };
+
+    // Obtener categorías únicas
+    const categories = [...new Set(projectsData.map(project => project.category))];
+    
+    // Crear grupos de proyectos por categoría
+    const groupedProjects = categories.map(category => {
+      return {
+        id: category,
+        name: categoryDefinitions[category as keyof typeof categoryDefinitions]?.name || category,
+        description: categoryDefinitions[category as keyof typeof categoryDefinitions]?.description || '',
+        projects: projectsData.filter(project => project.category === category)
+      };
+    });
+
+    setCategorizedProjects(groupedProjects);
   }, []);
-
-  // Filter projects by category
-  useEffect(() => {
-    if (selectedCategory === 'all') {
-      setFilteredProjects(projects);
-    } else {
-      setFilteredProjects(projects.filter(project => project.category === selectedCategory));
-    }
-  }, [selectedCategory, projects]);
-
-  const categories = [
-    { id: 'all', name: 'Todos' },
-    { id: 'ecommerce', name: 'E-Commerce' },
-    { id: 'landing', name: 'Landing Pages' },
-    { id: 'institucional', name: 'Institucional' },
-    { id: 'plataforma', name: 'Plataformas' },
-    { id: 'aplicacion', name: 'Aplicaciones' },
-  ];
 
   const openProjectDetails = (project: Project) => {
     setActiveProject(project);
@@ -143,30 +202,17 @@ const Trabajos: React.FC = () => {
           </div>
         </section>
         
-        <section className="portfolio-content">
-          <div className="container">
-            <div className="portfolio-filters">
-              <p className="filter-label">Filtrar por:</p>
-              <div className="filter-buttons">
-                {categories.map(category => (
-                  <button 
-                    key={category.id}
-                    className={`filter-btn ${selectedCategory === category.id ? 'active' : ''}`}
-                    onClick={() => setSelectedCategory(category.id)}
-                  >
-                    {category.name}
-                  </button>
-                ))}
+        {/* Proyectos organizados por categoría */}
+        {categorizedProjects.map((category, index) => (
+          <section key={category.id} className={`portfolio-category ${index % 2 === 1 ? 'bg-alt' : ''}`}>
+            <div className="container">
+              <div className="category-header">
+                <h2 className="category-title">{category.name}</h2>
+                <p className="category-description">{category.description}</p>
               </div>
-            </div>
-            
-            {filteredProjects.length === 0 ? (
-              <div className="no-results">
-                <p>No se encontraron proyectos en esta categoría.</p>
-              </div>
-            ) : (
+              
               <div className="projects-grid">
-                {filteredProjects.map(project => (
+                {category.projects.slice(0, 3).map(project => (
                   <div 
                     className="project-card" 
                     key={project.id}
@@ -176,9 +222,6 @@ const Trabajos: React.FC = () => {
                       <img src={project.image} alt={project.title} />
                     </div>
                     <div className="project-info">
-                      <span className="project-category">
-                        {categories.find(c => c.id === project.category)?.name}
-                      </span>
                       <h3>{project.title}</h3>
                       <div className="project-tech">
                         {project.technologies.slice(0, 3).map((tech, idx) => (
@@ -190,9 +233,9 @@ const Trabajos: React.FC = () => {
                   </div>
                 ))}
               </div>
-            )}
-          </div>
-        </section>
+            </div>
+          </section>
+        ))}
 
         <section className="cta-section">
           <div className="container">
@@ -221,7 +264,7 @@ const Trabajos: React.FC = () => {
                   <div className="modal-header">
                     <h2>{activeProject.title}</h2>
                     <span className="modal-category">
-                      {categories.find(c => c.id === activeProject.category)?.name}
+                      {categorizedProjects.find(cat => cat.id === activeProject.category)?.name}
                     </span>
                   </div>
                   
@@ -258,7 +301,7 @@ const Trabajos: React.FC = () => {
                     <a href={activeProject.url} target="_blank" rel="noopener noreferrer" className="visit-site-btn">
                       Visitar sitio
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                        <path fillRule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/>
+                        <path fillRule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a.5.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/>
                         <path fillRule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/>
                       </svg>
                     </a>

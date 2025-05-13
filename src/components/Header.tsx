@@ -29,7 +29,7 @@ const Header: React.FC = () => {
                         <li><Link to="/" onClick={() => setMenuOpen(false)}>Inicio</Link></li>
                         <li><Link to="/servicios" onClick={() => setMenuOpen(false)}>Servicios</Link></li>
                         {/* <li><Link to="/cotizador" onClick={() => setMenuOpen(false)}>Cotizador</Link></li> */}
-                        <li><Link to="/trabajos" onClick={() => setMenuOpen(false)}>Acerca De</Link></li>
+                        <li><Link to="/trabajos" onClick={() => setMenuOpen(false)}>Portfolio</Link></li>
                         <li><Link to="/cotizador" className='cotiza-mobile cta-button hero-cta-main' onClick={() => setMenuOpen(false)}>Cotizá tu Sistema</Link></li>
                     </ul>
                 </nav>

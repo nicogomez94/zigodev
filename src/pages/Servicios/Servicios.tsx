@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faPalette, faCartShopping, faChartLine, faServer, 
   faHeadset, faLightbulb, faMobile, faGlobe, faCode, 
-  faShoppingCart, faCreditCard, faChartPie, 
+  faShoppingCart, faCreditCard, faChartPie, faBullhorn,
   faSearch, faEnvelope, faShield, faCloud, faSync
 } from '@fortawesome/free-solid-svg-icons';
 
@@ -156,7 +156,7 @@ const Servicios: React.FC = () => {
               
               <div className="service-card">
                 <div className="card-icon">
-                  {/* <FontAwesomeIcon icon={faMegaphone} /> */}
+                  <FontAwesomeIcon icon={faBullhorn} />
                 </div>
                 <h3>Publicidad Digital</h3>
                 <p>Campañas de publicidad online que generan resultados inmediatos para tu negocio a través de diferentes plataformas.</p>

@@ -103,7 +103,7 @@ header .container {
 }
 
 .logo-icon {
-    color: #6c5ce7;
+    color: var(--accent-violet);
     margin-right: 10px;
     font-size: 1.2em;
 }
