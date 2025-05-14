@@ -26,7 +26,6 @@ interface CategoryGroup {
 }
 
 const Trabajos: React.FC = () => {
-  const [projects, setProjects] = useState<Project[]>([]);
   const [categorizedProjects, setCategorizedProjects] = useState<CategoryGroup[]>([]);
   const [activeProject, setActiveProject] = useState<Project | null>(null);
 
@@ -133,8 +132,6 @@ const Trabajos: React.FC = () => {
         year: '2023'
       },
     ];
-
-    setProjects(projectsData);
     
     // Agrupar proyectos por categoría
     const categoryDefinitions = {
