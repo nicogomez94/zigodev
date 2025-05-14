@@ -1,4 +1,8 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { 
+  faCheckCircle
+} from '@fortawesome/free-solid-svg-icons';
 
 const Hero: React.FC = () => {
     return (
@@ -12,18 +16,18 @@ const Hero: React.FC = () => {
                     Ofrecemos servicios de diseño web, e-commerce, marketing digital, SEO, soporte técnico y mucho más para llevar tu proyecto al siguiente nivel.
                 </p>
                 <div className="hero-buttons">
-                    <a href="contacto.html" className="cta-button hero-cta-main">Ponete en Contacto</a>
-                    <a href="servicios.html" className="cta-button cta-button-outline hero-cta-secondary">Saber más</a>
+                    <a href="https://wa.me/5491152291994" className="cta-button hero-cta-main">Ponete en Contacto</a>
+                    {/* <a href="servicios.html" className="cta-button cta-button-outline hero-cta-secondary">Saber más</a> */}
                 </div>
                 <div className="hero-graphic">
                     <img src="/img/home/1.png" alt="Gráfico del panel de IA" />
                 </div>
                 <div className="hero-logos">
-                    <div className="logo-item"><i className="fas fa-check-circle"></i> Diseño Web</div>
-                    <div className="logo-item"><i className="fas fa-check-circle"></i> E-commerce</div>
-                    <div className="logo-item"><i className="fas fa-check-circle"></i> Marketing Digital</div>
-                    <div className="logo-item"><i className="fas fa-check-circle"></i> SEO</div>
-                    <div className="logo-item"><i className="fas fa-check-circle"></i> Soporte Técnico</div>
+                    <div className="logo-item"><FontAwesomeIcon icon={faCheckCircle} /> Diseño Web</div>
+                    <div className="logo-item"><FontAwesomeIcon icon={faCheckCircle} /> E-commerce</div>
+                    <div className="logo-item"><FontAwesomeIcon icon={faCheckCircle} /> Marketing Digital</div>
+                    <div className="logo-item"><FontAwesomeIcon icon={faCheckCircle} /> SEO</div>
+                    <div className="logo-item"><FontAwesomeIcon icon={faCheckCircle} /> Soporte Técnico</div>
                 </div>
             </div>
         </section>

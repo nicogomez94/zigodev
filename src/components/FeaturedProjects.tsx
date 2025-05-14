@@ -7,24 +7,24 @@ const FeaturedProjects: React.FC = () => {
   const featuredProjects = [
     {
       id: 1,
-      title: 'E-commerce moda sustentable',
-      description: 'Tienda online completa para marca de indumentaria sustentable con integración de pagos.',
+      title: 'Presupuestador + Reservas con Calendario + Panel de Admin',
+      description: 'Herramienta integral que permite a los usuarios generar presupuestos personalizados y realizar reservas a través de un calendario interactivo. También cuenta con panel de admin.',
       image: '/img/trabajos/1.png',
-      technologies: ['React', 'WooCommerce', 'WordPress'],
+      technologies: ['React', 'Node.js', 'Mercado Pago'],
     },
     {
       id: 3,
-      title: 'Sitio web institucional consultora',
-      description: 'Web corporativa para consultora de negocios con múltiples secciones y blog integrado.',
-      image: '/img/trabajos/3.png',
-      technologies: ['WordPress', 'Elementor', 'PHP'],
+      title: 'Red social dinámica',
+      description: 'Red social dinámica inspirada en Instagram, donde los usuarios pueden compartir publicaciones, seguirse entre sí y construir comunidades en torno a intereses comunes.',
+      image: '/img/trabajos/4.png',
+      technologies: ['Red Social', 'Mercado Pago', 'A Medida'],
     },
     {
       id: 7,
-      title: 'Landing Page servicio financiero',
-      description: 'Landing page para servicio de finanzas personales con calculadoras interactivas.',
+      title: 'Sitio E-Commerce en WordPress',
+      description: 'Sitio E-Commerce en WordPress para Inesina Solar, con catálogo de productos, blog técnico y portafolio de proyectos.',
       image: '/img/trabajos/2.png',
-      technologies: ['JavaScript', 'Bootstrap', 'PHP'],
+      technologies: ['Wordpress', 'Bootstrap', 'PHP'],
     }
   ];
 
