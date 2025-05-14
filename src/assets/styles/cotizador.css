@@ -462,3 +462,38 @@ button:hover {
         max-width: 550px;
     }
 }
+
+/* Add these styles at the end of your CSS file */
+.success-message-container {
+  text-align: center;
+  padding: 40px 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.05);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.success-icon {
+  font-size: 64px;
+  margin-bottom: 20px;
+}
+
+.success-message-container h2 {
+  color: #2ecc71;
+  margin-bottom: 20px;
+  font-size: 28px;
+}
+
+.success-message-container p {
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 15px;
+  color: #555;
+}
+
+.email-confirmation {
+  font-weight: 500;
+  color: #333;
+  margin-top: 20px;
+}

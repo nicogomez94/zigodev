@@ -45,6 +45,7 @@ const Cotizador: React.FC = () => {
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [formErrors, setFormErrors] = useState<{ name?: string; email?: string }>({});
+  const [isSubmissionSuccessful, setIsSubmissionSuccessful] = useState(false);
 
   // Add this function to handle step clicks
   const handleStepClick = (stepIndex: number) => {
@@ -261,11 +262,9 @@ const Cotizador: React.FC = () => {
         throw new Error('Nombre y email son obligatorios');
       }
 
-      // console.log('Intentando enviar con Service ID:', 'service_axdn3bv', 'Template ID:', 'template_zxb4q4g');
-      
       const response = await emailjs.send(
         'service_axdn3bv', 
-        'template_zxb4q4g', // ID correcto de la plantilla según las capturas de pantalla
+        'template_zxb4q4g',
         templateParams,
         '7Gk-TPhf8Q8zrvEr7'
       );
@@ -274,12 +273,11 @@ const Cotizador: React.FC = () => {
       setSendResult('¡Cotización enviada! Pronto nos pondremos en contacto contigo.');
       setUserName('');
       setUserEmail('');
+      setIsSubmissionSuccessful(true);
     } catch (error: any) {
       console.error('Error al enviar email:', error);
-      // Mostrar más detalles del error para ayudar en la depuración
       console.error('Error detalles:', JSON.stringify(error));
       
-      // Mensaje de error más específico según el tipo de error
       if (error.text && error.text.includes('template ID not found')) {
         setSendResult(`Error: La plantilla de correo no existe (${error.status}: ${error.text}). Contacta al administrador.`);
       } else if (error.status === 400) {
@@ -287,6 +285,7 @@ const Cotizador: React.FC = () => {
       } else {
         setSendResult(`Hubo un error al enviar la cotización (${error.status || 'desconocido'}). Por favor, intenta nuevamente.`);
       }
+      setIsSubmissionSuccessful(false);
     } finally {
       setIsSending(false);
     }
@@ -656,60 +655,83 @@ const Cotizador: React.FC = () => {
     }
   };
 
+  const renderSuccessMessage = () => {
+    return (
+      <div className="success-message-container">
+        <div className="success-icon">✅</div>
+        <h2>¡Cotización enviada con éxito!</h2>
+        <p>Gracias por confiar en nosotros. Hemos recibido tu solicitud de cotización y nos pondremos en contacto contigo a la brevedad.</p>
+        <p className="email-confirmation">Se ha enviado una copia de la cotización a tu correo electrónico.</p>
+        <button 
+          className="cta-button hero-cta-main" 
+          onClick={() => window.location.reload()}
+          style={{ marginTop: '20px' }}
+        >
+          Realizar otra cotización
+        </button>
+      </div>
+    );
+  };
+
   return (
     <>
       <Header />
       <main>
         <div className="cotizador-container">
-          <h1>Cotizá tu web en minutos. Sin vueltas. </h1>
-          <p>Completa los siguientes pasos para obtener una cotización personalizada para tu proyecto.</p>
+          {isSubmissionSuccessful ? (
+            renderSuccessMessage()
+          ) : (
+            <>
+              <h1>Cotizá tu web en minutos. Sin vueltas. </h1>
+              <p>Completa los siguientes pasos para obtener una cotización personalizada para tu proyecto.</p>
 
-          <div className="progress-bar">
-            <div
-              className="progress"
-              id="progress"
-              style={{ 
-                width: `${
-                  // Si estamos en el paso 6 (resumen), muestra la barra completa
-                  currentStep >= 6 
-                    ? 100 
-                    : ((currentStep - 1) / (totalSteps - 1)) * 100
-                }%` 
-              }}
-            ></div>
-            {[...Array(totalSteps)].map((_, idx) => {
-              const stepNum = idx + 1;
-              const isCurrent = currentStep === stepNum || (currentStep === 6 && stepNum === 5);  // El paso 6 destaca el 5 en la barra
-              const isPrevious = stepNum < currentStep || (currentStep === 6 && stepNum < 6);
-              const isFuture = stepNum > currentStep && currentStep < 6;
-              
-              return (
+              <div className="progress-bar">
                 <div
-                  key={idx}
-                  className={`step${isCurrent ? ' active' : ''}${isPrevious ? ' completed clickable' : ''}${isFuture ? ' future' : ''}`}
-                  onClick={() => handleStepClick(stepNum > 5 ? 5 : stepNum)}
-                  role={isPrevious ? "button" : undefined}
-                  aria-label={isPrevious ? `Volver al paso ${stepNum}` : undefined}
-                >
-                  {stepNum}
-                </div>
-              );
-            })}
-          </div>
+                  className="progress"
+                  id="progress"
+                  style={{ 
+                    width: `${
+                      currentStep >= 6 
+                        ? 100 
+                        : ((currentStep - 1) / (totalSteps - 1)) * 100
+                    }%` 
+                  }}
+                ></div>
+                {[...Array(totalSteps)].map((_, idx) => {
+                  const stepNum = idx + 1;
+                  const isCurrent = currentStep === stepNum || (currentStep === 6 && stepNum === 5);
+                  const isPrevious = stepNum < currentStep || (currentStep === 6 && stepNum < 6);
+                  const isFuture = stepNum > currentStep && currentStep < 6;
+                  
+                  return (
+                    <div
+                      key={idx}
+                      className={`step${isCurrent ? ' active' : ''}${isPrevious ? ' completed clickable' : ''}${isFuture ? ' future' : ''}`}
+                      onClick={() => handleStepClick(stepNum > 5 ? 5 : stepNum)}
+                      role={isPrevious ? "button" : undefined}
+                      aria-label={isPrevious ? `Volver al paso ${stepNum}` : undefined}
+                    >
+                      {stepNum}
+                    </div>
+                  );
+                })}
+              </div>
 
-          <form id="cotizador-form" onSubmit={handleSubmit}>
-            {renderStep()}
-            {isSending && <div className="sending-message" style={{ padding: '12px', textAlign: 'center', margin: '15px 0', background: '#f3f3f3', borderRadius: '6px' }}>Enviando cotización...</div>}
-            {sendResult && <div className="send-result-message" style={{ 
-              padding: '12px', 
-              textAlign: 'center', 
-              margin: '15px 0', 
-              background: sendResult.includes('error') ? '#ffeeee' : '#eeffee',
-              color: sendResult.includes('error') ? '#990000' : '#006600',
-              borderRadius: '6px',
-              fontWeight: '500'
-            }}>{sendResult}</div>}
-          </form>
+              <form id="cotizador-form" onSubmit={handleSubmit}>
+                {renderStep()}
+                {isSending && <div className="sending-message" style={{ padding: '12px', textAlign: 'center', margin: '15px 0', background: '#f3f3f3', borderRadius: '6px' }}>Enviando cotización...</div>}
+                {sendResult && !isSubmissionSuccessful && <div className="send-result-message" style={{ 
+                  padding: '12px', 
+                  textAlign: 'center', 
+                  margin: '15px 0', 
+                  background: sendResult.includes('error') ? '#ffeeee' : '#eeffee',
+                  color: sendResult.includes('error') ? '#990000' : '#006600',
+                  borderRadius: '6px',
+                  fontWeight: '500'
+                }}>{sendResult}</div>}
+              </form>
+            </>
+          )}
         </div>
         <div className="review-slider-container">
 			<div className="review-item">
