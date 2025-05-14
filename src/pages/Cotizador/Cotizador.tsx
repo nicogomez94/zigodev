@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import emailjs from 'emailjs-com'; // EmailJS integration
 import { pricingConfig, optionNames } from './Config';
 import type { Selection, Selections } from './Config';
 import Header from '../../components/Header';
@@ -35,6 +36,9 @@ const Cotizador: React.FC = () => {
     totalTime: 0,
     monthlyPrice: 0
   });
+
+  const [isSending, setIsSending] = useState(false);
+  const [sendResult, setSendResult] = useState<string | null>(null);
 
   // Add this function to handle step clicks
   const handleStepClick = (stepIndex: number) => {
@@ -201,9 +205,42 @@ const Cotizador: React.FC = () => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert('¡Gracias por tu interés! Pronto nos pondremos en contacto contigo.');
+    setIsSending(true);
+    setSendResult(null);
+
+    // Prepare summary data for email
+    const summary = [
+      `Tipo de sitio: ${getOptionName('step1', calculatedPrices.step1.value)}`,
+      `Diseño: ${getOptionName('step2', calculatedPrices.step2.value)}`,
+      `Tamaño: ${getOptionName('step3', calculatedPrices.step3.value)}`,
+      ...(calculatedPrices.step4.filter(f => f.value !== 'ninguna').map(f => `Característica: ${getOptionName('step4', f.value)}`)),
+      ...(calculatedPrices.step5.filter(s => s.value !== 'ninguno').map(s => `Servicio: ${getOptionName('step5', s.value)}${s.isMonthly ? ' (mensual)' : ''}`)),
+      `Total estimado: AR$${formatNumber(totals.totalPrice)}`,
+      `Tiempo estimado: ${totals.totalTime} días`,
+      totals.monthlyPrice > 0 ? `Servicios mensuales: AR$${formatNumber(totals.monthlyPrice)}/mes` : 'Servicios mensuales: Ninguno'
+    ].join('\n');
+
+    // EmailJS params
+    const templateParams = {
+      cotizacion_resumen: summary,
+      // You can add more fields if you want to collect user email/name, etc.
+    };
+
+    try {
+      await emailjs.send(
+        'YOUR_SERVICE_ID', // Replace with your EmailJS service ID
+        'YOUR_TEMPLATE_ID', // Replace with your EmailJS template ID
+        templateParams,
+        'YOUR_USER_ID' // Replace with your EmailJS public key
+      );
+      setSendResult('¡Cotización enviada! Pronto nos pondremos en contacto contigo.');
+    } catch (error) {
+      setSendResult('Hubo un error al enviar la cotización. Por favor, intenta nuevamente.');
+    } finally {
+      setIsSending(false);
+    }
   };
 
   const handleVerResumen = (e: React.MouseEvent) => {
@@ -585,6 +622,8 @@ const Cotizador: React.FC = () => {
 
           <form id="cotizador-form" onSubmit={handleSubmit}>
             {renderStep()}
+            {isSending && <div className="sending-message">Enviando cotización...</div>}
+            {sendResult && <div className="send-result-message">{sendResult}</div>}
           </form>
         </div>
         <div className="review-slider-container">

@@ -34,101 +34,101 @@ const Trabajos: React.FC = () => {
     const projectsData: Project[] = [
       {
         id: 1,
-        title: 'E-commerce moda sustentable',
+        title: 'Tienda para Marca de Ropa',
         category: 'ecommerce',
-        description: 'Tienda online completa para marca de indumentaria sustentable con integración de pagos y gestión de inventario. Diseñamos una experiencia de compra intuitiva con foco en destacar los valores ecológicos de la marca.',
-        image: '/img/trabajos/1.png',
-        url: 'https://sustainablefashion.com',
-        technologies: ['React', 'WooCommerce', 'WordPress'],
-        client: 'EcoFashion',
+        description: 'Tienda online para marca de ropa con integración a Mercado Pago y gestión de inventario. Diseño responsivo y optimización SEO para mejorar la visibilidad en buscadores.',
+        image: '/img/trabajos/gone.jpg',
+        url: 'https://gonelake.com.ar',
+        technologies: ['Shopify'],
+        client: 'GONELAKE',
         year: '2023'
       },
       {
         id: 2,
-        title: 'Landing Page agencia de viajes',
+        title: 'Sitio E-Commerce en WordPress',
         category: 'ecommerce',
-        description: 'Landing de alta conversión para promoción de paquetes turísticos con integración de formulario de reserva. Optimizamos cada sección para maximizar la tasa de conversión y captar leads de calidad.',
+        description: 'Sitio E-Commerce en WordPress para Inesina Solar, con catálogo de productos, blog técnico y portafolio de proyectos.',
         image: '/img/trabajos/2.png',
-        url: 'https://travelagency.com',
-        technologies: ['HTML5', 'CSS3', 'JavaScript'],
-        client: 'Mundo Viajes',
-        year: '2023'
+        url: 'https://inesinasolar.com/',
+        technologies: ['PHP', 'WooCommerce', 'WordPress'],
+        client: 'Inesina Solar',
+        year: '2020'
       },
       {
         id: 3,
-        title: 'Sitio web institucional consultora',
-        category: 'institucional',
-        description: 'Web corporativa para consultora de negocios con múltiples secciones y blog integrado. Desarrollamos una arquitectura de información clara que comunica profesionalismo y experiencia en el sector financiero.',
-        image: '/img/trabajos/3.png',
-        url: 'https://businessconsulting.com',
+        title: 'PRAGA Tienda de Indumentaria',
+        category: 'ecommerce',
+        description: 'Tienda online para marca de indumentaria con diseño moderno y funcional. Integración con Mercado Pago y sistema de gestión de pedidos.',
+        image: '/img/trabajos/5.png',
+        url: 'https://pragaba.com.ar/productos/chomba-frequency/',
         technologies: ['WordPress', 'Elementor', 'PHP'],
         client: 'Consultoría Financiera Global',
         year: '2022'
       },
       {
         id: 4,
-        title: 'Plataforma educativa online',
-        category: 'plataforma',
-        description: 'Sistema completo de e-learning con cursos, foros y seguimiento de estudiantes. Implementamos funcionalidades avanzadas como evaluaciones automáticas, certificados personalizados y analíticas de aprendizaje.',
-        image: '/img/trabajos/4.png',
-        url: 'https://learnplatform.edu',
-        technologies: ['React', 'Node.js', 'MongoDB'],
-        client: 'Academia Digital',
-        year: '2022'
-      },
-      {
-        id: 5,
-        title: 'App web reservas restaurante',
+        title: 'Keramik - Detailing de Autos',
         category: 'aplicacion',
-        description: 'Sistema de reservas online para cadena de restaurantes con gestión en tiempo real. Permitimos a los usuarios seleccionar mesas específicas, pre-ordenar menús y recibir notificaciones de su reserva.',
-        image: '/img/trabajos/1.png',
-        url: 'https://restaurantbooking.com',
-        technologies: ['Vue.js', 'Firebase', 'Stripe'],
-        client: 'Grupo Gastronómico Gourmet',
+        description: 'Página estatica con sección de catálogo y presupuesto online. Diseño atractivo y optimización para SEO.',
+        image: '/img/trabajos/3.png',
+        url: 'https://keramik.com.ar/',
+        technologies: ['jQuery', 'Bootstrap'],
+        client: 'Keramik',
         year: '2023'
       },
       {
+        id: 5,
+        title: 'Portfolio para Web Devolper',
+        category: 'landing',
+        description: 'Portfolio personal con proyectos destacados y formulario de contacto. Diseño limpio y moderno, optimizado para SEO.',
+        image: '/img/trabajos/6.png',
+        url: 'https://nicolasgomezdev.com.ar/',
+        technologies: ['HTML', 'CSS', 'JavaScript'],
+        client: 'Nicolás Gómez',
+        year: '2024'
+      },
+      {
         id: 6,
-        title: 'Catálogo digital productos',
-        category: 'ecommerce',
-        description: 'Catálogo interactivo para empresa manufacturera con detalles técnicos de productos. Incorporamos visualización 3D de productos, descarga de fichas técnicas y comparador de características.',
-        image: '/img/trabajos/1.png',
+        title: 'Alquiler túristico en Buenos Aires',
+        category: 'landing',
+        description: 'Landing page para alquiler turístico en Buenos Aires, con integración a sistema de reservas y calendario. Diseño atractivo y optimización para SEO.',
+        image: '/img/trabajos/7.png',
         url: 'https://productcatalog.com',
-        technologies: ['React', 'Redux', 'GraphQL'],
-        client: 'Industrias Modernas',
-        year: '2022'
+        technologies: ['HTML', 'CSS', 'JavaScript'],
+        client: 'G&G Apartments',
+        year: '2024'
       },
       {
         id: 7,
-        title: 'Landing Page servicio financiero',
-        category: 'landing',
-        description: 'Landing page para servicio de finanzas personales con calculadoras interactivas y formulario de contacto optimizado para captar leads cualificados.',
-        image: '/img/trabajos/2.png',
-        url: 'https://financeservice.com',
-        technologies: ['JavaScript', 'Bootstrap', 'PHP'],
-        client: 'Finanzas Personales',
+        title: 'Presupuestador + Reservas con Calendario + Panel de Admin',
+        category: 'aplicacion',
+        description: 'Herramienta integral que permite a los usuarios generar presupuestos personalizados y realizar reservas a través de un calendario interactivo. También cuenta con panel de admin.',
+        image: '/img/trabajos/1.png',
+        url: 'https://blak.com.ar',
+        technologies: ['React', 'Node.js', 'Express', 'PostgreSQL'],
+        client: 'BLAK',
         year: '2023'
       },
       {
         id: 8,
-        title: 'Web institucional constructora',
-        category: 'institucional',
-        description: 'Sitio web para empresa constructora con galería de proyectos, formulario de consultas y sección de noticias del sector. Diseño atractivo que resalta la calidad de sus construcciones.',
-        image: '/img/trabajos/3.png',
-        url: 'https://constructora.com',
-        technologies: ['WordPress', 'CSS3', 'jQuery'],
-        client: 'Construye Seguro',
+        title: 'Red social dinámica',
+        category: 'aplicacion',
+        description: 'Red social dinámica inspirada en Instagram, donde los usuarios pueden compartir publicaciones, seguirse entre sí y construir comunidades en torno a intereses comunes.',
+        image: '/img/trabajos/4.png',
+        url: 'http://taggeon.com',
+        technologies: ['Javascript', 'PHP', 'MySQL'],
+        client: 'Taggeon',
         year: '2022'
       },
       {
         id: 9,
-        title: 'Portal de contenido educativo',
-        category: 'plataforma',
-        description: 'Portal de recursos educativos con búsqueda avanzada, sistema de membresías y descargas de materiales. Enfocado a profesores y estudiantes del nivel secundario.',
-        image: '/img/trabajos/4.png',
-        url: 'https://educaportal.edu',
-        technologies: ['React', 'Express', 'MySQL'],
-        client: 'Red Educativa Nacional',
+        title: 'Portal para Empresa de Paneles Solares',
+        category: 'landing',
+        description: 'Portal para empresa de paneles solares.',
+        image: '/img/trabajos/8.png',
+        url: 'https://technosolis.com.ar/',
+       technologies: ['HTML', 'CSS', 'JavaScript'],
+        client: 'Techno Solis',
         year: '2023'
       },
     ];
@@ -137,10 +137,6 @@ const Trabajos: React.FC = () => {
     
     // Agrupar proyectos por categoría
     const categoryDefinitions = {
-      ecommerce: {
-        name: 'E-commerce',
-        description: 'Tiendas online y plataformas de venta digital que maximizan los resultados del negocio'
-      },
       landing: {
         name: 'Landing Pages',
         description: 'Páginas optimizadas para la conversión que capturan leads y aumentan tus ventas'
@@ -148,6 +144,10 @@ const Trabajos: React.FC = () => {
       institucional: {
         name: 'Sitios Institucionales',
         description: 'Páginas corporativas que representan profesionalmente la imagen de tu empresa'
+      },
+      ecommerce: {
+        name: 'E-commerce',
+        description: 'Tiendas online y plataformas de venta digital que maximizan los resultados del negocio'
       },
       plataforma: {
         name: 'Plataformas Web',
