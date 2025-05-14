@@ -5,8 +5,7 @@ import Footer from '../../components/Footer';
 import '../../assets/styles/servicios.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
-  faPalette, faCartShopping, faChartLine, faServer, 
-  faHeadset, faLightbulb, faMobile, faGlobe, faCode, 
+  faMobile, faGlobe, faCode, 
   faShoppingCart, faCreditCard, faChartPie, faBullhorn,
   faSearch, faEnvelope, faShield, faCloud, faSync
 } from '@fortawesome/free-solid-svg-icons';
