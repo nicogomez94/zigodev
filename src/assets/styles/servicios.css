@@ -1,5 +1,3 @@
-
-
 /* --- Estilos de la Página de Servicios --- */
 .services-page {
     padding: 60px 0;
@@ -86,29 +84,6 @@
 }
 
 /* --- Sección Call to Action (Opcional) --- */
-.cta-section {
-    background-color: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    padding: 40px 35px;
-    text-align: center;
-    margin-top: 60px; /* Espacio sobre el CTA */
-}
-
-.cta-section h2 {
-    font-size: 2em;
-    color: var(--text-headings);
-    margin-bottom: 15px;
-}
-
-.cta-section p {
-    color: var(--text-medium);
-    font-size: 1.1em;
-    max-width: 600px;
-    margin: 0 auto 30px auto;
-}
-
-/* Botón CTA (reutiliza estilo si ya existe uno similar) */
 .cta-button-purple {
     display: inline-block;
     padding: 13px 30px;
@@ -181,12 +156,6 @@
   background-color: #f8f9fa;
 }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
 /* Hero section */
 .hero-section {
   background-color: var(--accent-violet);
@@ -247,7 +216,7 @@
   content: '';
   width: 80px;
   height: 4px;
-  background-color: #6c5ce7;
+  background-color: var(--accent-violet); /* Using theme variable instead */
   position: absolute;
   bottom: -15px;
   left: 50%;
@@ -292,7 +261,7 @@
 
 .card-icon {
   font-size: 2.5rem;
-  color: #6c5ce7;
+  color: var(--accent-violet); /* Using theme variable instead */
   margin-bottom: 20px;
   width: 70px;
   height: 70px;
@@ -331,14 +300,14 @@
 
 .service-card ul li::before {
   content: '✓';
-  color: #6c5ce7;
+  color: var(--accent-violet); /* Using theme variable instead */
   position: absolute;
   left: -18px;
 }
 
 .service-link {
   text-decoration: none;
-  color: #6c5ce7;
+  color: var(--accent-violet); /* Using theme variable instead */
   font-weight: 600;
   display: inline-block;
   border-bottom: 2px solid transparent;
@@ -348,12 +317,12 @@
 }
 
 .service-link:hover {
-  border-bottom-color: #6c5ce7;
+  border-bottom-color: var(--accent-violet); /* Using theme variable instead */
 }
 
 /* CTA Section */
 .cta-section {
-  background-color: #6c5ce7;
+  background-color: var(--accent-violet); /* Using theme variable instead */
   color: white;
   text-align: center;
   padding: 80px 20px;
@@ -371,16 +340,10 @@
   opacity: 0.9;
 }
 
-
-
 .arrow {
   display: inline-block;
   transition: transform 0.3s ease;
   margin-left: 5px;
-}
-
-.cta-button:hover .arrow {
-  transform: translateX(5px);
 }
 
 /* Responsive */

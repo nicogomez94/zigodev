@@ -7,9 +7,6 @@ import Contacto from './pages/Contacto/Contacto';
 import Trabajos from './pages/Trabajos/Trabajos';
 import WhatsAppButton from './components/WhatsAppButton'; // Import the new component
 import ScrollToTop from './components/ScrollToTop';
-import './assets/styles/style.css';
-import './assets/styles/contacto.css';
-import './assets/styles/servicios.css';
 
 const App: React.FC = () => {
   return (

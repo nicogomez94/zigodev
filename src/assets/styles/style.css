@@ -8,19 +8,19 @@
 }
 
 :root {
-    /* Light Theme Variables */
+    /* Light Theme Variables - Single declaration */
     --bg-primary: #FFFFFF;
     --bg-secondary: #F8F9FA;
     --bg-card: #FFFFFF;
     --text-primary: #212529;
     --text-secondary: #495057;
     --text-muted: #6C757D;
-    --accent-violet: rgb(98, 0, 234); /* Unchanged */
+    --accent-violet: rgb(98, 0, 234);
     --border-color: #DEE2E6;
     --shadow-color: rgba(0, 0, 0, 0.1);
     --font-primary: 'Inter', sans-serif;
     --suave-btn: 6px;
-    --background-light: #F8F9FA; /* Light background for hero section */
+    --background-light: #F8F9FA;
 }
 
 body {
@@ -36,6 +36,16 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 0.7em;
     line-height: 1.3;
     font-weight: 600;
+}
+
+h1{
+    font-size: 3.5em;
+    font-weight: 700;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    line-height: 1.2;
 }
 
 p {
@@ -213,15 +223,7 @@ header nav ul li a:hover {
     z-index: 1;
 }
 
-.hero h1 {
-    font-size: 3.5em;
-    font-weight: 700;
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 20px;
-    line-height: 1.2;
-}
+
 
 .hero p {
     font-size: 1.1em;
@@ -708,6 +710,7 @@ footer {
     transform: rotate(45deg);
 }
 
+/* WhatsApp Float Button - Single definition */
 .whatsapp-float {
     position: fixed;
     width: 80px;
@@ -724,7 +727,7 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out;
 }
 
 .whatsapp-float:hover {

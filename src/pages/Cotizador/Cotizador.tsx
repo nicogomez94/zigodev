@@ -682,7 +682,7 @@ const Cotizador: React.FC = () => {
             renderSuccessMessage()
           ) : (
             <>
-              <h1>Cotizá tu web en minutos. Sin vueltas. </h1>
+              <h1 className='page-title'>Cotizá tu web en minutos. Sin vueltas. </h1>
               <p>Completa los siguientes pasos para obtener una cotización personalizada para tu proyecto.</p>
 
               <div className="progress-bar">

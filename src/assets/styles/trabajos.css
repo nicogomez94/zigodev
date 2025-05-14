@@ -1,23 +1,6 @@
-/* filepath: src/assets/styles/trabajos.css */
-/* Portfolio Page Styles - Rediseño */
-:root {
-  --primary-color: var(--accent-violet);
-  --primary-light: #a29bfe;
-  --border-radius: 8px;
-  --transition-normal: all 0.3s ease;
-}
 
-/* Container */
-.container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 15px;
-}
-
-/* Portfolio Hero Section */
 .portfolio-hero {
-  background-color: var(--primary-color);
+  background-color: var(--accent-violet);
   color: white;
   padding: 70px 0 120px;
   position: relative;
@@ -33,7 +16,8 @@
   background: linear-gradient(to bottom right, transparent 49.5%, var(--background-light) 50%);
 }
 
-.hero-content {
+/* Using existing hero-content class with specific overrides */
+.portfolio-hero .hero-content {
   max-width: 800px;
   margin: 0 auto;
   text-align: center;
@@ -44,7 +28,7 @@
   font-weight: 800;
   margin-bottom: 25px;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    color: white !important;
+  color: white !important;
 }
 
 .hero-subtitle {
@@ -85,14 +69,14 @@
 }
 
 .filter-btn {
-  background: var(--background-white);
+  background: var(--bg-primary);
   border: 1px solid #e0e0e0;
   border-radius: 30px;
   padding: 8px 20px;
   font-size: 0.9rem;
   color: var(--text-medium);
   cursor: pointer;
-  transition: var(--transition-normal);
+  transition: all 0.3s ease;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
 }
 
@@ -102,10 +86,10 @@
 }
 
 .filter-btn.active {
-  background-color: var(--primary-color);
+  background-color: var(--accent-violet);
   color: white;
-  border-color: var(--primary-color);
-  box-shadow: 0 4px 10px rgba(108, 92, 231, 0.2);
+  border-color: var(--accent-violet);
+  box-shadow: 0 4px 10px rgba(98, 0, 234, 0.2);
 }
 
 /* Projects Grid */
@@ -118,11 +102,11 @@
 
 /* Project Card */
 .project-card {
-  background-color: var(--background-white);
-  border-radius: var(--border-radius);
+  background-color: var(--bg-card);
+  border-radius: 8px;
   overflow: hidden;
-  box-shadow: var(--shadow-light);
-  transition: var(--transition-normal);
+  box-shadow: 0 2px 10px var(--shadow-color);
+  transition: all 0.3s ease;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -132,7 +116,7 @@
 
 .project-card:hover {
   transform: translateY(-8px);
-  box-shadow: var(--shadow-medium);
+  box-shadow: 0 8px 25px var(--shadow-color);
 }
 
 .project-image {
@@ -164,7 +148,7 @@
 .project-info h3 {
   margin: 0 0 15px;
   font-size: 1.4rem;
-  color: var(--text-dark);
+  color: var(--text-primary);
   line-height: 1.3;
 }
 
@@ -186,25 +170,22 @@
   background-color: #fff;
 }
 
-.category-header {
-  text-align: center;
-  margin-bottom: 60px;
-}
+/* Using existing category-header without redefining */
 
-.category-title {
+.portfolio-category .category-title {
   font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 15px;
-  color: #333;
+  color: var(--text-primary);
   position: relative;
   display: inline-block;
 }
 
-.category-title::after {
+.portfolio-category .category-title::after {
   content: '';
   width: 80px;
   height: 4px;
-  background-color: var(--primary-color);
+  background-color: var(--accent-violet);
   position: absolute;
   bottom: -15px;
   left: 50%;
@@ -212,17 +193,17 @@
   border-radius: 2px;
 }
 
-.category-description {
+.portfolio-category .category-description {
   font-size: 1.2rem;
-  color: #666;
+  color: var(--text-secondary);
   max-width: 600px;
   margin: 0 auto;
   margin-top: 30px;
 }
 
-/* CTA Section */
-.cta-section {
-  background-color: var(--background-white);
+/* CTA Section - Portfolio specific */
+.portfolio-cta-section {
+  background-color: var(--bg-primary);
   padding: 80px 0;
 }
 
@@ -234,40 +215,41 @@
 
 .cta-content h2 {
   font-size: 2.2rem;
-  color: var(--text-dark);
+  color: var(--text-primary);
   margin-bottom: 20px;
 }
 
 .cta-content p {
   font-size: 1.1rem;
-  color: var(--text-medium);
+  color: var(--text-secondary);
   margin-bottom: 30px;
 }
 
-.cta-button {
+/* Using portfolio-specific button style */
+.portfolio-cta-button {
   display: inline-block;
-  background-color: var(--primary-color);
+  background-color: var(--accent-violet);
   color: white;
   padding: 12px 30px;
   border-radius: var(--suave-btn);
   font-weight: 600;
   text-decoration: none;
-  transition: var(--transition-normal);
-  box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(98, 0, 234, 0.3);
 }
 
-.cta-button span {
+.portfolio-cta-button span {
   margin-left: 5px;
   display: inline-block;
   transition: transform 0.3s ease;
 }
 
-.cta-button:hover {
+.portfolio-cta-button:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(108, 92, 231, 0.4);
+  box-shadow: 0 8px 25px rgba(98, 0, 234, 0.4);
 }
 
-.cta-button:hover span {
+.portfolio-cta-button:hover span {
   transform: translateX(5px);
 }
 
@@ -288,8 +270,8 @@
 }
 
 .modal-content {
-  background: var(--background-white);
-  border-radius: var(--border-radius);
+  background: var(--bg-primary);
+  border-radius: 8px;
   width: 100%;
   max-width: 1000px;
   max-height: 90vh;
@@ -313,7 +295,7 @@
   cursor: pointer;
   z-index: 10;
   color: white;
-  transition: var(--transition-normal);
+  transition: all 0.3s ease;
 }
 
 .close-modal:hover {
@@ -355,7 +337,7 @@
 
 .modal-details {
   padding: 30px;
-  color: var(--text-dark);
+  color: var(--text-primary);
 }
 
 .modal-header {
@@ -365,13 +347,13 @@
 .modal-header h2 {
   font-size: 1.8rem;
   margin: 0 0 10px;
-  color: var(--text-dark);
+  color: var(--text-primary);
 }
 
 .modal-category {
   display: inline-block;
-  background-color: rgba(108, 92, 231, 0.1);
-  color: var(--primary-color);
+  background-color: rgba(98, 0, 234, 0.1);
+  color: var(--accent-violet);
   padding: 5px 12px;
   border-radius: 20px;
   font-size: 0.8rem;
@@ -385,7 +367,7 @@
   gap: 20px;
   margin-bottom: 25px;
   padding-bottom: 25px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .meta-item {
@@ -395,13 +377,13 @@
 
 .meta-label {
   font-size: 0.8rem;
-  color: var(--text-light);
+  color: var(--text-muted);
   margin-bottom: 5px;
 }
 
 .meta-value {
   font-weight: 600;
-  color: var(--text-dark);
+  color: var(--text-primary);
 }
 
 /* Modal Description */
@@ -409,7 +391,7 @@
 .modal-technologies h3 {
   font-size: 1.1rem;
   margin: 0 0 15px;
-  color: var(--text-dark);
+  color: var(--text-primary);
 }
 
 .modal-description {
@@ -418,7 +400,7 @@
 
 .modal-description p {
   line-height: 1.7;
-  color: var(--text-medium);
+  color: var(--text-secondary);
   margin: 0;
 }
 
@@ -434,8 +416,8 @@
 }
 
 .tech-tag {
-  background-color: rgba(108, 92, 231, 0.08);
-  color: var(--primary-color);
+  background-color: rgba(98, 0, 234, 0.08);
+  color: var(--accent-violet);
   padding: 5px 12px;
   border-radius: 20px;
   font-size: 0.85rem;
@@ -451,13 +433,13 @@
 .visit-site-btn {
   display: inline-flex;
   align-items: center;
-  background-color: var(--primary-color);
+  background-color: var(--accent-violet);
   color: white;
   padding: 12px 25px;
   border-radius: 5px;
   text-decoration: none;
   font-weight: 500;
-  transition: var(--transition-normal);
+  transition: all 0.3s ease;
   border: none;
   cursor: pointer;
 }
@@ -479,24 +461,24 @@
   display: inline-flex;
   align-items: center;
   background-color: transparent;
-  border: 1px solid var(--primary-color);
-  color: var(--primary-color);
+  border: 1px solid var(--accent-violet);
+  color: var(--accent-violet);
   padding: 12px 25px;
   border-radius: 5px;
   text-decoration: none;
   font-weight: 500;
-  transition: var(--transition-normal);
+  transition: all 0.3s ease;
 }
 
 .quote-project-btn:hover {
-  background-color: rgba(108, 92, 231, 0.05);
+  background-color: rgba(98, 0, 234, 0.05);
 }
 
 /* No Results */
 .no-results {
   text-align: center;
   padding: 50px 0;
-  color: var(--text-medium);
+  color: var(--text-secondary);
 }
 
 /* Responsive Adjustments */
