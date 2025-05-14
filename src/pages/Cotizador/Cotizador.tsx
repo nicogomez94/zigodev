@@ -6,6 +6,9 @@ import Header from '../../components/Header';
 import '../../assets/styles/cotizador.css';
 import Footer from '../../components/Footer';
 
+// Inicializar EmailJS con la clave pública
+emailjs.init("7Gk-TPhf8Q8zrvEr7");
+
 // Helper function to format numbers with dots
 const formatNumber = (num: number): string => {
   if (num === undefined || num === null) return '0';
@@ -39,6 +42,9 @@ const Cotizador: React.FC = () => {
 
   const [isSending, setIsSending] = useState(false);
   const [sendResult, setSendResult] = useState<string | null>(null);
+  const [userName, setUserName] = useState('');
+  const [userEmail, setUserEmail] = useState('');
+  const [formErrors, setFormErrors] = useState<{ name?: string; email?: string }>({});
 
   // Add this function to handle step clicks
   const handleStepClick = (stepIndex: number) => {
@@ -209,6 +215,21 @@ const Cotizador: React.FC = () => {
     e.preventDefault();
     setIsSending(true);
     setSendResult(null);
+    setFormErrors({});
+
+    // Validación básica
+    let errors: { name?: string; email?: string } = {};
+    if (!userName.trim()) errors.name = 'El nombre es obligatorio.';
+    if (!userEmail.trim()) {
+      errors.email = 'El email es obligatorio.';
+    } else if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(userEmail)) {
+      errors.email = 'El email no es válido.';
+    }
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors);
+      setIsSending(false);
+      return;
+    }
 
     // Prepare summary data for email
     const summary = [
@@ -222,22 +243,50 @@ const Cotizador: React.FC = () => {
       totals.monthlyPrice > 0 ? `Servicios mensuales: AR$${formatNumber(totals.monthlyPrice)}/mes` : 'Servicios mensuales: Ninguno'
     ].join('\n');
 
-    // EmailJS params
+    // EmailJS params (asegúrate de que los nombres coincidan con las variables en tu plantilla)
     const templateParams = {
+      from_name: userName,
+      reply_to: userEmail,
+      message: summary,
       cotizacion_resumen: summary,
-      // You can add more fields if you want to collect user email/name, etc.
+      user_name: userName,
+      user_email: userEmail
     };
 
+    console.log('Enviando datos a EmailJS:', templateParams);
+
     try {
-      await emailjs.send(
-        'YOUR_SERVICE_ID', // Replace with your EmailJS service ID
-        'YOUR_TEMPLATE_ID', // Replace with your EmailJS template ID
+      // Verificar que los IDs sean los correctos antes de enviar
+      if (!userName || !userEmail) {
+        throw new Error('Nombre y email son obligatorios');
+      }
+
+      // console.log('Intentando enviar con Service ID:', 'service_axdn3bv', 'Template ID:', 'template_zxb4q4g');
+      
+      const response = await emailjs.send(
+        'service_axdn3bv', 
+        'template_zxb4q4g', // ID correcto de la plantilla según las capturas de pantalla
         templateParams,
-        'YOUR_USER_ID' // Replace with your EmailJS public key
+        '7Gk-TPhf8Q8zrvEr7'
       );
+      
+      console.log('EmailJS respuesta exitosa:', response);
       setSendResult('¡Cotización enviada! Pronto nos pondremos en contacto contigo.');
-    } catch (error) {
-      setSendResult('Hubo un error al enviar la cotización. Por favor, intenta nuevamente.');
+      setUserName('');
+      setUserEmail('');
+    } catch (error: any) {
+      console.error('Error al enviar email:', error);
+      // Mostrar más detalles del error para ayudar en la depuración
+      console.error('Error detalles:', JSON.stringify(error));
+      
+      // Mensaje de error más específico según el tipo de error
+      if (error.text && error.text.includes('template ID not found')) {
+        setSendResult(`Error: La plantilla de correo no existe (${error.status}: ${error.text}). Contacta al administrador.`);
+      } else if (error.status === 400) {
+        setSendResult(`Error en la configuración del correo: ${error.text || 'Revisa los IDs de servicio y plantilla'}`);
+      } else {
+        setSendResult(`Hubo un error al enviar la cotización (${error.status || 'desconocido'}). Por favor, intenta nuevamente.`);
+      }
     } finally {
       setIsSending(false);
     }
@@ -563,12 +612,40 @@ const Cotizador: React.FC = () => {
                 </div>
               </div>
             </div>
+            <div className="form-row" style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
+              <div className="form-group" style={{ flex: 1, minWidth: 200 }}>
+                <label htmlFor="userName">Nombre completo *</label>
+                <input
+                  type="text"
+                  id="userName"
+                  name="userName"
+                  value={userName}
+                  onChange={e => setUserName(e.target.value)}
+                  disabled={isSending}
+                  required
+                />
+                {formErrors.name && <div className="form-error">{formErrors.name}</div>}
+              </div>
+              <div className="form-group" style={{ flex: 1, minWidth: 200 }}>
+                <label htmlFor="userEmail">Email *</label>
+                <input
+                  type="email"
+                  id="userEmail"
+                  name="userEmail"
+                  value={userEmail}
+                  onChange={e => setUserEmail(e.target.value)}
+                  disabled={isSending}
+                  required
+                />
+                {formErrors.email && <div className="form-error">{formErrors.email}</div>}
+              </div>
+            </div>
             <div className="buttons">
-              <button type="button" className="prev cta-button hero-cta-main" onClick={prevStep}>
+              <button type="button" className="prev cta-button hero-cta-main" onClick={prevStep} disabled={isSending}>
                 Anterior
               </button>
-              <button type="submit" className="submit cta-button hero-cta-main">
-                Solicitar cotización formal
+              <button type="submit" className="submit cta-button hero-cta-main" disabled={isSending}>
+                {isSending ? 'Enviando...' : 'Solicitar cotización formal'}
               </button>
             </div>
           </div>
@@ -622,8 +699,16 @@ const Cotizador: React.FC = () => {
 
           <form id="cotizador-form" onSubmit={handleSubmit}>
             {renderStep()}
-            {isSending && <div className="sending-message">Enviando cotización...</div>}
-            {sendResult && <div className="send-result-message">{sendResult}</div>}
+            {isSending && <div className="sending-message" style={{ padding: '12px', textAlign: 'center', margin: '15px 0', background: '#f3f3f3', borderRadius: '6px' }}>Enviando cotización...</div>}
+            {sendResult && <div className="send-result-message" style={{ 
+              padding: '12px', 
+              textAlign: 'center', 
+              margin: '15px 0', 
+              background: sendResult.includes('error') ? '#ffeeee' : '#eeffee',
+              color: sendResult.includes('error') ? '#990000' : '#006600',
+              borderRadius: '6px',
+              fontWeight: '500'
+            }}>{sendResult}</div>}
           </form>
         </div>
         <div className="review-slider-container">
