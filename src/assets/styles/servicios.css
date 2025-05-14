@@ -1,15 +1,4 @@
-:root {
-    --bg-dark: #12121c;
-    --bg-card: #252532;
-    --bg-input: #682abf06;
-    --text-light: #484848;
-    --text-headings: #000;
-    --text-medium: #a0a0b0;
-    --accent-purple: rgb(98, 0, 234); /* Morado vibrante */
-    --accent-purple-darker: #682abf;
-    --border-color: #3a3a4a;
-    --font-primary: 'Poppins', sans-serif;
-}
+
 
 /* --- Estilos de la Página de Servicios --- */
 .services-page {
@@ -200,7 +189,7 @@
 
 /* Hero section */
 .hero-section {
-  background-color: #682abf;
+  background-color: var(--accent-violet);
   text-align: center;
   padding: 80px 0px 140px;;
   position: relative;
@@ -211,13 +200,6 @@
 }
 .hero-section p {
     color: rgb(196, 196, 196);
-}
-.page-title {
-    font-size: 3.5rem;
-    font-weight: 800;
-    margin-bottom: 25px;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    color: white !important;
 }
 
 .hero-section::after {
@@ -389,23 +371,7 @@
   opacity: 0.9;
 }
 
-.cta-button {
-  display: inline-block;
-  background-color: white;
-  color: #6c5ce7;
-  padding: 15px 30px;
-  border-radius: 30px;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 1.1rem;
-  transition: all 0.3s ease;
-}
 
-.cta-button:hover {
-  background-color: #f8f9fa;
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-}
 
 .arrow {
   display: inline-block;

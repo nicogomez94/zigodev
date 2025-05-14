@@ -1,15 +1,8 @@
 /* filepath: src/assets/styles/trabajos.css */
 /* Portfolio Page Styles - Rediseño */
 :root {
-  --primary-color: #682abf;
+  --primary-color: var(--accent-violet);
   --primary-light: #a29bfe;
-  --text-dark: #333;
-  --text-medium: #555;
-  --text-light: #777;
-  --background-light: #f8f9fa;
-  --background-white: #ffffff;
-  --shadow-light: 0 5px 15px rgba(0, 0, 0, 0.05);
-  --shadow-medium: 0 8px 25px rgba(0, 0, 0, 0.1);
   --border-radius: 8px;
   --transition-normal: all 0.3s ease;
 }
