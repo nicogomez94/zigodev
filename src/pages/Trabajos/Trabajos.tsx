@@ -21,6 +21,7 @@ interface CategoryGroup {
   id: string;
   name: string;
   description: string;
+  _project?: string;
   projects: Project[];
 }
 
