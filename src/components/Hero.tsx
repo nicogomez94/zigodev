@@ -16,7 +16,7 @@ const Hero: React.FC = () => {
                     Ofrecemos servicios de diseño web, e-commerce, marketing digital, SEO, soporte técnico y mucho más para llevar tu proyecto al siguiente nivel.
                 </p>
                 <div className="hero-buttons">
-                    <a href="https://wa.me/5491152291994" className="cta-button hero-cta-main">Ponete en Contacto</a>
+                    <a href="/cotizador" className="cta-button hero-cta-main">Cotizá tu Sistema</a>
                     {/* <a href="servicios.html" className="cta-button cta-button-outline hero-cta-secondary">Saber más</a> */}
                 </div>
                 <div className="hero-graphic">

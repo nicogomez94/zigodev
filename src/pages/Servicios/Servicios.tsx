@@ -239,7 +239,7 @@ const Servicios: React.FC = () => {
         </section>
 
         {/* CTA final */}
-        <section className="cta-section">
+        <section className="cta-section cta-section-footer">
           <div className="container">
             <h2>¿Listo para impulsar tu proyecto?</h2>
             <p>Conversemos sobre tus ideas y cómo podemos ayudarte a alcanzar tus objetivos</p>

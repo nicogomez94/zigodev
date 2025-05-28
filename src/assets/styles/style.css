@@ -16,6 +16,7 @@
     --text-secondary: #495057;
     --text-muted: #6C757D;
     --accent-violet: rgb(98, 0, 234);
+    --accent-violet-light: rgb(124, 41, 240);
     --border-color: #DEE2E6;
     --shadow-color: rgba(0, 0, 0, 0.1);
     --font-primary: 'Inter', sans-serif;
@@ -350,6 +351,18 @@ header nav ul li a:hover {
     grid-template-columns: 1fr 1fr;
     gap: 60px;
     align-items: center;
+}
+.cta-section-footer h2 {
+    color: white;
+}
+.cta-section-footer p {
+    color: rgba(255, 255, 255, 0.8);
+}   
+.cta-section-footer {
+    background-color: var(--accent-violet-light);
+}
+.cta-section-footer .cta-button:hover{
+    color: white;
 }
 
 .build-scalable h2 {

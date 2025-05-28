@@ -235,7 +235,7 @@ const Trabajos: React.FC = () => {
           </section>
         ))}
 
-        <section className="cta-section">
+        <section className="cta-section cta-section-footer">
           <div className="container">
             <div className="cta-content">
               <h2>¿Tenés un proyecto en mente?</h2>
