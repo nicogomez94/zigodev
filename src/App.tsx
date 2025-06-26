@@ -5,6 +5,7 @@ import Cotizador from './pages/Cotizador/Cotizador';
 import Servicios from './pages/Servicios/Servicios';
 import Contacto from './pages/Contacto/Contacto';
 import Trabajos from './pages/Trabajos/Trabajos';
+import AcercaDe from './pages/AcercaDe/AcercaDe';
 import WhatsAppButton from './components/WhatsAppButton'; // Import the new component
 import ScrollToTop from './components/ScrollToTop';
 
@@ -18,6 +19,7 @@ const App: React.FC = () => {
         <Route path="/servicios" element={<Servicios />} />
         <Route path="/contacto" element={<Contacto />} />
         <Route path="/trabajos" element={<Trabajos />} />
+        <Route path="/acerca-de" element={<AcercaDe />} />
       </Routes>
       <WhatsAppButton />
     </Router>
