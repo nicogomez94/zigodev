@@ -30,7 +30,7 @@ const Header: React.FC = () => {
                         <li><Link to="/servicios" onClick={() => setMenuOpen(false)}>Servicios</Link></li>
                         {/* <li><Link to="/cotizador" onClick={() => setMenuOpen(false)}>Cotizador</Link></li> */}
                         <li><Link to="/trabajos" onClick={() => setMenuOpen(false)}>Portfolio</Link></li>
-                        <li><Link to="/acerca-de" onClick={() => setMenuOpen(false)}>Acerca de</Link></li>
+                        {/* <li><Link to="/acerca-de" onClick={() => setMenuOpen(false)}>Acerca de</Link></li> */}
                         <li><Link to="https://wa.me/5491152291994" className='cotiza-mobile cta-button hero-cta-main' onClick={() => setMenuOpen(false)}>Ponete en Contacto</Link></li>
                     </ul>
                 </nav>
