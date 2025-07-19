@@ -14,7 +14,7 @@ const AcercaDe = () => {
   // Datos del equipo
   const teamMembers = [
     {
-      name: "Alejandro Martínez",
+      name: "Ricardo Zito",
       role: "Director de Tecnología",
       bio: "Con más de 10 años de experiencia en desarrollo web y aplicaciones móviles. Especialista en arquitectura de software y soluciones escalables.",
       image: "/img/team/team1.png"
@@ -88,29 +88,6 @@ const AcercaDe = () => {
                   </div>
                 ))}
               </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="our-history-section py-16 bg-gray-50">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto text-center">
-              <h2 className="section-title mb-6">Nuestra Historia</h2>
-              <p className="text-lg mb-8">
-                Fundada en 2020, ZigoDev nació con la visión de transformar ideas en soluciones digitales 
-                excepcionales. A lo largo de los años, hemos crecido hasta convertirnos en un equipo diverso 
-                de más de 20 profesionales, incluyendo desarrolladores, diseñadores, especialistas en marketing 
-                digital y expertos en experiencia de usuario.
-              </p>
-              <p className="text-lg mb-8">
-                Nos enorgullece nuestro enfoque colaborativo y nuestra dedicación para entender las necesidades 
-                únicas de cada cliente. Esto nos permite diseñar soluciones personalizadas que no solo cumplen 
-                sino que superan las expectativas.
-              </p>
-              <p className="text-lg">
-                Hoy, continuamos innovando y expandiendo nuestros horizontes, siempre con el compromiso 
-                de ofrecer la más alta calidad y servicio excepcional en cada proyecto que emprendemos.
-              </p>
             </div>
           </div>
         </section>
