@@ -56,14 +56,14 @@ const Trabajos: React.FC = () => {
       },
       {
         id: 3,
-        title: 'PRAGA Tienda de Indumentaria',
+        title: 'Samaydeco - Articulos para el Hogar',
         category: 'ecommerce',
-        description: 'Tienda online para marca de indumentaria con diseño moderno y funcional. Integración con Mercado Pago y sistema de gestión de pedidos.',
-        image: '/img/trabajos/5.png',
-        url: 'https://pragaba.com.ar/productos/chomba-frequency/',
+        description: 'E-commerce para venta de artículos para el hogar, con integración de pasarela de pagos y sistema de gestión de inventario.',
+        image: '/img/trabajos/samay.jpg',
+        url: 'https://samaydeco.com.ar/',
         technologies: ['WordPress', 'Elementor', 'PHP'],
-        client: 'Consultoría Financiera Global',
-        year: '2022'
+        client: 'Samaydeco',
+        year: '2025'
       },
       {
         id: 4,
