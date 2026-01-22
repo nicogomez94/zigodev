@@ -56,11 +56,11 @@ const Trabajos: React.FC = () => {
       },
       {
         id: 3,
-        title: 'Samaydeco - Articulos para el Hogar',
+        title: 'Samaydeco',
         category: 'ecommerce',
         description: 'E-commerce para venta de artículos para el hogar, con integración de pasarela de pagos y sistema de gestión de inventario.',
         image: '/img/trabajos/samay.jpg',
-        url: 'https://samaydeco.com.ar/',
+        url: 'https://samaydeco.com/',
         technologies: ['WordPress', 'Elementor', 'PHP'],
         client: 'Samaydeco',
         year: '2025'
@@ -93,7 +93,7 @@ const Trabajos: React.FC = () => {
         category: 'landing',
         description: 'Landing page para alquiler turístico en Buenos Aires, con integración a sistema de reservas y calendario. Diseño atractivo y optimización para SEO.',
         image: '/img/trabajos/7.png',
-        url: 'https://productcatalog.com',
+        url: 'https://ggapartments.com.ar/',
         technologies: ['HTML', 'CSS', 'JavaScript'],
         client: 'G&G Apartments',
         year: '2024'
