@@ -93,7 +93,7 @@ const Trabajos: React.FC = () => {
         category: 'landing',
         description: 'Landing page para alquiler turístico en Buenos Aires, con integración a sistema de reservas y calendario. Diseño atractivo y optimización para SEO.',
         image: '/img/trabajos/7.png',
-        url: 'https://ggapartments.com.ar/',
+        url: 'https://ggapart.onrender.com/index.html',
         technologies: ['HTML', 'CSS', 'JavaScript'],
         client: 'G&G Apartments',
         year: '2024'
