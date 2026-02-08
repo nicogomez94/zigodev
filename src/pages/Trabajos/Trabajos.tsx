@@ -60,7 +60,7 @@ const Trabajos: React.FC = () => {
         category: 'ecommerce',
         description: 'E-commerce para venta de artículos para el hogar, con integración de pasarela de pagos y sistema de gestión de inventario.',
         image: '/img/trabajos/samay.jpg',
-        url: 'https://samaydeco.com/',
+        url: 'https://samaydeco2.com/',
         technologies: ['WordPress', 'Elementor', 'PHP'],
         client: 'Samaydeco',
         year: '2025'
