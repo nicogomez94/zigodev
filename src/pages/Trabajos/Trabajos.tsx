@@ -93,7 +93,7 @@ const Trabajos: React.FC = () => {
         category: 'landing',
         description: 'Landing page para alquiler turístico en Buenos Aires, con integración a sistema de reservas y calendario. Diseño atractivo y optimización para SEO.',
         image: '/img/trabajos/7.png',
-        url: 'https://ggapart.onrender.com/index.html',
+        url: 'https://ggapartments.com.ar/',
         technologies: ['HTML', 'CSS', 'JavaScript'],
         client: 'G&G Apartments',
         year: '2024'
@@ -115,7 +115,7 @@ const Trabajos: React.FC = () => {
         category: 'aplicacion',
         description: 'Red social dinámica inspirada en Instagram, donde los usuarios pueden compartir publicaciones, seguirse entre sí y construir comunidades en torno a intereses comunes.',
         image: '/img/trabajos/4.png',
-        url: 'http://taggeon.com',
+        url: 'https://taggeon.vercel.app/',
         technologies: ['Javascript', 'PHP', 'MySQL'],
         client: 'Taggeon',
         year: '2022'
