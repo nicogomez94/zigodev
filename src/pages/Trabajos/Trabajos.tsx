@@ -38,7 +38,7 @@ const Trabajos: React.FC = () => {
         category: 'ecommerce',
         description: 'Tienda online para marca de ropa con integración a Mercado Pago y gestión de inventario. Diseño responsivo y optimización SEO para mejorar la visibilidad en buscadores.',
         image: '/img/trabajos/gone.jpg',
-        url: 'https://gonelake.com.ar',
+        url: 'https://gonelake.vercel.app/',
         technologies: ['Shopify'],
         client: 'GONELAKE',
         year: '2023'
