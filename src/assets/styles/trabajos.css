@@ -100,6 +100,60 @@
   width: 100%;
 }
 
+.projects-carousel-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.projects-carousel-viewport {
+  width: 100%;
+  overflow: hidden;
+}
+
+.projects-carousel-track {
+  display: flex;
+  transition: transform 0.45s ease;
+}
+
+.projects-carousel-slide {
+  flex: 0 0 auto;
+  box-sizing: border-box;
+  padding: 0 10px;
+}
+
+.projects-carousel-slide .project-card {
+  height: 100%;
+}
+
+.carousel-control {
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(98, 0, 234, 0.25);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--accent-violet);
+  font-size: 1.8rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 14px rgba(98, 0, 234, 0.12);
+}
+
+.carousel-control:hover:not(:disabled) {
+  transform: translateY(-2px);
+  background: var(--accent-violet);
+  color: #fff;
+}
+
+.carousel-control:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
 /* Project Card */
 .project-card {
   background-color: var(--bg-card);
@@ -486,6 +540,10 @@
   .projects-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .projects-carousel-slide {
+    padding: 0 8px;
+  }
   
   .portfolio-hero h1 {
     font-size: 3rem;
@@ -508,6 +566,20 @@
   .projects-grid {
     grid-template-columns: repeat(1, 1fr);
     gap: 20px;
+  }
+
+  .projects-carousel-wrapper {
+    gap: 10px;
+  }
+
+  .projects-carousel-slide {
+    padding: 0 6px;
+  }
+
+  .carousel-control {
+    width: 36px;
+    height: 36px;
+    font-size: 1.5rem;
   }
   
   .project-image {

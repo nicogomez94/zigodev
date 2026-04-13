@@ -28,6 +28,8 @@ interface CategoryGroup {
 const Trabajos: React.FC = () => {
   const [categorizedProjects, setCategorizedProjects] = useState<CategoryGroup[]>([]);
   const [activeProject, setActiveProject] = useState<Project | null>(null);
+  const [projectsPerView, setProjectsPerView] = useState(3);
+  const [carouselIndexes, setCarouselIndexes] = useState<Record<string, number>>({});
 
   // Sample projects data
   useEffect(() => {
@@ -67,8 +69,8 @@ const Trabajos: React.FC = () => {
       },
       {
         id: 4,
-        title: 'Keramik - Detailing de Autos',
-        category: 'aplicacion',
+        title: 'Landing Page - Detailing de Autos',
+        category: 'landing',
         description: 'Página estatica con sección de catálogo y presupuesto online. Diseño atractivo y optimización para SEO.',
         image: '/img/trabajos/3.png',
         url: 'https://keramik.com.ar/',
@@ -101,7 +103,7 @@ const Trabajos: React.FC = () => {
       {
         id: 7,
         title: 'Presupuestador + Reservas con Calendario + Panel de Admin',
-        category: 'aplicacion',
+        category: 'plataforma',
         description: 'Herramienta integral que permite a los usuarios generar presupuestos personalizados y realizar reservas a través de un calendario interactivo. También cuenta con panel de admin.',
         image: '/img/trabajos/1.png',
         url: 'https://blak.com.ar',
@@ -112,7 +114,7 @@ const Trabajos: React.FC = () => {
       {
         id: 8,
         title: 'Red social dinámica',
-        category: 'aplicacion',
+        category: 'plataforma',
         description: 'Red social dinámica inspirada en Instagram, donde los usuarios pueden compartir publicaciones, seguirse entre sí y construir comunidades en torno a intereses comunes.',
         image: '/img/trabajos/4.png',
         url: 'https://taggeon.vercel.app/',
@@ -123,13 +125,68 @@ const Trabajos: React.FC = () => {
       {
         id: 9,
         title: 'Portal para Empresa de Paneles Solares',
-        category: 'landing',
+        category: 'institucional',
         description: 'Portal para empresa de paneles solares.',
         image: '/img/trabajos/8.png',
         url: 'https://technosolis.com.ar/',
        technologies: ['HTML', 'CSS', 'JavaScript'],
         client: 'Techno Solis',
         year: '2023'
+      },
+      {
+        id: 10,
+        title: 'Sitio Autoadministrable - Coordinacion de HockeyBDSC',
+        category: 'plataforma',
+        description: 'Sitio institucional.',
+        image: '/img/trabajos/bdsc.png',
+        url: 'https://coordinacionhockey.com.ar',
+        technologies: ['React', 'Node.js', 'Express', 'PostgreSQL'],
+        client: 'BDSC',
+        year: '2026'
+      },
+      {
+        id: 11,
+        title: 'Sitio con Panel de ADMIN - Cetrip',
+        category: 'plataforma',
+        description: 'Sitio institucional.',
+        image: '/img/trabajos/cetrip.png',
+        url: 'https://cetrip.com.ar/',
+        technologies: ['React', 'Node.js', 'Express', 'PostgreSQL'],
+        client: 'Cetrip',
+        year: '2026'
+      },
+      {
+        id: 12,
+        title: 'Panel de admin para camara de comercio - Eventos, locales, etc',
+        category: 'plataforma',
+        description: 'Sitio institucional.',
+        image: '/img/trabajos/emilio.png',
+        url: 'https://emilio-frontend-shared-db-zwqe.onrender.com/',
+        technologies: ['React', 'Node.js', 'Express', 'PostgreSQL'],
+        client: 'Emilio',
+        year: '2026'
+      },
+      {
+        id: 13,
+        title: 'Sitio Institucional GM Comex',
+        category: 'institucional',
+        description: 'Sitio institucional.',
+        image: '/img/trabajos/gmcomex.png',
+        url: 'https://gmcomex.com.ar',
+        technologies: ['HTML', 'CSS', 'JavaScript'],
+        client: 'GM Comex',
+        year: '2026'
+      },
+      {
+        id: 14,
+        title: 'Inmobiliaria/Panel de admin para cargar propiedades',
+        category: 'plataforma',
+        description: 'Sitio institucional.',
+        image: '/img/trabajos/laura.png',
+        url: 'https://lauragutierrezpropiedades.com.ar',
+        technologies: ['HTML', 'CSS', 'JavaScript'],
+        client: 'Laura',
+        year: '2026'
       },
     ];
     
@@ -157,8 +214,17 @@ const Trabajos: React.FC = () => {
       }
     };
 
-    // Obtener categorías únicas
+    // Obtener categorías únicas con orden controlado
     const categories = [...new Set(projectsData.map(project => project.category))];
+    const categoryOrder: Record<string, number> = {
+      institucional: 1,
+      landing: 2,
+      plataforma: 3,
+      aplicacion: 4,
+      ecommerce: 99
+    };
+
+    categories.sort((a, b) => (categoryOrder[a] ?? 50) - (categoryOrder[b] ?? 50));
     
     // Crear grupos de proyectos por categoría
     const groupedProjects = categories.map(category => {
@@ -173,6 +239,40 @@ const Trabajos: React.FC = () => {
     setCategorizedProjects(groupedProjects);
   }, []);
 
+  useEffect(() => {
+    const updateProjectsPerView = () => {
+      if (window.innerWidth < 768) {
+        setProjectsPerView(1);
+        return;
+      }
+
+      if (window.innerWidth < 1100) {
+        setProjectsPerView(2);
+        return;
+      }
+
+      setProjectsPerView(3);
+    };
+
+    updateProjectsPerView();
+    window.addEventListener('resize', updateProjectsPerView);
+    return () => window.removeEventListener('resize', updateProjectsPerView);
+  }, []);
+
+  useEffect(() => {
+    setCarouselIndexes(prev => {
+      const nextIndexes = { ...prev };
+
+      categorizedProjects.forEach(category => {
+        const maxIndex = Math.max(category.projects.length - projectsPerView, 0);
+        const currentIndex = nextIndexes[category.id] ?? 0;
+        nextIndexes[category.id] = Math.min(currentIndex, maxIndex);
+      });
+
+      return nextIndexes;
+    });
+  }, [categorizedProjects, projectsPerView]);
+
   const openProjectDetails = (project: Project) => {
     setActiveProject(project);
     // Cuando se abre el modal, evitar scroll en el body
@@ -183,6 +283,22 @@ const Trabajos: React.FC = () => {
     setActiveProject(null);
     // Restaurar scroll cuando se cierra el modal
     document.body.style.overflow = 'auto';
+  };
+
+  const goToPreviousProject = (categoryId: string) => {
+    setCarouselIndexes(prev => ({
+      ...prev,
+      [categoryId]: Math.max((prev[categoryId] ?? 0) - 1, 0)
+    }));
+  };
+
+  const goToNextProject = (categoryId: string, totalProjects: number) => {
+    const maxIndex = Math.max(totalProjects - projectsPerView, 0);
+
+    setCarouselIndexes(prev => ({
+      ...prev,
+      [categoryId]: Math.min((prev[categoryId] ?? 0) + 1, maxIndex)
+    }));
   };
 
   return (
@@ -202,36 +318,106 @@ const Trabajos: React.FC = () => {
         
         {/* Proyectos organizados por categoría */}
         {categorizedProjects.map((category, index) => (
-          <section key={category.id} className={`portfolio-category ${index % 2 === 1 ? 'bg-alt' : ''}`}>
-            <div className="container">
-              <div className="category-header">
-                <h2 className="category-title">{category.name}</h2>
-                <p className="category-description">{category.description}</p>
-              </div>
-              
-              <div className="projects-grid">
-                {category.projects.slice(0, 3).map(project => (
-                  <div 
-                    className="project-card" 
-                    key={project.id}
-                    onClick={() => openProjectDetails(project)}
-                  >
-                    <div className="project-image">
-                      <img src={project.image} alt={project.title} />
-                    </div>
-                    <div className="project-info">
-                      <h3>{project.title}</h3>
-                      <div className="project-tech">
-                        {project.technologies.slice(0, 3).map((tech, idx) => (
-                          <span key={idx} className="tech-badge">{tech}</span>
-                        ))}
-                      </div>
-                      <button className="view-details-btn">Ver detalles</button>
-                    </div>
+          <section
+            key={category.id}
+            className={`portfolio-category ${index % 2 === 1 ? 'bg-alt' : ''}`}
+          >
+            {(() => {
+              const shouldUseCarousel = category.projects.length > 3;
+              const currentIndex = carouselIndexes[category.id] ?? 0;
+              const maxIndex = Math.max(category.projects.length - projectsPerView, 0);
+
+              return (
+                <div className="container">
+                  <div className="category-header">
+                    <h2 className="category-title">{category.name}</h2>
+                    <p className="category-description">{category.description}</p>
                   </div>
-                ))}
-              </div>
-            </div>
+
+                  {!shouldUseCarousel && (
+                    <div className="projects-grid">
+                      {category.projects.map(project => (
+                        <div
+                          className="project-card"
+                          key={project.id}
+                          onClick={() => openProjectDetails(project)}
+                        >
+                          <div className="project-image">
+                            <img src={project.image} alt={project.title} />
+                          </div>
+                          <div className="project-info">
+                            <h3>{project.title}</h3>
+                            <div className="project-tech">
+                              {project.technologies.slice(0, 3).map((tech, idx) => (
+                                <span key={idx} className="tech-badge">{tech}</span>
+                              ))}
+                            </div>
+                            <button className="view-details-btn">Ver detalles</button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {shouldUseCarousel && (
+                    <div className="projects-carousel-wrapper">
+                      <button
+                        className="carousel-control carousel-control-prev"
+                        onClick={() => goToPreviousProject(category.id)}
+                        disabled={currentIndex === 0}
+                        aria-label={`Ver proyectos anteriores de ${category.name}`}
+                      >
+                        ‹
+                      </button>
+
+                      <div className="projects-carousel-viewport">
+                        <div
+                          className="projects-carousel-track"
+                          style={{
+                            transform: `translateX(calc(-${currentIndex} * (100% / ${projectsPerView})))`
+                          }}
+                        >
+                          {category.projects.map(project => (
+                            <div
+                              className="projects-carousel-slide"
+                              key={project.id}
+                              style={{ width: `${100 / projectsPerView}%` }}
+                            >
+                              <div
+                                className="project-card"
+                                onClick={() => openProjectDetails(project)}
+                              >
+                                <div className="project-image">
+                                  <img src={project.image} alt={project.title} />
+                                </div>
+                                <div className="project-info">
+                                  <h3>{project.title}</h3>
+                                  <div className="project-tech">
+                                    {project.technologies.slice(0, 3).map((tech, idx) => (
+                                      <span key={idx} className="tech-badge">{tech}</span>
+                                    ))}
+                                  </div>
+                                  <button className="view-details-btn">Ver detalles</button>
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      <button
+                        className="carousel-control carousel-control-next"
+                        onClick={() => goToNextProject(category.id, category.projects.length)}
+                        disabled={currentIndex >= maxIndex}
+                        aria-label={`Ver más proyectos de ${category.name}`}
+                      >
+                        ›
+                      </button>
+                    </div>
+                  )}
+                </div>
+              );
+            })()}
           </section>
         ))}
 
