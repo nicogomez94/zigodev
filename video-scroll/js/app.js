@@ -210,7 +210,7 @@ function initSectionAnimations() {
     const leavePct = parseFloat(sec.dataset.leave) / 100;
 
     const children = Array.from(sec.querySelectorAll(
-      '.section-label, .section-heading, .section-body, .cta-button, .stat'
+      '.section-label, .section-heading, .section-body, .cta-button, .stat, .section-image'
     ));
 
     // Build entrance timeline
