@@ -12,6 +12,9 @@ const OVERLAY_ENTER = 0.47;
 const MARQUEE_ENTER = 0.22;
 const MARQUEE_LEAVE = 0.79;
 
+// Mobile detection (CSS breakpoint mirror)
+const IS_MOBILE = window.innerWidth <= 768;
+
 // ── DOM REFS ────────────────────────────────────────────────
 const loader      = document.getElementById('loader');
 const loaderBar   = document.getElementById('loader-bar');
@@ -74,11 +77,21 @@ function initLenis() {
 // ── POSITION SECTIONS ────────────────────────────────────────
 function positionSections() {
   const totalH = scrollCont.getBoundingClientRect().height;
+  const viewH  = window.innerHeight;
+
   document.querySelectorAll('.scroll-section').forEach((sec) => {
     const enter = parseFloat(sec.dataset.enter) / 100;
     const leave = parseFloat(sec.dataset.leave) / 100;
     const mid   = (enter + leave) / 2;
-    sec.style.top       = (mid * totalH) + 'px';
+
+    // On mobile the viewport is a large fraction of the container, so position
+    // sections relative to the actual scroll range (totalH - viewH) so they
+    // land centred in the viewport at their scroll midpoint.
+    const top = IS_MOBILE
+      ? mid * (totalH - viewH) + viewH / 2
+      : mid * totalH;
+
+    sec.style.top       = top + 'px';
     sec.style.transform = 'translateY(-50%)';
   });
 }
