@@ -28,7 +28,7 @@
       <a href="#" class="logo">ZigoDev</a>
       <ul>
         <li><a href="#" onclick="return false">Servicios</a></li>
-        <li><a href="#" onclick="return false">Portfolio</a></li>
+        <li><a href="#portfolio" class="nav-portfolio">Portfolio</a></li>
         <li><a href="https://wa.me/5491152291994" target="_blank" class="nav-cta">Ponete en Contacto</a></li>
       </ul>
     </nav>
@@ -70,9 +70,11 @@
     </div>
   </section>
 
-  <!-- CANVAS -->
-  <div class="canvas-wrap" id="canvas-wrap">
-    <canvas id="canvas"></canvas>
+  <!-- BG VIDEO -->
+  <div class="video-wrap" id="video-wrap">
+    <video id="bg-video" muted playsinline preload="auto" disableremoteplayback>
+      <source src="kling.mp4" type="video/mp4">
+    </video>
   </div>
 
   <!-- DARK OVERLAY -->
@@ -115,33 +117,11 @@
       </div>
     </section>
 
-    <!-- SECTION 3: Stats (dark overlay) -->
-    <section class="scroll-section section-stats"
-             data-enter="47" data-leave="64" data-animation="stagger-up">
-      <div class="stats-grid">
-        <div class="stat">
-          <span class="stat-number" data-value="90" data-decimals="0">0</span>
-          <span class="stat-suffix">%</span>
-          <span class="stat-label">Clientes satisfechos</span>
-        </div>
-        <div class="stat">
-          <span class="stat-number" data-value="50" data-decimals="0">0</span>
-          <span class="stat-suffix">+</span>
-          <span class="stat-label">Proyectos entregados</span>
-        </div>
-        <div class="stat">
-          <span class="stat-number" data-value="5" data-decimals="0">0</span>
-          <span class="stat-suffix">+</span>
-          <span class="stat-label">Años de experiencia</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION 4: E-commerce -->
+    <!-- SECTION 3: E-commerce (dark overlay) -->
     <section class="scroll-section section-content align-left"
-             data-enter="65" data-leave="79" data-animation="scale-up">
+             data-enter="47" data-leave="63" data-animation="scale-up">
       <div class="section-inner">
-        <span class="section-label">004 / E-commerce</span>
+        <span class="section-label">003 / E-commerce</span>
         <h2 class="section-heading">Tiendas que<br>Venden Solas.</h2>
         <p class="section-body">WooCommerce, Shopify, Tienda Nube. Catálogos, carrito optimizado y pasarelas de pago integradas para maximizar tus ventas.</p>
       </div>
@@ -150,9 +130,59 @@
       </div>
     </section>
 
+    <!-- SECTION 4: Proyectos Realizados -->
+    <section class="scroll-section section-portfolio" id="portfolio"
+             data-enter="64" data-leave="81" data-animation="stagger-up">
+      <div class="portfolio-col-header">
+        <span class="section-label">004 / Portfolio</span>
+        <h2 class="section-heading">Proyectos<br>Realizados.</h2>
+        <p class="section-body">Más de 50 proyectos entregados en Argentina y LATAM.</p>
+        <a href="https://zigodev.vercel.app/trabajos" target="_blank" class="cta-button cta-sm">Ver todos →</a>
+      </div>
+      <div class="portfolio-col-list">
+
+        <div class="pf-item">
+          <div class="pf-thumb">
+            <img src="../public/img/trabajos/1.png" alt="BLAK Ploteo" loading="lazy" />
+          </div>
+          <div class="pf-info">
+            <span class="pf-cat">Plataforma</span>
+            <h3 class="pf-title">BLAK Ploteo</h3>
+            <p class="pf-desc">Presupuestador + reservas con calendario + panel de admin.</p>
+            <div class="pf-tech"><span>React</span><span>Node.js</span><span>PostgreSQL</span></div>
+          </div>
+        </div>
+
+        <div class="pf-item">
+          <div class="pf-thumb">
+            <img src="../public/img/trabajos/4.png" alt="Taggeon" loading="lazy" />
+          </div>
+          <div class="pf-info">
+            <span class="pf-cat">Red Social</span>
+            <h3 class="pf-title">Taggeon</h3>
+            <p class="pf-desc">Red social inspirada en Instagram con comunidades y Mercado Pago.</p>
+            <div class="pf-tech"><span>PHP</span><span>JavaScript</span><span>MySQL</span></div>
+          </div>
+        </div>
+
+        <div class="pf-item">
+          <div class="pf-thumb">
+            <img src="../public/img/trabajos/gone.jpg" alt="GONELAKE" loading="lazy" />
+          </div>
+          <div class="pf-info">
+            <span class="pf-cat">E-Commerce</span>
+            <h3 class="pf-title">GONELAKE</h3>
+            <p class="pf-desc">Tienda online para marca de ropa con Mercado Pago y gestión de inventario.</p>
+            <div class="pf-tech"><span>Shopify</span></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
     <!-- SECTION 5: CTA final -->
     <section class="scroll-section section-cta align-left"
-             data-enter="82" data-leave="100" data-animation="fade-up" data-persist="true">
+             data-enter="83" data-leave="100" data-animation="fade-up" data-persist="true">
       <div class="section-inner">
         <span class="section-label">005 / Acción</span>
         <h2 class="section-heading">¿Listo para<br>escalar tu negocio?</h2>
