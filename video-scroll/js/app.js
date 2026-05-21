@@ -5,14 +5,14 @@
 gsap.registerPlugin(ScrollTrigger);
 
 // ── CONFIG ──────────────────────────────────────────────────
-const FRAME_COUNT  = 240;
+const FRAME_COUNT  = 241;
 const FRAME_EXT    = 'jpg';
 const FRAME_PATH   = 'frames/frame_';
 const FRAME_SPEED  = 1.0;   // 1 = full video over full scroll (before overlay)
 const PRELOAD_FAST = 12;    // frames to show before starting
 
 // Dark overlay range (0–1 scroll progress)
-const OVERLAY_ENTER = 0.47;
+const OVERLAY_ENTER = 0.63;
 
 // Marquee range
 const MARQUEE_ENTER = 0.22;
@@ -130,6 +130,8 @@ function initLenis() {
     duration: 1.2,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     smoothWheel: true,
+    syncTouch: true,        // use native touch scroll on mobile
+    touchMultiplier: 1.5,
   });
   lenisInstance.on('scroll', ScrollTrigger.update);
   gsap.ticker.add((time) => lenisInstance.raf(time * 1000));
@@ -174,8 +176,8 @@ function initHeroTransition() {
         canvasWrap.style.opacity  = '0';
       } else {
         canvasWrap.style.opacity = '1';
-        const wipe = Math.min(1, Math.max(0, (p - 0.01) / 0.07));
-        canvasWrap.style.clipPath = `circle(${wipe * 82}% at 50% 50%)`;
+        const wipe = Math.min(1, Math.max(0, (p - 0.002) / 0.035));
+        canvasWrap.style.clipPath = `circle(${wipe * 90}% at 50% 50%)`;
       }
     },
   });

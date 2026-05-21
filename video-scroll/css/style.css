@@ -322,6 +322,12 @@ body {
 .section-content .section-inner {
   flex: 1;
   overflow: hidden;
+  background: rgba(0,0,0,0.72);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 2.2rem 2.5rem;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.06);
 }
 
 /* CTA — keeps simple left layout */
@@ -571,20 +577,25 @@ body {
   }
 
   /* ── Scroll container height stays — JS repositions sections ── */
-  #scroll-container { height: 430vh; }
+  #scroll-container { height: 550vh; }
 
   /* ── Portfolio ── */
   .section-portfolio {
     flex-direction: column;
-    padding: 2rem 5vw;
-    gap: 1.25rem;
+    padding: 1.5rem 5vw;
+    gap: 1rem;
     overflow: visible;
   }
   .portfolio-col-header { flex: unset; }
-  .portfolio-col-list { gap: 0.7rem; }
-  .pf-item { flex-direction: column; align-items: flex-start; gap: 0.7rem; }
-  .pf-thumb { flex: unset; width: 100%; height: 90px; }
+  .portfolio-col-header .section-heading { font-size: clamp(1.6rem, 7vw, 2.2rem); }
+  .portfolio-col-list { gap: 0.6rem; }
+  /* Row layout for items on mobile = much more compact */
+  .pf-item { flex-direction: row; align-items: center; gap: 0.75rem; }
+  .pf-thumb { flex: 0 0 72px; width: 72px; height: 72px; border-radius: 10px; }
+  .pf-thumb img { border-radius: 10px; }
   .pf-desc { display: none; }
+  /* Hide third item on mobile to save space */
+  .pf-item:nth-child(3) { display: none; }
 
   .site-header { padding: 1rem 5vw; }
   .site-header ul li:not(:last-child) { display: none; }
