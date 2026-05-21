@@ -5,46 +5,116 @@
 gsap.registerPlugin(ScrollTrigger);
 
 // ── CONFIG ──────────────────────────────────────────────────
-// Dark overlay (0–1 scroll progress)
+const FRAME_COUNT  = 240;
+const FRAME_EXT    = 'jpg';
+const FRAME_PATH   = 'frames/frame_';
+const FRAME_SPEED  = 1.0;   // 1 = full video over full scroll (before overlay)
+const PRELOAD_FAST = 12;    // frames to show before starting
+
+// Dark overlay range (0–1 scroll progress)
 const OVERLAY_ENTER = 0.47;
 
 // Marquee range
 const MARQUEE_ENTER = 0.22;
 const MARQUEE_LEAVE = 0.79;
 
-// Mobile detection (CSS breakpoint mirror)
-const IS_MOBILE = window.innerWidth <= 768;
-
 // ── DOM REFS ────────────────────────────────────────────────
 const loader      = document.getElementById('loader');
 const loaderBar   = document.getElementById('loader-bar');
 const loaderPct   = document.getElementById('loader-percent');
-const videoEl     = document.getElementById('bg-video');
-const videoWrap   = document.getElementById('video-wrap');
+const canvasEl    = document.getElementById('canvas');
+const canvasWrap  = document.getElementById('canvas-wrap');
+const ctx         = canvasEl.getContext('2d');
 const scrollCont  = document.getElementById('scroll-container');
 const heroSection = document.getElementById('hero-section');
 const darkOverlay = document.getElementById('dark-overlay');
 const marqueeWrap = document.getElementById('marquee');
 const marqueeText = marqueeWrap.querySelector('.marquee-text');
 
-// ── LOADER ───────────────────────────────────────────────────
-function runLoader() {
-  let pct = 0;
-  const tick = setInterval(() => {
-    pct += Math.random() * 18 + 8;
-    if (pct >= 100) { pct = 100; clearInterval(tick); setTimeout(onReady, 120); }
-    loaderBar.style.width = pct + '%';
-    loaderPct.textContent = Math.floor(pct) + '%';
-  }, 60);
+// ── FRAME STORE ─────────────────────────────────────────────
+const frames     = new Array(FRAME_COUNT).fill(null);
+let currentFrame = 0;
+let bgColor      = '#0d0d0d';
+
+// ── CANVAS RESIZE ───────────────────────────────────────────
+const dpr = window.devicePixelRatio || 1;
+function resizeCanvas() {
+  canvasEl.width        = window.innerWidth  * dpr;
+  canvasEl.height       = window.innerHeight * dpr;
+  canvasEl.style.width  = window.innerWidth  + 'px';
+  canvasEl.style.height = window.innerHeight + 'px';
+  ctx.scale(dpr, dpr);
+  if (frames[currentFrame]) drawFrame(currentFrame);
+}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+function padNum(n, len) { return String(n).padStart(len, '0'); }
+function frameSrc(i)    { return `${FRAME_PATH}${padNum(i + 1, 4)}.${FRAME_EXT}`; }
+
+// ── BACKGROUND COLOR SAMPLING ───────────────────────────────
+function sampleBgColor(img) {
+  const tmp = document.createElement('canvas');
+  tmp.width = 4; tmp.height = 4;
+  const tc = tmp.getContext('2d');
+  tc.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight, 0, 0, 4, 4);
+  const d = tc.getImageData(0, 0, 1, 1).data;
+  bgColor = `rgb(${d[0]},${d[1]},${d[2]})`;
 }
 
+// ── DRAW FRAME ───────────────────────────────────────────────
+function drawFrame(index) {
+  const img = frames[index];
+  if (!img) return;
+  const cw = canvasEl.width  / dpr;
+  const ch = canvasEl.height / dpr;
+  const iw = img.naturalWidth;
+  const ih = img.naturalHeight;
+  const scale = Math.max(cw / iw, ch / ih);
+  const dw = iw * scale, dh = ih * scale;
+  const dx = (cw - dw) / 2, dy = (ch - dh) / 2;
+  ctx.fillStyle = bgColor;
+  ctx.fillRect(0, 0, cw, ch);
+  ctx.drawImage(img, dx, dy, dw, dh);
+}
+
+// ── PRELOADER ───────────────────────────────────────────────
+function loadImage(index) {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload  = () => { frames[index] = img; resolve(); };
+    img.onerror = () => resolve();
+    img.src = frameSrc(index);
+  });
+}
+
+async function preloadAll() {
+  // Phase 1: first PRELOAD_FAST frames fast
+  const fast = [];
+  for (let i = 0; i < PRELOAD_FAST; i++) fast.push(loadImage(i));
+  await Promise.all(fast);
+  if (frames[0]) { sampleBgColor(frames[0]); drawFrame(0); }
+
+  // Phase 2: rest in background, update progress bar
+  let loaded = PRELOAD_FAST;
+  const update = () => {
+    const pct = Math.round((loaded / FRAME_COUNT) * 100);
+    loaderBar.style.width = pct + '%';
+    loaderPct.textContent = pct + '%';
+    if (loaded >= FRAME_COUNT) onReady();
+  };
+  update();
+  for (let i = PRELOAD_FAST; i < FRAME_COUNT; i++) {
+    loadImage(i).then(() => { loaded++; update(); });
+  }
+}
+
+// ── BOOT ─────────────────────────────────────────────────────
 function onReady() {
   loader.classList.add('hidden');
-  videoEl.pause();
-  videoEl.currentTime = 0;
   initLenis();
   initHeroTransition();
-  initVideoScroll();
+  initFrameScroll();
   initSectionAnimations();
   initDarkOverlay();
   initMarquee();
@@ -65,7 +135,7 @@ function initLenis() {
   gsap.ticker.add((time) => lenisInstance.raf(time * 1000));
   gsap.ticker.lagSmoothing(0);
 
-  // Portfolio nav link → scroll to portfolio section enter point
+  // Portfolio nav link → smooth scroll to portfolio section
   document.querySelector('.nav-portfolio')?.addEventListener('click', (e) => {
     e.preventDefault();
     const sc = document.getElementById('scroll-container');
@@ -77,21 +147,11 @@ function initLenis() {
 // ── POSITION SECTIONS ────────────────────────────────────────
 function positionSections() {
   const totalH = scrollCont.getBoundingClientRect().height;
-  const viewH  = window.innerHeight;
-
   document.querySelectorAll('.scroll-section').forEach((sec) => {
     const enter = parseFloat(sec.dataset.enter) / 100;
     const leave = parseFloat(sec.dataset.leave) / 100;
     const mid   = (enter + leave) / 2;
-
-    // On mobile the viewport is a large fraction of the container, so position
-    // sections relative to the actual scroll range (totalH - viewH) so they
-    // land centred in the viewport at their scroll midpoint.
-    const top = IS_MOBILE
-      ? mid * (totalH - viewH) + viewH / 2
-      : mid * totalH;
-
-    sec.style.top       = top + 'px';
+    sec.style.top       = (mid * totalH) + 'px';
     sec.style.transform = 'translateY(-50%)';
   });
 }
@@ -105,35 +165,40 @@ function initHeroTransition() {
     scrub: true,
     onUpdate: (self) => {
       const p = self.progress;
+      // Hero fades out fast
       heroSection.style.opacity       = Math.max(0, 1 - p * 18);
       heroSection.style.pointerEvents = p > 0.05 ? 'none' : 'auto';
-      // Video fades in as hero fades out
-      videoWrap.style.opacity = Math.min(1, Math.max(0, (p - 0.02) / 0.08));
+      // Canvas: circle wipe in early, collapse when overlay takes over
+      if (p >= OVERLAY_ENTER) {
+        canvasWrap.style.clipPath = 'circle(0% at 50% 50%)';
+        canvasWrap.style.opacity  = '0';
+      } else {
+        canvasWrap.style.opacity = '1';
+        const wipe = Math.min(1, Math.max(0, (p - 0.01) / 0.07));
+        canvasWrap.style.clipPath = `circle(${wipe * 82}% at 50% 50%)`;
+      }
     },
   });
 }
 
-// ── VIDEO SCRUBBING ──────────────────────────────────────────
-function initVideoScroll() {
-  function setupScrub() {
-    const dur = videoEl.duration;
-    ScrollTrigger.create({
-      trigger: scrollCont,
-      start: 'top top',
-      end: 'bottom bottom',
-      scrub: true,
-      onUpdate: (self) => {
-        // Map scroll 0 → OVERLAY_ENTER to full video duration
-        videoEl.currentTime = Math.min(self.progress / OVERLAY_ENTER, 1) * dur;
-      },
-    });
-  }
-
-  if (!isNaN(videoEl.duration) && videoEl.readyState >= 1) {
-    setupScrub();
-  } else {
-    videoEl.addEventListener('loadedmetadata', setupScrub, { once: true });
-  }
+// ── FRAME → SCROLL ───────────────────────────────────────────
+function initFrameScroll() {
+  ScrollTrigger.create({
+    trigger: scrollCont,
+    start: 'top top',
+    end: 'bottom bottom',
+    scrub: true,
+    onUpdate: (self) => {
+      // Map scroll 0 → OVERLAY_ENTER to full 240 frames
+      const accelerated = Math.min((self.progress / OVERLAY_ENTER) * FRAME_SPEED, 1);
+      const index = Math.min(Math.floor(accelerated * FRAME_COUNT), FRAME_COUNT - 1);
+      if (index !== currentFrame) {
+        currentFrame = index;
+        if (index % 20 === 0 && frames[index]) sampleBgColor(frames[index]);
+        requestAnimationFrame(() => drawFrame(index));
+      }
+    },
+  });
 }
 
 // ── SECTION ANIMATIONS ───────────────────────────────────────
@@ -145,7 +210,7 @@ function initSectionAnimations() {
     const leavePct = parseFloat(sec.dataset.leave) / 100;
 
     const children = Array.from(sec.querySelectorAll(
-      '.section-label, .section-heading, .section-body, .cta-button, .stat, .section-image'
+      '.section-label, .section-heading, .section-body, .cta-button, .stat, .section-image, .portfolio-col-header, .pf-item'
     ));
 
     const tl = gsap.timeline({ paused: true });
@@ -159,7 +224,7 @@ function initSectionAnimations() {
       case 'rotate-in':
         tl.from(children, { y: 40, rotation: 3, opacity: 0, stagger: 0.1, duration: 0.9, ease: 'power3.out' }); break;
       case 'stagger-up':
-        tl.from(children, { y: 60, opacity: 0, stagger: 0.15, duration: 0.8, ease: 'power3.out' }); break;
+        tl.from(children, { y: 60, opacity: 0, stagger: 0.12, duration: 0.8, ease: 'power3.out' }); break;
       case 'clip-reveal':
         tl.from(children, { clipPath: 'inset(100% 0 0 0)', opacity: 0, stagger: 0.15, duration: 1.2, ease: 'power4.inOut' }); break;
       default:
@@ -176,10 +241,10 @@ function initSectionAnimations() {
       onUpdate: (self) => {
         const p = self.progress;
         let opacity = 0;
-        if      (p >= enterPct - FADE && p <= enterPct)              opacity = (p - (enterPct - FADE)) / FADE;
-        else if (p > enterPct && p < leavePct)                        opacity = 1;
-        else if (!persist && p >= leavePct && p <= leavePct + FADE)  opacity = 1 - (p - leavePct) / FADE;
-        else if (persist  && p >= leavePct)                           opacity = 1;
+        if      (p >= enterPct - FADE && p <= enterPct)             opacity = (p - (enterPct - FADE)) / FADE;
+        else if (p > enterPct && p < leavePct)                       opacity = 1;
+        else if (!persist && p >= leavePct && p <= leavePct + FADE) opacity = 1 - (p - leavePct) / FADE;
+        else if (persist  && p >= leavePct)                          opacity = 1;
 
         sec.style.opacity = opacity;
         sec.classList.toggle('visible', opacity > 0);
@@ -267,5 +332,5 @@ function initCounters() {
   });
 }
 
-// ── BOOT ─────────────────────────────────────────────────────
-runLoader();
+// ── START ────────────────────────────────────────────────────
+preloadAll();
