@@ -16,7 +16,7 @@ const OVERLAY_ENTER = 0.63;
 
 // Marquee range
 const MARQUEE_ENTER = 0.22;
-const MARQUEE_LEAVE = 0.70;
+const MARQUEE_LEAVE = 0.59;
 
 // ── DOM REFS ────────────────────────────────────────────────
 const loader      = document.getElementById('loader');
