@@ -141,13 +141,6 @@ function initLenis() {
   gsap.ticker.add((time) => lenisInstance.raf(time * 1000));
   gsap.ticker.lagSmoothing(0);
 
-  // Portfolio nav link → smooth scroll to portfolio section
-  document.querySelector('.nav-portfolio')?.addEventListener('click', (e) => {
-    e.preventDefault();
-    const sc = document.getElementById('scroll-container');
-    const target = sc.offsetTop + sc.offsetHeight * 0.64;
-    lenisInstance.scrollTo(target, { duration: 1.8 });
-  });
 }
 
 // ── POSITION SECTIONS ────────────────────────────────────────
