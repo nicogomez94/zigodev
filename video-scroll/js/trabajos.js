@@ -12,6 +12,17 @@ const CATEGORY_LABELS = {
 const PROJECTS = [
   // ── PLATAFORMAS WEB ─────────────────────────────────────
   {
+    id: 0,
+    title: 'AutoZona — Clasificados de Autos Usados',
+    client: 'AutoZona',
+    category: 'plataforma',
+    description: 'Plataforma de clasificados de autos usados con publicaciones pagas, búsqueda por marca, precio y ubicación, y contacto directo por WhatsApp con el vendedor.',
+    image: '../public/img/trabajos/autozona.png',
+    url: 'https://autozonaclasificados.com',
+    technologies: ['React', 'Node.js', 'PostgreSQL'],
+    year: '2026',
+  },
+  {
     id: 1,
     title: 'Presupuestador + Reservas + Panel Admin',
     client: 'BLAK',

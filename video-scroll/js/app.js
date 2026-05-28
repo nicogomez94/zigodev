@@ -179,7 +179,7 @@ function initHeroTransition() {
         canvasWrap.style.clipPath = 'circle(0% at 50% 50%)';
         canvasWrap.style.opacity  = '0';
       } else {
-        canvasWrap.style.opacity = '1';
+        canvasWrap.style.opacity = '.6';
         const wipe = Math.min(1, Math.max(0, (p - 0.002) / 0.035));
         canvasWrap.style.clipPath = `circle(${wipe * 90}% at 50% 50%)`;
       }
