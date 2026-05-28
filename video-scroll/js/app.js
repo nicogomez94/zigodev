@@ -16,7 +16,7 @@ const OVERLAY_ENTER = 0.63;
 
 // Marquee range
 const MARQUEE_ENTER = 0.22;
-const MARQUEE_LEAVE = 0.79;
+const MARQUEE_LEAVE = 0.70;
 
 // ── DOM REFS ────────────────────────────────────────────────
 const loader      = document.getElementById('loader');
@@ -54,12 +54,16 @@ function frameSrc(i)    { return `${FRAME_PATH}${padNum(i + 1, 4)}.${FRAME_EXT}`
 
 // ── BACKGROUND COLOR SAMPLING ───────────────────────────────
 function sampleBgColor(img) {
-  const tmp = document.createElement('canvas');
-  tmp.width = 4; tmp.height = 4;
-  const tc = tmp.getContext('2d');
-  tc.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight, 0, 0, 4, 4);
-  const d = tc.getImageData(0, 0, 1, 1).data;
-  bgColor = `rgb(${d[0]},${d[1]},${d[2]})`;
+  try {
+    const tmp = document.createElement('canvas');
+    tmp.width = 4; tmp.height = 4;
+    const tc = tmp.getContext('2d');
+    tc.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight, 0, 0, 4, 4);
+    const d = tc.getImageData(0, 0, 1, 1).data;
+    bgColor = `rgb(${d[0]},${d[1]},${d[2]})`;
+  } catch (e) {
+    // Safari file:// protocol taints canvas — skip color sampling
+  }
 }
 
 // ── DRAW FRAME ───────────────────────────────────────────────
@@ -214,7 +218,7 @@ function initSectionAnimations() {
     // Animate the card container (.section-inner) + image as units so the
     // black background and text both appear at the same time.
     const children = Array.from(sec.querySelectorAll(
-      '.section-inner, .section-image, .portfolio-col-header, .pf-item'
+      '.section-inner, .section-image, .portfolio-col-header, .pf-item, .feat-image, .feat-overline, .feat-title, .feat-desc, .feat-tech, .feat-links'
     ));
 
     const tl = gsap.timeline({ paused: true });
