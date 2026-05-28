@@ -334,6 +334,7 @@ body {
 .section-cta {
   padding-left: 5vw;
   padding-right: 52vw;
+  padding-bottom: 12vh;
 }
 .section-cta .section-inner { max-width: 40vw; overflow: hidden; }
 
