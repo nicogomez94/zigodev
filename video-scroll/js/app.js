@@ -12,7 +12,7 @@ const FRAME_SPEED  = 1.0;   // 1 = full video over full scroll (before overlay)
 const PRELOAD_FAST = 12;    // frames to show before starting
 
 // Dark overlay range (0–1 scroll progress)
-const OVERLAY_ENTER = 0.63;
+const OVERLAY_ENTER = 0.59;
 
 // Marquee range
 const MARQUEE_ENTER = 0.22;

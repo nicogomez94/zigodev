@@ -296,7 +296,7 @@ body {
 /* ── SCROLL CONTAINER ────────────────────────────────────── */
 #scroll-container {
   position: relative;
-  height: 950vh;
+  height: 1200vh;
   z-index: 4;
 }
 
@@ -726,7 +726,7 @@ body {
   }
 
   /* ── Scroll container height stays — JS repositions sections ── */
-  #scroll-container { height: 760vh; }
+  #scroll-container { height: 900vh; }
 
   /* ── Portfolio header ── */
   .section-portfolio {
