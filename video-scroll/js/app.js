@@ -211,26 +211,28 @@ function initSectionAnimations() {
     const enterPct = parseFloat(sec.dataset.enter) / 100;
     const leavePct = parseFloat(sec.dataset.leave) / 100;
 
+    // Animate the card container (.section-inner) + image as units so the
+    // black background and text both appear at the same time.
     const children = Array.from(sec.querySelectorAll(
-      '.section-label, .section-heading, .section-body, .cta-button, .stat, .section-image, .portfolio-col-header, .pf-item'
+      '.section-inner, .section-image, .portfolio-col-header, .pf-item'
     ));
 
     const tl = gsap.timeline({ paused: true });
     switch (type) {
       case 'slide-left':
-        tl.from(children, { x: -80, opacity: 0, stagger: 0.12, duration: 0.9, ease: 'power3.out' }); break;
+        tl.from(children, { x: -60, opacity: 0, stagger: 0.08, duration: 0.7, ease: 'power3.out' }); break;
       case 'slide-right':
-        tl.from(children, { x: 80, opacity: 0, stagger: 0.12, duration: 0.9, ease: 'power3.out' }); break;
+        tl.from(children, { x: 60, opacity: 0, stagger: 0.08, duration: 0.7, ease: 'power3.out' }); break;
       case 'scale-up':
-        tl.from(children, { scale: 0.85, opacity: 0, stagger: 0.12, duration: 1.0, ease: 'power2.out' }); break;
+        tl.from(children, { scale: 0.88, opacity: 0, stagger: 0.08, duration: 0.75, ease: 'power2.out' }); break;
       case 'rotate-in':
-        tl.from(children, { y: 40, rotation: 3, opacity: 0, stagger: 0.1, duration: 0.9, ease: 'power3.out' }); break;
+        tl.from(children, { y: 30, rotation: 2, opacity: 0, stagger: 0.08, duration: 0.7, ease: 'power3.out' }); break;
       case 'stagger-up':
-        tl.from(children, { y: 60, opacity: 0, stagger: 0.12, duration: 0.8, ease: 'power3.out' }); break;
+        tl.from(children, { y: 50, opacity: 0, stagger: 0.1, duration: 0.7, ease: 'power3.out' }); break;
       case 'clip-reveal':
-        tl.from(children, { clipPath: 'inset(100% 0 0 0)', opacity: 0, stagger: 0.15, duration: 1.2, ease: 'power4.inOut' }); break;
+        tl.from(children, { clipPath: 'inset(100% 0 0 0)', opacity: 0, stagger: 0.1, duration: 0.9, ease: 'power4.inOut' }); break;
       default:
-        tl.from(children, { y: 50, opacity: 0, stagger: 0.12, duration: 0.9, ease: 'power3.out' });
+        tl.from(children, { y: 40, opacity: 0, stagger: 0.08, duration: 0.7, ease: 'power3.out' });
     }
 
     const FADE = 0.04;
