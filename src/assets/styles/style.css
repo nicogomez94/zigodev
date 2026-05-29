@@ -141,6 +141,24 @@ header nav ul li a:hover {
     color: #6c5ce7;
 }
 
+.nav-social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    color: var(--text-primary);
+}
+
+.nav-social-link svg {
+    width: 1.15rem;
+    height: 1.15rem;
+}
+
+.nav-social-link::after {
+    display: none;
+}
+
 .menu-icon {
     display: none;
     font-size: 1.5rem;

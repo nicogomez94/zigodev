@@ -49,11 +49,23 @@ a { text-decoration: none; color: inherit; }
   justify-content: space-between;
 }
 .site-header .logo {
-  font-family: var(--font-display);
-  font-size: 1.25rem;
-  font-weight: 800;
-  color: var(--text);
-  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  font-family: var(--font-body);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0;
+}
+.site-header .logo-icon {
+  color: var(--violet);
+  width: 1.2em;
+  height: 1.2em;
+  margin-right: 10px;
+  flex: 0 0 auto;
+}
+.site-header .logo span {
+  color: #fff;
 }
 .site-header ul {
   list-style: none;
@@ -69,6 +81,19 @@ a { text-decoration: none; color: inherit; }
 }
 .site-header ul a:hover,
 .site-header ul a.nav-active { color: var(--text); }
+.nav-icon-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  color: #fff !important;
+}
+.social-icon {
+  display: block;
+  width: 1.1rem;
+  height: 1.1rem;
+}
 .nav-cta {
   background: var(--violet) !important;
   color: #fff !important;
