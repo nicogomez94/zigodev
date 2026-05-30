@@ -341,3 +341,21 @@ function initCounters() {
 
 // ── START ────────────────────────────────────────────────────
 preloadAll();
+
+// ── HAMBURGER MENU ───────────────────────────────────────────
+const burger     = document.querySelector('.nav-burger');
+const siteHeader = document.querySelector('.site-header');
+
+burger.addEventListener('click', () => {
+  const open = siteHeader.classList.toggle('nav-open');
+  burger.setAttribute('aria-expanded', open);
+  document.querySelector('.nav-drawer').setAttribute('aria-hidden', !open);
+});
+
+document.querySelectorAll('.nav-drawer a').forEach(link => {
+  link.addEventListener('click', () => {
+    siteHeader.classList.remove('nav-open');
+    burger.setAttribute('aria-expanded', 'false');
+    document.querySelector('.nav-drawer').setAttribute('aria-hidden', 'true');
+  });
+});
