@@ -369,7 +369,8 @@ body {
   overflow: hidden;
   border-radius: 16px;
 }
-.section-image img {
+.section-image img,
+.section-image video {
   width: 100%;
   height: auto;
   display: block;
@@ -379,7 +380,8 @@ body {
   filter: brightness(0.88) saturate(1.1);
   transition: filter 0.4s ease;
 }
-.section-image img:hover { filter: brightness(1) saturate(1.15); }
+.section-image img:hover,
+.section-image video:hover { filter: brightness(1) saturate(1.15); }
 
 .section-heading {
   font-family: var(--font-display);

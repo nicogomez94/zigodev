@@ -44,10 +44,10 @@ const Header: React.FC = () => {
                             </a>
                         </li>
                         {/* <li><Link to="/acerca-de" onClick={() => setMenuOpen(false)}>Acerca de</Link></li> */}
-                        <li><Link to="https://wa.me/5491152291994" className='cotiza-mobile cta-button hero-cta-main' onClick={() => setMenuOpen(false)}>Ponete en Contacto</Link></li>
+                        <li><Link to="https://wa.me/5491178258076" className='cotiza-mobile cta-button hero-cta-main' onClick={() => setMenuOpen(false)}>Ponete en Contacto</Link></li>
                     </ul>
                 </nav>
-                <Link to="https://wa.me/5491152291994" className="cotiza-desk cta-button hero-cta-main">Ponete en Contacto</Link>
+                <Link to="https://wa.me/5491178258076" className="cotiza-desk cta-button hero-cta-main">Ponete en Contacto</Link>
             </div>
         </header>
     );

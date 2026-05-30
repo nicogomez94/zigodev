@@ -15,7 +15,7 @@ const PRELOAD_FAST = 12;    // frames to show before starting
 const OVERLAY_ENTER = 0.59;
 
 // Marquee range
-const MARQUEE_ENTER = 0.22;
+const MARQUEE_ENTER = 0.08;
 const MARQUEE_LEAVE = 0.59;
 
 // ── DOM REFS ────────────────────────────────────────────────
@@ -207,6 +207,7 @@ function initSectionAnimations() {
     const persist  = sec.dataset.persist === 'true';
     const enterPct = parseFloat(sec.dataset.enter) / 100;
     const leavePct = parseFloat(sec.dataset.leave) / 100;
+    const videos   = Array.from(sec.querySelectorAll('video'));
 
     // Animate the card container (.section-inner) + image as units so the
     // black background and text both appear at the same time.
@@ -248,7 +249,12 @@ function initSectionAnimations() {
         else if (persist  && p >= leavePct)                          opacity = 1;
 
         sec.style.opacity = opacity;
-        sec.classList.toggle('visible', opacity > 0);
+        const isVisible = opacity > 0.05;
+        sec.classList.toggle('visible', isVisible);
+        videos.forEach((video) => {
+          if (isVisible && video.paused) video.play().catch(() => {});
+          if (!isVisible && !video.paused) video.pause();
+        });
 
         if (p >= enterPct && !played) { played = true; tl.play(0); }
         if (p < enterPct - FADE)      { played = false; tl.pause(0, true); }
