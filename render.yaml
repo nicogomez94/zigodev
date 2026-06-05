@@ -2,7 +2,6 @@ services:
   - type: web
     name: zigodev-static
     runtime: static
-    plan: free
     buildCommand: echo "No build step required"
     staticPublishPath: .
     autoDeploy: true
