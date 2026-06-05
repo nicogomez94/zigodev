@@ -10,6 +10,51 @@ const CATEGORY_LABELS = {
 };
 
 const PROJECTS = [
+  // ── NUEVOS PROYECTOS ───────────────────────────────────
+  {
+    id: 19,
+    title: 'Kadima Salud — Consultoría en Salud',
+    client: 'Kadima Salud',
+    category: 'institucional',
+    description: 'Sitio institucional para consultoría en salud con navegación clara, presentación de servicios y vías de contacto rápidas.',
+    image: 'img/portfolio/kadima.png',
+    url: 'https://kadimasalud.com.ar',
+    technologies: ['HTML', 'CSS', 'JavaScript'],
+    year: '2026',
+  },
+  {
+    id: 20,
+    title: 'Cultura Animal — Peluquería Canina Profesional',
+    client: 'Cultura Animal',
+    category: 'ecommerce',
+    description: 'Tienda comercial para cursos y formación en peluquería canina con foco en conversión, comunidad y acceso al aula virtual.',
+    image: 'img/portfolio/cultura-animal.png',
+    url: 'http://culturaanimal.com.ar',
+    technologies: ['HTML', 'CSS', 'JavaScript'],
+    year: '2026',
+  },
+  {
+    id: 21,
+    title: 'Metal Santiago — Ferretería y Construcciones',
+    client: 'Metal Santiago',
+    category: 'ecommerce',
+    description: 'Tienda online para ferretería y construcción con catálogo de productos, navegación por categorías y llamada a cotización.',
+    image: 'img/portfolio/metal-santiago.png',
+    url: 'https://ferreteriametalsantiago.com',
+    technologies: ['E-commerce', 'Catálogo', 'Checkout'],
+    year: '2026',
+  },
+  {
+    id: 22,
+    title: 'Voyage Turismo — Agencia de Viajes',
+    client: 'Voyage Turismo',
+    category: 'plataforma',
+    description: 'Plataforma para agencia de viajes con buscador de destinos, paquetes y experiencias, más acceso a administración.',
+    image: 'img/portfolio/voyage-turismo.png',
+    url: 'https://voyage-turismo.onrender.com',
+    technologies: ['React', 'Node.js', 'PostgreSQL'],
+    year: '2026',
+  },
   // ── PLATAFORMAS WEB ─────────────────────────────────────
   {
     id: 0,
@@ -174,7 +219,7 @@ const PROJECTS = [
     category: 'landing',
     description: 'Portfolio personal con proyectos destacados, stack tecnológico y formulario de contacto. Diseño limpio y moderno, optimizado para SEO.',
     image: 'img/6.png',
-    url: 'https://nicolasgomezdev.com.ar/',
+    url: 'https://portfolio-wvoh.onrender.com',
     technologies: ['HTML', 'CSS', 'JavaScript'],
     year: '2024',
   },
