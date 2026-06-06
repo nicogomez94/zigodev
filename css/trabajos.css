@@ -297,8 +297,43 @@ a { text-decoration: none; color: inherit; }
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
-  padding: 3rem 8vw 6rem;
+  padding: 3rem 8vw 2.25rem;
   transition: opacity 0.18s ease;
+}
+
+.port-load-more {
+  display: flex;
+  justify-content: center;
+  padding: 0 8vw 6rem;
+}
+.port-load-more[hidden] {
+  display: none;
+}
+.load-more-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  min-width: 9.5rem;
+  background: var(--violet);
+  border: 1px solid var(--violet);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 0.8rem 2rem;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s, border-color 0.2s;
+}
+.load-more-btn:hover {
+  background: var(--violet-light);
+  border-color: var(--violet-light);
+  transform: translateY(-2px);
+}
+.load-more-btn:focus-visible {
+  outline: 2px solid rgba(255,255,255,0.75);
+  outline-offset: 3px;
 }
 
 .proj-card {
@@ -591,7 +626,8 @@ a { text-decoration: none; color: inherit; }
   .port-badge { min-height: 2.75rem; padding: 0 1rem; font-size: 0.9rem; }
 
   /* Grid & filters */
-  .port-grid { grid-template-columns: 1fr; padding: 2rem 5vw 4rem; }
+  .port-grid { grid-template-columns: 1fr; padding: 2rem 5vw 2rem; }
+  .port-load-more { padding: 0 5vw 4rem; }
   .port-filters { padding: 2rem 5vw 0; }
 
   /* Modal */

@@ -272,10 +272,16 @@ const PROJECTS = [
 
 /* ── RENDER ─────────────────────────────────────────────── */
 const grid = document.getElementById('port-grid');
+const loadMoreBtn = document.getElementById('load-more-btn');
+const loadMoreWrap = document.querySelector('.port-load-more');
+const PROJECTS_PER_PAGE = 9;
+
+let currentProjects = PROJECTS;
+let visibleProjects = PROJECTS_PER_PAGE;
 
 function renderCards(projects) {
   grid.innerHTML = '';
-  projects.forEach(p => {
+  projects.slice(0, visibleProjects).forEach(p => {
     const card = document.createElement('article');
     card.className = 'proj-card';
     card.dataset.category = p.category;
@@ -300,6 +306,7 @@ function renderCards(projects) {
     card.addEventListener('click', () => openModal(p));
     grid.appendChild(card);
   });
+  loadMoreWrap.hidden = visibleProjects >= projects.length;
 }
 
 renderCards(PROJECTS);
@@ -311,12 +318,19 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.classList.add('active');
     const cat = btn.dataset.cat;
     const filtered = cat === 'all' ? PROJECTS : PROJECTS.filter(p => p.category === cat);
+    currentProjects = filtered;
+    visibleProjects = PROJECTS_PER_PAGE;
     grid.style.opacity = '0';
     setTimeout(() => {
       renderCards(filtered);
       grid.style.opacity = '1';
     }, 180);
   });
+});
+
+loadMoreBtn.addEventListener('click', () => {
+  visibleProjects += PROJECTS_PER_PAGE;
+  renderCards(currentProjects);
 });
 
 /* ── MODAL ──────────────────────────────────────────────── */
