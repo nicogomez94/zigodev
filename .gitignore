@@ -9,7 +9,7 @@ lerna-debug.log*
 .vite
 
 node_modules
-portfolio
+/portfolio
 dist
 dist-ssr
 *.local
