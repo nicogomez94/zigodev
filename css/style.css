@@ -133,6 +133,7 @@ body {
   display: block;
   width: 1.1rem;
   height: 1.1rem;
+  flex: 0 0 auto;
 }
 .nav-cta {
   background: var(--violet) !important;
@@ -143,6 +144,18 @@ body {
   transition: background 0.2s, transform 0.2s !important;
 }
 .nav-cta:hover { background: var(--violet-light) !important; transform: translateY(-1px); }
+
+.nav-mobile-actions {
+  display: none;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.nav-mobile-instagram {
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 999px;
+  background: rgba(255,255,255,0.04);
+}
 
 /* ── HAMBURGER BUTTON ────────────────────────────────────── */
 .nav-burger {
@@ -220,6 +233,13 @@ body {
   width: auto;
   height: auto;
   gap: 0.75rem;
+  justify-content: flex-start;
+}
+.nav-drawer .social-icon {
+  width: 1.2rem;
+  height: 1.2rem;
+  min-width: 1.2rem;
+  color: #fff;
 }
 .nav-drawer ul li:last-child {
   padding: 0.75rem 0 0;
@@ -904,10 +924,12 @@ body {
 
   .site-header { padding: 1rem 5vw; }
   .site-header .nav-desktop { display: none; }
+  .nav-mobile-actions { display: flex; }
   .nav-burger { display: flex; }
   .nav-drawer { display: block; }
   .marquee-text { font-size: 22vw; }
 
-  .cta-actions { align-items: stretch; }
+  .cta-actions { align-items: flex-start; }
   .cta-button { padding: 0.85rem 2rem; font-size: 0.95rem; text-align: center; }
+  .cta-icon-button { align-self: flex-start; }
 }

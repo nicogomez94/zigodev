@@ -93,6 +93,7 @@ a { text-decoration: none; color: inherit; }
   display: block;
   width: 1.1rem;
   height: 1.1rem;
+  flex: 0 0 auto;
 }
 .nav-cta {
   background: var(--violet) !important;
@@ -103,6 +104,18 @@ a { text-decoration: none; color: inherit; }
   transition: background 0.2s, transform 0.2s !important;
 }
 .nav-cta:hover { background: var(--violet-light) !important; transform: translateY(-1px); }
+
+.nav-mobile-actions {
+  display: none;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.nav-mobile-instagram {
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 999px;
+  background: rgba(255,255,255,0.04);
+}
 
 /* ── HAMBURGER BUTTON ────────────────────────────────────── */
 .nav-burger {
@@ -176,7 +189,17 @@ a { text-decoration: none; color: inherit; }
 }
 .nav-drawer ul a:hover,
 .nav-drawer ul a.nav-active { color: #fff; }
-.nav-drawer .nav-icon-link { width: auto; height: auto; }
+.nav-drawer .nav-icon-link {
+  width: auto;
+  height: auto;
+  justify-content: flex-start;
+}
+.nav-drawer .social-icon {
+  width: 1.2rem;
+  height: 1.2rem;
+  min-width: 1.2rem;
+  color: #fff;
+}
 .nav-drawer ul li:last-child { padding: 0.75rem 0 0; border-bottom: none; }
 .nav-drawer ul a.nav-cta {
   display: inline-flex;
@@ -616,12 +639,13 @@ a { text-decoration: none; color: inherit; }
   /* Hamburger */
   .site-header { padding: 1rem 5vw; }
   .site-header .nav-desktop { display: none; }
+  .nav-mobile-actions { display: flex; }
   .nav-burger { display: flex; }
   .nav-drawer { display: block; }
 
   /* Hero */
   .port-hero { padding: 90px 5vw 3rem; min-height: auto; }
-  .port-heading { font-size: clamp(2.4rem, 11vw, 4rem); }
+  .port-heading { font-size: clamp(2.4rem, 11vw, 3rem); }
   .port-badges { gap: 0.6rem; margin-top: 1.5rem; }
   .port-badge { min-height: 2.75rem; padding: 0 1rem; font-size: 0.9rem; }
 
