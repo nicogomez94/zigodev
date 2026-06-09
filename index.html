@@ -6,7 +6,10 @@
   <title>ZigoDev — Llevá tu proyecto al siguiente nivel</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syne:wght@700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syne:wght@700;800&display=swap" rel="stylesheet" /></noscript>
+  <link rel="preload" as="image" href="frames-mobile/frame_0001.jpg" media="(max-width: 800px)" fetchpriority="high" />
+  <link rel="preload" as="image" href="frames/frame_0001.jpg" media="(min-width: 801px)" fetchpriority="high" />
   <link rel="icon" type="image/png" href="favposta.png" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
@@ -98,7 +101,9 @@
           alt="ZigoDev — Proyectos Digitales"
           loading="eager"
         /> -->
-        <img src="img/zigo.gif" alt="ZigoDev — Proyectos Digitales" loading="eager" />
+        <video class="hero-visual-media" autoplay muted loop playsinline preload="auto" poster="img/optimized/hero-zigo-poster.jpg" aria-label="ZigoDev — Proyectos Digitales">
+          <source src="img/optimized/hero-zigo.mp4" type="video/mp4" />
+        </video>
         <div class="hero-visual-badge">
           <span class="hvb-dot"></span>
           <span>Ideas convertidas en productos digitales</span>
@@ -141,7 +146,7 @@
         <p class="section-body">Sites institucionales, landing pages y plataformas con diseño personalizado, responsive y optimizado para conversión.</p>
       </div>
       <div class="section-image">
-        <video class="section-media" autoplay muted loop playsinline preload="metadata" poster="img/newgif/video/diseno.jpg" aria-label="Diseño web profesional">
+        <video class="section-media" muted loop playsinline preload="none" poster="img/newgif/video/diseno.jpg" aria-label="Diseño web profesional">
           <source src="img/newgif/video/diseno.mp4" type="video/mp4" />
         </video>
       </div>
@@ -151,7 +156,7 @@
     <section class="scroll-section section-content align-right"
              data-enter="21" data-leave="37" data-animation="slide-right">
       <div class="section-image">
-        <video class="section-media" autoplay muted loop playsinline preload="metadata" poster="img/newgif/video/chatbot.jpg" aria-label="MYI chatbot de IA">
+        <video class="section-media" muted loop playsinline preload="none" poster="img/newgif/video/chatbot.jpg" aria-label="MYI chatbot de IA">
           <source src="img/newgif/video/chatbot.mp4" type="video/mp4" />
         </video>
       </div>
@@ -173,7 +178,7 @@
         <p class="section-body">WooCommerce, Shopify, Tienda Nube. Catálogos, carrito optimizado y pasarelas de pago integradas para maximizar tus ventas.</p>
       </div>
       <div class="section-image">
-        <video class="section-media" autoplay muted loop playsinline preload="metadata" poster="img/newgif/video/tienda.jpg" aria-label="Tienda online">
+        <video class="section-media" muted loop playsinline preload="none" poster="img/newgif/video/tienda.jpg" aria-label="Tienda online">
           <source src="img/newgif/video/tienda.mp4" type="video/mp4" />
         </video>
       </div>
@@ -195,7 +200,10 @@
              data-enter="65" data-leave="73" data-animation="stagger-up">
       <div class="feat-image">
         <a href="https://autozonaclasificados.com" target="_blank" rel="noopener noreferrer">
-          <img src="img/autozona.png" alt="AutoZona Clasificados" loading="lazy" />
+          <picture>
+            <source type="image/avif" srcset="img/optimized/autozona-800.avif 800w, img/optimized/autozona-1280.avif 1280w" sizes="(max-width: 800px) 90vw, 55vw" />
+            <img src="img/optimized/autozona-800.jpg" srcset="img/optimized/autozona-800.jpg 800w, img/optimized/autozona-1280.jpg 1280w" sizes="(max-width: 800px) 90vw, 55vw" alt="AutoZona Clasificados" loading="lazy" decoding="async" />
+          </picture>
         </a>
       </div>
       <div class="feat-info">
@@ -222,7 +230,10 @@
              data-enter="72" data-leave="80" data-animation="stagger-up">
       <div class="feat-image">
         <a href="https://lauragutierrezpropiedades.com.ar" target="_blank" rel="noopener noreferrer">
-          <img src="img/laura.png" alt="LG Propiedades" loading="lazy" />
+          <picture>
+            <source type="image/avif" srcset="img/optimized/laura-800.avif 800w, img/optimized/laura-1280.avif 1280w" sizes="(max-width: 800px) 90vw, 55vw" />
+            <img src="img/optimized/laura-800.jpg" srcset="img/optimized/laura-800.jpg 800w, img/optimized/laura-1280.jpg 1280w" sizes="(max-width: 800px) 90vw, 55vw" alt="LG Propiedades" loading="lazy" decoding="async" />
+          </picture>
         </a>
       </div>
       <div class="feat-info">
@@ -249,7 +260,10 @@
              data-enter="79" data-leave="87" data-animation="stagger-up">
       <div class="feat-image">
         <a href="https://pasalert.com/dashboard" target="_blank" rel="noopener noreferrer">
-          <img src="img/pasalert.png" alt="PASAlert" loading="lazy" />
+          <picture>
+            <source type="image/avif" srcset="img/optimized/pasalert-800.avif 800w, img/optimized/pasalert-1280.avif 1280w" sizes="(max-width: 800px) 90vw, 55vw" />
+            <img src="img/optimized/pasalert-800.jpg" srcset="img/optimized/pasalert-800.jpg 800w, img/optimized/pasalert-1280.jpg 1280w" sizes="(max-width: 800px) 90vw, 55vw" alt="PASAlert" loading="lazy" decoding="async" />
+          </picture>
         </a>
       </div>
       <div class="feat-info">
@@ -276,7 +290,10 @@
              data-enter="85" data-leave="92" data-animation="stagger-up">
       <div class="feat-image">
         <a href="https://blak.com.ar" target="_blank" rel="noopener noreferrer">
-          <img src="img/1.png" alt="BLAK Ploteo" loading="lazy" />
+          <picture>
+            <source type="image/avif" srcset="img/optimized/blak-800.avif 800w, img/optimized/blak-1280.avif 1280w" sizes="(max-width: 800px) 90vw, 55vw" />
+            <img src="img/optimized/blak-800.jpg" srcset="img/optimized/blak-800.jpg 800w, img/optimized/blak-1280.jpg 1280w" sizes="(max-width: 800px) 90vw, 55vw" alt="BLAK Ploteo" loading="lazy" decoding="async" />
+          </picture>
         </a>
       </div>
       <div class="feat-info">
@@ -304,7 +321,10 @@
              data-enter="91" data-leave="97" data-animation="stagger-up">
       <div class="feat-image">
         <a href="https://ad-seguros.com.ar/" target="_blank" rel="noopener noreferrer">
-          <img src="img/adseguros.png" alt="AD Seguros" loading="lazy" />
+          <picture>
+            <source type="image/avif" srcset="img/optimized/adseguros-800.avif 800w, img/optimized/adseguros-1280.avif 1280w" sizes="(max-width: 800px) 90vw, 55vw" />
+            <img src="img/optimized/adseguros-800.jpg" srcset="img/optimized/adseguros-800.jpg 800w, img/optimized/adseguros-1280.jpg 1280w" sizes="(max-width: 800px) 90vw, 55vw" alt="AD Seguros" loading="lazy" decoding="async" />
+          </picture>
         </a>
       </div>
       <div class="feat-info">
@@ -345,9 +365,9 @@
 
   </div><!-- /scroll-container -->
 
-  <script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
-  <script src="js/app.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+  <script defer src="js/app.js"></script>
 </body>
 </html>

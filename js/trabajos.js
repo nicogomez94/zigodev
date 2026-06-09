@@ -9,6 +9,68 @@ const CATEGORY_LABELS = {
   institucional: 'Institucional',
 };
 
+const OPTIMIZED_IMAGE_BASES = {
+  'img/portfolio/kadima.png': 'kadima',
+  'img/portfolio/cultura-animal.png': 'cultura-animal',
+  'img/portfolio/metal-santiago.png': 'metal-santiago',
+  'img/portfolio/voyage-turismo.png': 'voyage-turismo',
+  'img/autozona.png': 'autozona',
+  'img/1.png': 'blak',
+  'img/bdsc.png': 'bdsc',
+  'img/cetrip.png': 'cetrip',
+  'img/emilio.png': 'emilio',
+  'img/laura.png': 'laura',
+  'img/segurostimbues.png': 'segurostimbues',
+  'img/pasalert.png': 'pasalert',
+  'img/professionalsathome.png': 'professionalsathome',
+  'img/viandaschaneton.png': 'viandaschaneton',
+  'img/gone.jpg': 'gone',
+  'img/2.png': 'inesina',
+  'img/pintatuauto.png': 'pintatuauto',
+  'img/3.png': 'keramik',
+  'img/6.png': 'portfolio-nicolas',
+  'img/7.png': 'gg-apartments',
+  'img/adseguros.png': 'adseguros',
+  'img/8.png': 'technosolis',
+  'img/gmcomex.png': 'gmcomex',
+};
+
+function optimizedBase(project) {
+  return OPTIMIZED_IMAGE_BASES[project.image];
+}
+
+function projectImageMarkup(project) {
+  const base = optimizedBase(project);
+  if (!base) {
+    return `<img src="${project.image}" alt="${project.title}" loading="lazy" decoding="async" />`;
+  }
+
+  const sizes = '(max-width: 800px) 90vw, (max-width: 1100px) 42vw, 28vw';
+  return `
+    <picture>
+      <source type="image/avif" srcset="img/optimized/${base}-800.avif 800w, img/optimized/${base}-1280.avif 1280w" sizes="${sizes}" />
+      <img src="img/optimized/${base}-800.jpg" srcset="img/optimized/${base}-800.jpg 800w, img/optimized/${base}-1280.jpg 1280w" sizes="${sizes}" alt="${project.title}" loading="lazy" decoding="async" />
+    </picture>
+  `;
+}
+
+function setModalImage(project) {
+  const img = document.getElementById('modal-img');
+  const base = optimizedBase(project);
+
+  if (base) {
+    img.src = `img/optimized/${base}-1280.jpg`;
+    img.srcset = `img/optimized/${base}-800.jpg 800w, img/optimized/${base}-1280.jpg 1280w`;
+    img.sizes = '(max-width: 800px) 90vw, 440px';
+  } else {
+    img.src = project.image;
+    img.removeAttribute('srcset');
+    img.removeAttribute('sizes');
+  }
+
+  img.alt = project.title;
+}
+
 const PROJECTS = [
   // ── NUEVOS PROYECTOS ───────────────────────────────────
   {
@@ -287,7 +349,7 @@ function renderCards(projects) {
     card.dataset.category = p.category;
     card.innerHTML = `
       <div class="proj-img-wrap">
-        <img src="${p.image}" alt="${p.title}" loading="lazy" />
+        ${projectImageMarkup(p)}
         <div class="proj-img-overlay">
           <span class="overlay-cta">Ver detalles →</span>
         </div>
@@ -338,8 +400,7 @@ const modal    = document.getElementById('modal');
 const modalClose = document.getElementById('modal-close');
 
 function openModal(p) {
-  document.getElementById('modal-img').src       = p.image;
-  document.getElementById('modal-img').alt       = p.title;
+  setModalImage(p);
   document.getElementById('modal-cat').textContent    = CATEGORY_LABELS[p.category];
   document.getElementById('modal-title').textContent  = p.title;
   document.getElementById('modal-client').textContent = p.client  ? `Cliente: ${p.client}` : '';

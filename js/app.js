@@ -7,9 +7,12 @@ gsap.registerPlugin(ScrollTrigger);
 // ── CONFIG ──────────────────────────────────────────────────
 const FRAME_COUNT  = 241;
 const FRAME_EXT    = 'jpg';
-const FRAME_PATH   = 'frames/frame_';
+const IS_TOUCH     = window.matchMedia('(pointer: coarse)').matches;
+const USE_MOBILE_FRAMES = window.matchMedia('(max-width: 800px)').matches;
+const FRAME_PATH   = `${USE_MOBILE_FRAMES ? 'frames-mobile' : 'frames'}/frame_`;
 const FRAME_SPEED  = 1.0;   // 1 = full video over full scroll (before overlay)
-const PRELOAD_FAST = 12;    // frames to show before starting
+const PRELOAD_FAST = IS_TOUCH ? 4 : 8; // frames to show before starting
+const PRELOAD_AHEAD = IS_TOUCH ? 8 : 14;
 
 // Dark overlay range (0–1 scroll progress)
 const OVERLAY_ENTER = 0.59;
@@ -30,27 +33,58 @@ const heroSection = document.getElementById('hero-section');
 const darkOverlay = document.getElementById('dark-overlay');
 const marqueeWrap = document.getElementById('marquee');
 const marqueeText = marqueeWrap.querySelector('.marquee-text');
+const heroVideo   = document.querySelector('.hero-visual-media');
 
 // ── FRAME STORE ─────────────────────────────────────────────
 const frames     = new Array(FRAME_COUNT).fill(null);
+const framePromises = new Array(FRAME_COUNT).fill(null);
 let currentFrame = 0;
 let bgColor      = '#0d0d0d';
+let pendingFrame = null;
+let drawRaf = 0;
 
 // ── CANVAS RESIZE ───────────────────────────────────────────
-const dpr = window.devicePixelRatio || 1;
+let dpr = getCanvasDpr();
+
+function getCanvasDpr() {
+  const ratio = window.devicePixelRatio || 1;
+  return Math.min(ratio, IS_TOUCH ? 2 : 2);
+}
+
 function resizeCanvas() {
-  canvasEl.width        = window.innerWidth  * dpr;
-  canvasEl.height       = window.innerHeight * dpr;
-  canvasEl.style.width  = window.innerWidth  + 'px';
-  canvasEl.style.height = window.innerHeight + 'px';
-  ctx.scale(dpr, dpr);
+  dpr = getCanvasDpr();
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+  canvasEl.width        = Math.ceil(width * dpr);
+  canvasEl.height       = Math.ceil(height * dpr);
+  canvasEl.style.width  = width  + 'px';
+  canvasEl.style.height = height + 'px';
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.imageSmoothingEnabled = true;
+  ctx.imageSmoothingQuality = 'high';
   if (frames[currentFrame]) drawFrame(currentFrame);
 }
-window.addEventListener('resize', resizeCanvas);
+let resizeRaf = 0;
+window.addEventListener('resize', () => {
+  cancelAnimationFrame(resizeRaf);
+  resizeRaf = requestAnimationFrame(() => {
+    resizeCanvas();
+    positionSections();
+    ScrollTrigger.refresh();
+  });
+});
 resizeCanvas();
 
 function padNum(n, len) { return String(n).padStart(len, '0'); }
 function frameSrc(i)    { return `${FRAME_PATH}${padNum(i + 1, 4)}.${FRAME_EXT}`; }
+
+function startHeroVideo() {
+  if (!heroVideo) return;
+  heroVideo.muted = true;
+  heroVideo.play().catch(() => {});
+}
+
+startHeroVideo();
 
 // ── BACKGROUND COLOR SAMPLING ───────────────────────────────
 function sampleBgColor(img) {
@@ -82,48 +116,98 @@ function drawFrame(index) {
   ctx.drawImage(img, dx, dy, dw, dh);
 }
 
-// ── PRELOADER ───────────────────────────────────────────────
-function loadImage(index) {
-  return new Promise((resolve) => {
-    const img = new Image();
-    img.onload  = () => { frames[index] = img; resolve(); };
-    img.onerror = () => resolve();
-    img.src = frameSrc(index);
+function scheduleFrameDraw(index) {
+  pendingFrame = index;
+  if (drawRaf) return;
+  drawRaf = requestAnimationFrame(() => {
+    drawRaf = 0;
+    const next = pendingFrame;
+    pendingFrame = null;
+    drawFrame(next);
   });
 }
 
-async function preloadAll() {
-  // Phase 1: first PRELOAD_FAST frames fast
-  const fast = [];
-  for (let i = 0; i < PRELOAD_FAST; i++) fast.push(loadImage(i));
-  await Promise.all(fast);
-  if (frames[0]) { sampleBgColor(frames[0]); drawFrame(0); }
+// ── PRELOADER ───────────────────────────────────────────────
+function loadImage(index, priority = 'auto') {
+  if (index < 0 || index >= FRAME_COUNT) return Promise.resolve(null);
+  if (frames[index]) return Promise.resolve(frames[index]);
+  if (framePromises[index]) return framePromises[index];
 
-  // Phase 2: rest in background, update progress bar
-  let loaded = PRELOAD_FAST;
+  framePromises[index] = new Promise((resolve) => {
+    const img = new Image();
+    img.decoding = 'async';
+    if ('fetchPriority' in img) img.fetchPriority = priority;
+    img.onload  = () => {
+      frames[index] = img;
+      resolve(img);
+    };
+    img.onerror = () => resolve(null);
+    img.src = frameSrc(index);
+  });
+
+  return framePromises[index];
+}
+
+async function preloadAll() {
+  let initialLoaded = 0;
+  const initialFrames = Array.from({ length: PRELOAD_FAST }, (_, i) => i);
   const update = () => {
-    const pct = Math.round((loaded / FRAME_COUNT) * 100);
+    const pct = Math.min(100, Math.round((initialLoaded / initialFrames.length) * 100));
     loaderBar.style.width = pct + '%';
     loaderPct.textContent = pct + '%';
-    if (loaded >= FRAME_COUNT) onReady();
   };
+
   update();
-  for (let i = PRELOAD_FAST; i < FRAME_COUNT; i++) {
-    loadImage(i).then(() => { loaded++; update(); });
+  await Promise.all(initialFrames.map((index) =>
+    loadImage(index, index === 0 ? 'high' : 'auto').then(() => {
+      initialLoaded++;
+      update();
+    })
+  ));
+
+  if (frames[0]) {
+    sampleBgColor(frames[0]);
+    drawFrame(0);
   }
+
+  onReady();
+  warmFrameWindow(0);
+}
+
+function runWhenIdle(callback) {
+  if ('requestIdleCallback' in window) {
+    window.requestIdleCallback(callback, { timeout: 900 });
+  } else {
+    window.setTimeout(callback, 90);
+  }
+}
+
+let lastWarmCenter = -999;
+function warmFrameWindow(center) {
+  if (Math.abs(center - lastWarmCenter) < 4) return;
+  lastWarmCenter = center;
+
+  runWhenIdle(() => {
+    loadImage(center, 'high');
+    for (let i = 1; i <= PRELOAD_AHEAD; i++) {
+      loadImage(center + i);
+      if (i <= 3) loadImage(center - i);
+    }
+  });
 }
 
 // ── BOOT ─────────────────────────────────────────────────────
 function onReady() {
   loader.classList.add('hidden');
   initLenis();
+  positionSections();
   initHeroTransition();
   initFrameScroll();
   initSectionAnimations();
   initDarkOverlay();
   initMarquee();
   initCounters();
-  positionSections();
+  ScrollTrigger.refresh();
 }
 
 // ── LENIS ───────────────────────────────────────────────────
@@ -131,11 +215,11 @@ let lenisInstance = null;
 
 function initLenis() {
   lenisInstance = new Lenis({
-    duration: 1.2,
+    duration: IS_TOUCH ? 0.9 : 1.2,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     smoothWheel: true,
-    syncTouch: true,        // use native touch scroll on mobile
-    touchMultiplier: 1.5,
+    syncTouch: false,
+    touchMultiplier: IS_TOUCH ? 1 : 1.5,
   });
   lenisInstance.on('scroll', ScrollTrigger.update);
   gsap.ticker.add((time) => lenisInstance.raf(time * 1000));
@@ -145,7 +229,7 @@ function initLenis() {
 
 // ── POSITION SECTIONS ────────────────────────────────────────
 function positionSections() {
-  const totalH = scrollCont.getBoundingClientRect().height;
+  const totalH = scrollCont.offsetHeight;
   document.querySelectorAll('.scroll-section').forEach((sec) => {
     const enter = parseFloat(sec.dataset.enter) / 100;
     const leave = parseFloat(sec.dataset.leave) / 100;
@@ -193,8 +277,14 @@ function initFrameScroll() {
       const index = Math.min(Math.floor(accelerated * FRAME_COUNT), FRAME_COUNT - 1);
       if (index !== currentFrame) {
         currentFrame = index;
-        if (index % 20 === 0 && frames[index]) sampleBgColor(frames[index]);
-        requestAnimationFrame(() => drawFrame(index));
+        if (frames[index]) {
+          scheduleFrameDraw(index);
+        } else {
+          loadImage(index, 'high').then(() => {
+            if (currentFrame === index) scheduleFrameDraw(index);
+          });
+        }
+        warmFrameWindow(index);
       }
     },
   });
@@ -208,6 +298,7 @@ function initSectionAnimations() {
     const enterPct = parseFloat(sec.dataset.enter) / 100;
     const leavePct = parseFloat(sec.dataset.leave) / 100;
     const videos   = Array.from(sec.querySelectorAll('video'));
+    videos.forEach((video) => video.pause());
 
     // Animate the card container (.section-inner) + image as units so the
     // black background and text both appear at the same time.
@@ -235,6 +326,8 @@ function initSectionAnimations() {
 
     const FADE = 0.04;
     let played = false;
+    let wasVisible = false;
+    let lastOpacity = -1;
 
     ScrollTrigger.create({
       trigger: scrollCont,
@@ -248,13 +341,19 @@ function initSectionAnimations() {
         else if (!persist && p >= leavePct && p <= leavePct + FADE) opacity = 1 - (p - leavePct) / FADE;
         else if (persist  && p >= leavePct)                          opacity = 1;
 
-        sec.style.opacity = opacity;
+        if (Math.abs(opacity - lastOpacity) > 0.001) {
+          sec.style.opacity = opacity;
+          lastOpacity = opacity;
+        }
         const isVisible = opacity > 0.05;
-        sec.classList.toggle('visible', isVisible);
-        videos.forEach((video) => {
-          if (isVisible && video.paused) video.play().catch(() => {});
-          if (!isVisible && !video.paused) video.pause();
-        });
+        if (isVisible !== wasVisible) {
+          sec.classList.toggle('visible', isVisible);
+          videos.forEach((video) => {
+            if (isVisible && video.paused) video.play().catch(() => {});
+            if (!isVisible && !video.paused) video.pause();
+          });
+          wasVisible = isVisible;
+        }
 
         if (p >= enterPct && !played) { played = true; tl.play(0); }
         if (p < enterPct - FADE)      { played = false; tl.pause(0, true); }

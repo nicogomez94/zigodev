@@ -289,7 +289,8 @@ body {
   border-radius: 20px;
   overflow: hidden;
 }
-.hero-visual img {
+.hero-visual img,
+.hero-visual-media {
   width: 100%;
   height: auto;
   max-height: 70vh;
@@ -436,6 +437,7 @@ body {
 /* ── SCROLL SECTIONS ─────────────────────────────────────── */
 .scroll-section {
   position: absolute;
+  top: 100%;
   left: 0; right: 0;
   opacity: 0;
   pointer-events: none;
@@ -550,6 +552,9 @@ body {
   position: relative;
   border-radius: 12px;
   overflow: hidden;
+}
+.feat-image picture {
+  display: block;
 }
 .feat-image a::before {
   content: '';
