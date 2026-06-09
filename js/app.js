@@ -33,7 +33,6 @@ const heroSection = document.getElementById('hero-section');
 const darkOverlay = document.getElementById('dark-overlay');
 const marqueeWrap = document.getElementById('marquee');
 const marqueeText = marqueeWrap.querySelector('.marquee-text');
-const heroVideo   = document.querySelector('.hero-visual-media');
 
 // ── FRAME STORE ─────────────────────────────────────────────
 const frames     = new Array(FRAME_COUNT).fill(null);
@@ -77,14 +76,6 @@ resizeCanvas();
 
 function padNum(n, len) { return String(n).padStart(len, '0'); }
 function frameSrc(i)    { return `${FRAME_PATH}${padNum(i + 1, 4)}.${FRAME_EXT}`; }
-
-function startHeroVideo() {
-  if (!heroVideo) return;
-  heroVideo.muted = true;
-  heroVideo.play().catch(() => {});
-}
-
-startHeroVideo();
 
 // ── BACKGROUND COLOR SAMPLING ───────────────────────────────
 function sampleBgColor(img) {
