@@ -8,11 +8,13 @@ gsap.registerPlugin(ScrollTrigger);
 const FRAME_COUNT  = 241;
 const FRAME_EXT    = 'jpg';
 const IS_TOUCH     = window.matchMedia('(pointer: coarse)').matches;
-const USE_MOBILE_FRAMES = window.matchMedia('(max-width: 800px)').matches;
-const FRAME_PATH   = `${USE_MOBILE_FRAMES ? 'frames-mobile' : 'frames'}/frame_`;
+const IS_MOBILE    = window.matchMedia('(max-width: 800px)').matches;
+const FRAME_PATH   = 'frames/frame_';
 const FRAME_SPEED  = 1.0;   // 1 = full video over full scroll (before overlay)
-const PRELOAD_FAST = IS_TOUCH ? 4 : 8; // frames to show before starting
-const PRELOAD_AHEAD = IS_TOUCH ? 8 : 14;
+const PRELOAD_FAST = IS_TOUCH ? 16 : 8; // frames to show before starting
+const PRELOAD_AHEAD = IS_TOUCH ? 32 : 14;
+const PRELOAD_ALL_BEFORE_READY = IS_TOUCH || IS_MOBILE;
+const PRELOAD_CONCURRENCY = IS_TOUCH ? 8 : 10;
 
 // Dark overlay range (0–1 scroll progress)
 const OVERLAY_ENTER = 0.59;
@@ -47,7 +49,7 @@ let dpr = getCanvasDpr();
 
 function getCanvasDpr() {
   const ratio = window.devicePixelRatio || 1;
-  return Math.min(ratio, IS_TOUCH ? 2 : 2);
+  return Math.min(ratio, IS_TOUCH ? 1.5 : 2);
 }
 
 function resizeCanvas() {
@@ -60,7 +62,7 @@ function resizeCanvas() {
   canvasEl.style.height = height + 'px';
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   ctx.imageSmoothingEnabled = true;
-  ctx.imageSmoothingQuality = 'high';
+  ctx.imageSmoothingQuality = IS_TOUCH ? 'medium' : 'high';
   if (frames[currentFrame]) drawFrame(currentFrame);
 }
 let resizeRaf = 0;
@@ -140,10 +142,11 @@ function loadImage(index, priority = 'auto') {
 }
 
 async function preloadAll() {
-  let initialLoaded = 0;
+  let loaded = 0;
   const initialFrames = Array.from({ length: PRELOAD_FAST }, (_, i) => i);
   const update = () => {
-    const pct = Math.min(100, Math.round((initialLoaded / initialFrames.length) * 100));
+    const total = PRELOAD_ALL_BEFORE_READY ? FRAME_COUNT : initialFrames.length;
+    const pct = Math.min(100, Math.round((loaded / total) * 100));
     loaderBar.style.width = pct + '%';
     loaderPct.textContent = pct + '%';
   };
@@ -151,7 +154,7 @@ async function preloadAll() {
   update();
   await Promise.all(initialFrames.map((index) =>
     loadImage(index, index === 0 ? 'high' : 'auto').then(() => {
-      initialLoaded++;
+      loaded++;
       update();
     })
   ));
@@ -161,8 +164,32 @@ async function preloadAll() {
     drawFrame(0);
   }
 
+  if (PRELOAD_ALL_BEFORE_READY) {
+    const remainingFrames = Array.from(
+      { length: FRAME_COUNT - PRELOAD_FAST },
+      (_, i) => i + PRELOAD_FAST
+    );
+
+    await loadFrameQueue(remainingFrames, PRELOAD_CONCURRENCY, () => {
+      loaded++;
+      update();
+    });
+  }
+
   onReady();
   warmFrameWindow(0);
+}
+
+async function loadFrameQueue(indexes, concurrency, onLoaded) {
+  let cursor = 0;
+  const workers = Array.from({ length: Math.min(concurrency, indexes.length) }, async () => {
+    while (cursor < indexes.length) {
+      const index = indexes[cursor++];
+      await loadImage(index);
+      onLoaded();
+    }
+  });
+  await Promise.all(workers);
 }
 
 function runWhenIdle(callback) {
@@ -206,11 +233,11 @@ let lenisInstance = null;
 
 function initLenis() {
   lenisInstance = new Lenis({
-    duration: IS_TOUCH ? 0.9 : 1.2,
+    duration: 1.2,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     smoothWheel: true,
-    syncTouch: false,
-    touchMultiplier: IS_TOUCH ? 1 : 1.5,
+    syncTouch: true,
+    touchMultiplier: 1.5,
   });
   lenisInstance.on('scroll', ScrollTrigger.update);
   gsap.ticker.add((time) => lenisInstance.raf(time * 1000));
@@ -242,6 +269,13 @@ function initHeroTransition() {
       // Hero fades out fast
       heroSection.style.opacity       = Math.max(0, 1 - p * 18);
       heroSection.style.pointerEvents = p > 0.05 ? 'none' : 'auto';
+
+      if (IS_TOUCH) {
+        canvasWrap.style.clipPath = 'none';
+        canvasWrap.style.opacity = p >= OVERLAY_ENTER ? '0' : (p > 0.002 ? '.6' : '0');
+        return;
+      }
+
       // Canvas: circle wipe in early, collapse when overlay takes over
       if (p >= OVERLAY_ENTER) {
         canvasWrap.style.clipPath = 'circle(0% at 50% 50%)';
@@ -288,8 +322,9 @@ function initSectionAnimations() {
     const persist  = sec.dataset.persist === 'true';
     const enterPct = parseFloat(sec.dataset.enter) / 100;
     const leavePct = parseFloat(sec.dataset.leave) / 100;
-    const videos   = Array.from(sec.querySelectorAll('video'));
-    videos.forEach((video) => video.pause());
+    const allVideos = Array.from(sec.querySelectorAll('video'));
+    allVideos.forEach((video) => video.pause());
+    const videos = IS_MOBILE ? [] : allVideos;
 
     // Animate the card container (.section-inner) + image as units so the
     // black background and text both appear at the same time.
