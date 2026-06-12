@@ -650,7 +650,7 @@ a { text-decoration: none; color: inherit; }
 
   /* Hero */
   .port-hero { padding: 90px 5vw 3rem; min-height: auto; }
-  .port-heading { font-size: clamp(2.4rem, 11vw, 3rem); }
+  .port-heading { font-size: clamp(1rem, 10vw, 3rem); }
   .port-badges { gap: 0.6rem; margin-top: 1.5rem; }
   .port-badge { min-height: 2.75rem; padding: 0 1rem; font-size: 0.9rem; }
 
