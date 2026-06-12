@@ -11,10 +11,11 @@ const IS_TOUCH     = window.matchMedia('(pointer: coarse)').matches;
 const IS_MOBILE    = window.matchMedia('(max-width: 800px)').matches;
 const FRAME_PATH   = 'frames/frame_';
 const FRAME_SPEED  = 1.0;   // 1 = full video over full scroll (before overlay)
-const PRELOAD_FAST = IS_TOUCH ? 16 : 8; // frames to show before starting
+const PRELOAD_FAST = IS_TOUCH ? 24 : 8; // frames to show before starting
 const PRELOAD_AHEAD = IS_TOUCH ? 32 : 14;
-const PRELOAD_ALL_BEFORE_READY = IS_TOUCH || IS_MOBILE;
+const PRELOAD_ALL_BEFORE_READY = false;
 const PRELOAD_CONCURRENCY = IS_TOUCH ? 8 : 10;
+const BACKGROUND_PRELOAD_CONCURRENCY = IS_TOUCH ? 3 : 6;
 
 // Dark overlay range (0–1 scroll progress)
 const OVERLAY_ENTER = 0.59;
@@ -178,6 +179,7 @@ async function preloadAll() {
 
   onReady();
   warmFrameWindow(0);
+  preloadRemainingFrames();
 }
 
 async function loadFrameQueue(indexes, concurrency, onLoaded) {
@@ -190,6 +192,17 @@ async function loadFrameQueue(indexes, concurrency, onLoaded) {
     }
   });
   await Promise.all(workers);
+}
+
+function preloadRemainingFrames() {
+  const remainingFrames = Array.from(
+    { length: FRAME_COUNT - PRELOAD_FAST },
+    (_, i) => i + PRELOAD_FAST
+  );
+
+  runWhenIdle(() => {
+    loadFrameQueue(remainingFrames, BACKGROUND_PRELOAD_CONCURRENCY, () => {});
+  });
 }
 
 function runWhenIdle(callback) {
