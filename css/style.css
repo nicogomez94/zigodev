@@ -120,7 +120,8 @@ body {
   align-items: center;
 }
 .site-header ul a {
-  color: rgba(240,237,232,0.6);
+  /* color: rgba(240,237,232,0.6); */
+  color: #fff;
   text-decoration: none;
   font-size: 0.875rem;
   font-weight: 500;
@@ -857,7 +858,7 @@ body {
 /* ── MOBILE ──────────────────────────────────────────────── */
 @media (max-width: 800px) {
   .hero-heading { font-size: clamp(2rem, 9vw, 3rem); }
-  .section-heading { font-size: clamp(1.3rem, 6.5vw, 2.2rem); }
+  .section-heading { font-size: clamp(1.3rem, 5.5vw, 2.2rem); }
 
   .hero-inner {
     flex-direction: column;
