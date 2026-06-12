@@ -287,12 +287,6 @@ function initHeroTransition() {
       heroSection.style.opacity       = Math.max(0, 1 - p * 18);
       heroSection.style.pointerEvents = p > 0.05 ? 'none' : 'auto';
 
-      if (IS_TOUCH) {
-        canvasWrap.style.clipPath = 'none';
-        canvasWrap.style.opacity = p >= OVERLAY_ENTER ? '0' : (p > 0.002 ? '.6' : '0');
-        return;
-      }
-
       // Canvas: circle wipe in early, collapse when overlay takes over
       if (p >= OVERLAY_ENTER) {
         canvasWrap.style.clipPath = 'circle(0% at 50% 50%)';
