@@ -174,8 +174,8 @@ main {
 .workspace {
   display: grid;
   grid-template-columns: minmax(0, 1.25fr) minmax(360px, 0.75fr);
-  gap: clamp(2.5rem, 6vw, 7rem);
-  padding: clamp(3.4rem, 7vw, 6.5rem) 0;
+  gap: clamp(2rem, 4vw, 4.5rem);
+  padding: clamp(2rem, 4vh, 3.25rem) 0;
 }
 
 .section-heading,
@@ -184,7 +184,7 @@ main {
   align-items: flex-end;
   justify-content: space-between;
   gap: 1rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1.35rem;
 }
 
 .section-heading h2,
@@ -321,20 +321,25 @@ main {
 
 .project-list {
   display: grid;
-  gap: 0.55rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  overflow: hidden;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: 5px;
 }
 
 .project-option {
   position: relative;
-  min-height: 82px;
+  min-width: 0;
+  min-height: 42px;
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-columns: auto minmax(0, 1fr);
   align-items: center;
-  gap: 1rem;
-  padding: 1rem 1.1rem;
-  background: rgba(255, 255, 255, 0.018);
-  border: 1px solid var(--line);
-  border-radius: 5px;
+  gap: 0.6rem;
+  padding: 0.48rem 0.62rem;
+  background: var(--ink);
+  border: 0;
   cursor: pointer;
   transition: background 180ms ease, border-color 180ms ease, transform 180ms ease;
   animation: option-in 350ms both;
@@ -342,8 +347,7 @@ main {
 
 .project-option:hover {
   background: rgba(255, 255, 255, 0.04);
-  border-color: var(--line-strong);
-  transform: translateX(3px);
+  transform: none;
 }
 
 .project-option.is-selected {
@@ -359,7 +363,7 @@ main {
 }
 
 .custom-check {
-  width: 24px;
+  width: 18px;
   aspect-ratio: 1;
   display: grid;
   place-items: center;
@@ -369,7 +373,7 @@ main {
 }
 
 .custom-check svg {
-  width: 15px;
+  width: 12px;
   fill: none;
   stroke: var(--ink);
   stroke-width: 2.5;
@@ -396,32 +400,21 @@ main {
 
 .project-name {
   display: block;
-  margin-bottom: 0.3rem;
   overflow: hidden;
   color: var(--paper);
-  font-size: 0.93rem;
-  font-weight: 700;
+  font-size: 0.74rem;
+  font-weight: 600;
   letter-spacing: -0.02em;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .project-detail {
-  display: block;
-  overflow: hidden;
-  color: var(--muted);
-  font-size: 0.72rem;
-  line-height: 1.4;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  display: none;
 }
 
 .project-type {
-  color: #777c70;
-  font-family: var(--font-mono);
-  font-size: 0.55rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  display: none;
 }
 
 .empty-results {
@@ -631,10 +624,6 @@ footer a {
     grid-template-columns: 1fr;
   }
 
-  .message-panel {
-    order: -1;
-  }
-
   .message-card {
     position: static;
   }
@@ -675,7 +664,7 @@ footer a {
 
   .workspace {
     gap: 3.4rem;
-    padding: 3rem 0;
+    padding: 1.5rem 0 3rem;
   }
 
   .message-card {
@@ -688,12 +677,12 @@ footer a {
   }
 
   .project-option {
-    grid-template-columns: auto minmax(0, 1fr);
-    padding: 0.9rem;
+    min-height: 44px;
+    padding: 0.55rem 0.6rem;
   }
 
-  .project-type {
-    display: none;
+  .project-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .section-heading {
