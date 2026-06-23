@@ -74,6 +74,17 @@ function setModalImage(project) {
 const PROJECTS = [
   // ── NUEVOS PROYECTOS ───────────────────────────────────
   {
+    id: 23,
+    title: 'Renovables Pro — Ingeniería Solar',
+    client: 'Renovables Pro',
+    category: 'institucional',
+    description: 'Sitio institucional para una empresa de ingeniería solar, con presentación de soluciones fotovoltaicas, proceso de trabajo y contacto comercial.',
+    image: 'https://renovablespro.com.ar/assets/solar-farm-sunset.jpeg',
+    url: 'https://renovablespro.com.ar',
+    technologies: ['HTML', 'CSS', 'JavaScript'],
+    year: '2026',
+  },
+  {
     id: 19,
     title: 'Kadima Salud — Consultoría en Salud',
     client: 'Kadima Salud',
@@ -108,10 +119,10 @@ const PROJECTS = [
   },
   {
     id: 22,
-    title: 'Voyage Turismo — Agencia de Viajes',
-    client: 'Voyage Turismo',
+    title: 'Turismo Iguazú — Agencia de Viajes',
+    client: 'Iguazú Turismo',
     category: 'plataforma',
-    description: 'Plataforma para agencia de viajes con buscador de destinos, paquetes y experiencias, más acceso a administración.',
+    description: 'Plataforma para agencia de viajes ',
     image: 'img/portfolio/voyage-turismo.png',
     url: 'https://voyage-turismo.onrender.com',
     technologies: ['React', 'Node.js', 'PostgreSQL'],

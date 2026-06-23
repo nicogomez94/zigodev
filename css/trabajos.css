@@ -295,13 +295,6 @@ a { text-decoration: none; color: inherit; }
   cursor: pointer;
   transition: all 0.2s;
 }
-.filter-btn span {
-  background: rgba(255,255,255,0.07);
-  border-radius: 100px;
-  padding: 0.08rem 0.45rem;
-  font-size: 0.68rem;
-  font-weight: 600;
-}
 .filter-btn:hover {
   border-color: rgba(255,255,255,0.15);
   color: var(--text);
@@ -311,10 +304,6 @@ a { text-decoration: none; color: inherit; }
   border-color: var(--violet);
   color: #fff;
 }
-.filter-btn.active span {
-  background: rgba(255,255,255,0.2);
-}
-
 /* ── GRID ────────────────────────────────────────────────── */
 .port-grid {
   display: grid;

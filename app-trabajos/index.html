@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#11130f" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Armador de trabajos — ZigoDev</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/png" href="../favposta.png" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <!-- <header class="topbar">
+        <a class="brand" href="https://zigodev.com.ar" target="_blank" rel="noopener noreferrer" aria-label="Ir a ZigoDev">
+          <span class="brand-mark" aria-hidden="true">Z</span>
+          <span>ZigoDev</span>
+        </a>
+        <span class="utility-label">Armador de trabajos <i aria-hidden="true"></i></span>
+      </header> -->
+
+      <main>
+        <!-- <section class="intro" aria-labelledby="page-title">
+          <p class="eyebrow">Portfolio / WhatsApp</p>
+          <h1 id="page-title">Elegí. Copiá.<br /><span>Mandá.</span></h1>
+          <p class="intro-copy">Marcá los trabajos que querés compartir y te armo el mensaje listo para pegar.</p>
+        </section> -->
+
+        <div class="workspace">
+          <section class="projects-panel" aria-labelledby="projects-title">
+            <div class="section-heading">
+              <div>
+                <p class="section-kicker">01 — Selección</p>
+                <h2 id="projects-title">Tus trabajos</h2>
+              </div>
+              <div class="selection-counter" aria-live="polite">
+                <strong id="selected-count">0</strong>
+                <span>elegidos</span>
+              </div>
+            </div>
+
+            <div class="toolbar">
+              <label class="search-field" for="project-search">
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+                  <circle cx="11" cy="11" r="6.5"></circle>
+                  <path d="m16 16 4 4"></path>
+                </svg>
+                <input id="project-search" type="search" placeholder="Buscar trabajo..." autocomplete="off" />
+              </label>
+              <button class="text-button" id="clear-selection" type="button">Limpiar</button>
+            </div>
+
+            <div class="category-filters" id="category-filters" aria-label="Filtrar por tipo de proyecto"></div>
+            <div class="project-list" id="project-list"></div>
+            <p class="empty-results" id="empty-results" hidden>No encontré ningún trabajo con ese nombre.</p>
+          </section>
+
+          <aside class="message-panel" aria-labelledby="message-title">
+            <div class="message-card">
+              <div class="message-heading">
+                <div>
+                  <p class="section-kicker">02 — Mensaje</p>
+                  <h2 id="message-title">Listo para enviar</h2>
+                </div>
+                <span class="live-dot"><i aria-hidden="true"></i> En vivo</span>
+              </div>
+
+              <div class="message-preview-wrap">
+                <pre class="message-preview is-empty" id="message-preview" aria-live="polite"></pre>
+              </div>
+
+              <div class="message-actions">
+                <button class="copy-button" id="copy-message" type="button" disabled>
+                  <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+                    <rect x="8" y="8" width="11" height="11" rx="2"></rect>
+                    <path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"></path>
+                  </svg>
+                  <span>Copiar mensaje</span>
+                </button>
+                <a class="whatsapp-button is-disabled" id="open-whatsapp" href="#" target="_blank" rel="noopener noreferrer" aria-disabled="true" tabindex="-1">
+                  Abrir WhatsApp
+                  <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+                    <path d="m8 16 8-8M9 8h7v7"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <p class="autosave-note"><span aria-hidden="true">●</span> La selección se guarda automáticamente en este dispositivo.</p>
+          </aside>
+        </div>
+      </main>
+
+      <footer>
+        Hecho por
+        <a href="https://zigodev.com.ar" target="_blank" rel="noopener noreferrer">zigodev</a>
+      </footer>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite">Mensaje copiado</div>
+    <script src="app.js"></script>
+  </body>
+</html>
