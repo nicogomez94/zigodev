@@ -39,46 +39,10 @@ function optimizedBase(project) {
   return OPTIMIZED_IMAGE_BASES[project.image];
 }
 
-function projectCoverDataUri(project) {
-  const palettes = {
-    ecommerce: ['#27104f', '#8c3dff', '#f6c453'],
-    landing: ['#071b2d', '#11a7a1', '#b7f7d0'],
-    institucional: ['#17151f', '#e05a47', '#ffd2a6'],
-    plataforma: ['#0d1f1b', '#8ed53d', '#e6ffb4'],
-  };
-  const [background, accent, highlight] = palettes[project.category] || palettes.institucional;
-  const title = project.client || project.title.split(' — ')[0];
-  const subtitle = CATEGORY_LABELS[project.category] || 'Proyecto web';
-  const svg = `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 800">
-      <defs>
-        <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stop-color="${background}"/>
-          <stop offset="1" stop-color="${accent}"/>
-        </linearGradient>
-        <radialGradient id="glow" cx="85%" cy="15%" r="65%">
-          <stop offset="0" stop-color="${highlight}" stop-opacity=".8"/>
-          <stop offset="1" stop-color="${highlight}" stop-opacity="0"/>
-        </radialGradient>
-      </defs>
-      <rect width="1280" height="800" fill="url(#bg)"/>
-      <rect width="1280" height="800" fill="url(#glow)" opacity=".55"/>
-      <circle cx="1080" cy="110" r="190" fill="none" stroke="${highlight}" stroke-opacity=".3" stroke-width="2"/>
-      <circle cx="1080" cy="110" r="260" fill="none" stroke="${highlight}" stroke-opacity=".18" stroke-width="1"/>
-      <path d="M-80 675 C280 480 480 850 860 620 S1260 510 1380 650" fill="none" stroke="${highlight}" stroke-opacity=".22" stroke-width="3"/>
-      <text x="88" y="112" fill="${highlight}" font-family="Arial, sans-serif" font-size="26" font-weight="700" letter-spacing="5">ZIGODEV / PORTFOLIO</text>
-      <text x="88" y="510" fill="#fff" font-family="Arial, sans-serif" font-size="72" font-weight="700">${title}</text>
-      <text x="92" y="568" fill="#fff" fill-opacity=".78" font-family="Arial, sans-serif" font-size="28" letter-spacing="2">${subtitle.toUpperCase()}</text>
-      <rect x="92" y="625" width="104" height="6" rx="3" fill="${highlight}"/>
-    </svg>`;
-  return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
-}
-
 function projectImageMarkup(project) {
   const base = optimizedBase(project);
   if (!base) {
-    const image = project.image || projectCoverDataUri(project);
-    return `<img src="${image}" alt="${project.title}" loading="lazy" decoding="async" />`;
+    return `<img src="${project.image}" alt="${project.title}" loading="lazy" decoding="async" />`;
   }
 
   const sizes = '(max-width: 800px) 90vw, (max-width: 1100px) 42vw, 28vw';
@@ -99,7 +63,7 @@ function setModalImage(project) {
     img.srcset = `img/optimized/${base}-800.jpg 800w, img/optimized/${base}-1280.jpg 1280w`;
     img.sizes = '(max-width: 800px) 90vw, 440px';
   } else {
-    img.src = project.image || projectCoverDataUri(project);
+    img.src = project.image;
     img.removeAttribute('srcset');
     img.removeAttribute('sizes');
   }
@@ -115,7 +79,7 @@ const PROJECTS = [
     client: 'VIALCO',
     category: 'institucional',
     description: 'Sitio institucional para una empresa de administración de consorcios, con foco en claridad, confianza y contacto comercial.',
-    image: '',
+    image: 'img/portfolio/vialco.jpg',
     url: 'https://vialco.site/',
     technologies: ['HTML', 'CSS', 'JavaScript'],
     year: '2026',
@@ -126,7 +90,7 @@ const PROJECTS = [
     client: 'Scorpions',
     category: 'ecommerce',
     description: 'Tienda online desarrollada desde cero para una marca industrial, con catálogo de productos y experiencia de compra orientada a conversión.',
-    image: '',
+    image: 'img/portfolio/scorpions.jpg',
     url: 'https://scorpions-indu.com',
     technologies: ['WordPress', 'WooCommerce', 'E-commerce'],
     year: '2026',
@@ -137,7 +101,7 @@ const PROJECTS = [
     client: 'MG Seguridad',
     category: 'institucional',
     description: 'Sitio institucional para una empresa de seguridad y control, con presentación de servicios y canales de contacto.',
-    image: '',
+    image: 'img/portfolio/mg-seguridad.jpg',
     url: 'https://mg-seguridad.onrender.com',
     technologies: ['React', 'CSS', 'JavaScript'],
     year: '2026',
@@ -148,7 +112,7 @@ const PROJECTS = [
     client: 'KOS Limpieza',
     category: 'institucional',
     description: 'Sitio institucional para servicios profesionales de mantenimiento y limpieza para empresas, oficinas y consorcios.',
-    image: '',
+    image: 'img/portfolio/kos-limpieza.jpg',
     url: 'https://koslimpieza.com.ar',
     technologies: ['HTML', 'CSS', 'JavaScript'],
     year: '2026',
@@ -159,7 +123,7 @@ const PROJECTS = [
     client: 'NetSalud Natural',
     category: 'ecommerce',
     description: 'Tienda online en Shopify para productos de salud natural, con catálogo, navegación por categorías y proceso de compra optimizado.',
-    image: '',
+    image: 'img/portfolio/netsalud-natural.jpg',
     url: 'https://netsaludnatural.com.ar',
     technologies: ['Shopify', 'E-commerce', 'Catálogo'],
     year: '2026',
@@ -170,7 +134,7 @@ const PROJECTS = [
     client: 'EXVER',
     category: 'institucional',
     description: 'Sitio institucional para servicios de mantenimiento, reparación e impermeabilización de fachadas mediante acceso por cuerdas.',
-    image: '',
+    image: 'img/portfolio/exver.jpg',
     url: 'https://exverfachadas.com.ar/',
     technologies: ['HTML', 'CSS', 'JavaScript'],
     year: '2026',
@@ -181,7 +145,7 @@ const PROJECTS = [
     client: 'Buenos Aires Refrigeración',
     category: 'landing',
     description: 'Landing page para servicio técnico de refrigeración en Salta, con presentación de servicios y reserva de visitas online.',
-    image: '',
+    image: 'img/portfolio/refrigeracion.jpg',
     url: 'https://refrigeravilndigital.site',
     technologies: ['HTML', 'CSS', 'JavaScript'],
     year: '2026',
@@ -192,7 +156,7 @@ const PROJECTS = [
     client: 'Suriosidd',
     category: 'landing',
     description: 'Landing page para una organización de tecnología ambiental humana, complementada con un chatbot para acompañar la navegación y las consultas.',
-    image: '',
+    image: 'img/portfolio/suriosidd.jpg',
     url: 'https://suriosidd.com',
     technologies: ['HTML', 'CSS', 'JavaScript', 'Chatbot'],
     year: '2026',
@@ -203,7 +167,7 @@ const PROJECTS = [
     client: 'Andrea Alkalay',
     category: 'landing',
     description: 'Portfolio web para artista visual, pensado para presentar series fotográficas, obras y proyectos con una navegación editorial.',
-    image: '',
+    image: 'img/portfolio/andrea-alkalay.jpg',
     url: 'https://andrealkalay.com',
     technologies: ['HTML', 'CSS', 'JavaScript'],
     year: '2026',
@@ -214,7 +178,7 @@ const PROJECTS = [
     client: 'Pacha Purum',
     category: 'ecommerce',
     description: 'Tienda online desarrollada desde cero para una marca de láminas vegetales, con catálogo de productos y experiencia de compra propia.',
-    image: '',
+    image: 'img/portfolio/pacha-purum.jpg',
     url: 'https://pachapurum.com',
     technologies: ['WordPress', 'WooCommerce', 'E-commerce'],
     year: '2026',
