@@ -74,6 +74,28 @@ function setModalImage(project) {
 const PROJECTS = [
   // ── NUEVOS PROYECTOS ───────────────────────────────────
   {
+    id: 35,
+    title: 'Brumma — Tienda Online',
+    client: 'Brumma',
+    category: 'ecommerce',
+    description: 'Tienda online de espumas saborizadas, jarabes y kits para bebidas, con catálogo, promociones y proceso de compra integrado.',
+    image: 'img/portfolio/brumma.png',
+    url: 'https://brumma.ar',
+    technologies: ['WordPress', 'WooCommerce', 'E-commerce'],
+    year: '2026',
+  },
+  {
+    id: 34,
+    title: 'Armentia Propiedades — Landing + Panel Admin',
+    client: 'Armentia Propiedades',
+    category: 'plataforma',
+    description: 'Landing inmobiliaria con buscador de propiedades y panel de administración para publicar y gestionar el catálogo.',
+    image: 'img/portfolio/armentia-propiedades.png',
+    url: 'https://armentiapropiedades.com',
+    technologies: ['React', 'Panel Admin', 'Catálogo'],
+    year: '2026',
+  },
+  {
     id: 33,
     title: 'VIALCO — Administración de Consorcios',
     client: 'VIALCO',

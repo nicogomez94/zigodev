@@ -1,4 +1,6 @@
 const PROJECTS = [
+  { id: 35, name: "Brumma", detail: "Tienda online de espumas saborizadas, jarabes y kits para bebidas.", category: "E-commerce", url: "https://brumma.ar" },
+  { id: 34, name: "Armentia Propiedades", detail: "Landing inmobiliaria con buscador y panel de administración.", category: "Plataforma", url: "https://armentiapropiedades.com" },
   { id: 33, name: "VIALCO", detail: "Sitio institucional para administración profesional de consorcios.", category: "Institucional", url: "https://vialco.site/" },
   { id: 32, name: "Scorpions", detail: "Tienda online industrial desarrollada desde cero.", category: "E-commerce", url: "https://scorpions-indu.com" },
   { id: 31, name: "MG Seguridad", detail: "Sitio institucional para servicios de seguridad y control.", category: "Institucional", url: "https://mg-seguridad.onrender.com" },

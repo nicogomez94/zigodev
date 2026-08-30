@@ -463,6 +463,7 @@ body {
 .section-content.align-right { flex-direction: row-reverse; }
 .section-content .section-inner {
   flex: 1;
+  min-width: 0;
   overflow: hidden;
   background: rgba(0,0,0,0.72);
   backdrop-filter: blur(10px);
@@ -858,7 +859,7 @@ body {
 /* ── MOBILE ──────────────────────────────────────────────── */
 @media (max-width: 800px) {
   .hero-heading { font-size: clamp(2rem, 9vw, 3rem); }
-  .section-heading { font-size: clamp(1.3rem, 5.5vw, 2.2rem); }
+  .section-heading { font-size: 1.85rem; }
 
   .hero-inner {
     flex-direction: column;
@@ -884,13 +885,26 @@ body {
     gap: 1.5rem;
   }
   .section-content .section-inner {
+    width: 100%;
     max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
     background: rgba(0,0,0,0.55);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     padding: 1.75rem;
     border-radius: 14px;
     border: 1px solid rgba(255,255,255,0.07);
+  }
+
+  .section-content .section-heading {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+
+  .section-content .cta-button {
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   /* ── CTA section ── */
@@ -956,4 +970,8 @@ body {
   .cta-actions { align-items: flex-start; }
   .cta-button { padding: 0.85rem 2rem; font-size: 0.95rem; text-align: center; }
   .cta-icon-button { align-self: flex-start; }
+}
+
+@media (max-width: 420px) {
+  .section-heading { font-size: 1.6rem; }
 }
