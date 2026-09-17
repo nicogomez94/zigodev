@@ -1,4 +1,5 @@
 const PROJECTS = [
+  { id: 36, name: "Mente Estudio", detail: "Landing para agencia de marketing.", category: "Landing", url: "https://mentestudio.com.ar" },
   { id: 35, name: "Brumma", detail: "Tienda online de espumas saborizadas, jarabes y kits para bebidas.", category: "E-commerce", url: "https://brumma.ar" },
   { id: 34, name: "Armentia Propiedades", detail: "Landing inmobiliaria con buscador y panel de administración.", category: "Plataforma", url: "https://armentiapropiedades.com" },
   { id: 33, name: "VIALCO", detail: "Sitio institucional para administración profesional de consorcios.", category: "Institucional", url: "https://vialco.site/" },

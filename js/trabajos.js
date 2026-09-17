@@ -74,6 +74,17 @@ function setModalImage(project) {
 const PROJECTS = [
   // ── NUEVOS PROYECTOS ───────────────────────────────────
   {
+    id: 36,
+    title: 'Mente Estudio — Landing para Agencia de Marketing',
+    client: 'Mente Estudio',
+    category: 'landing',
+    description: 'Landing page para una agencia de marketing, con una identidad visual editorial y foco en estrategia, creatividad y contenido.',
+    image: 'img/portfolio/mente-estudio.png',
+    url: 'https://mentestudio.com.ar',
+    technologies: ['HTML', 'CSS', 'JavaScript'],
+    year: '2026',
+  },
+  {
     id: 35,
     title: 'Brumma — Tienda Online',
     client: 'Brumma',
