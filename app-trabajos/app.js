@@ -1,5 +1,12 @@
 const PROJECTS = [
-  { id: 36, name: "Mente Estudio", detail: "Landing para agencia de marketing.", category: "Landing", url: "https://mentestudio.com.ar" },
+  { id: 43, name: "Transesco S.A.", detail: "Sitio institucional de logística fluvial y comercio exterior.", category: "Institucional", url: "https://transesco.com" },
+  { id: 42, name: "SS Pack", detail: "Sitio institucional de máquinas envasadoras Flow Pack.", category: "Institucional", url: "https://sspack.com.ar" },
+  { id: 41, name: "Rosaura Tarot", detail: "Landing de tarot, psicología y videncia natural.", category: "Landing", url: "https://rosauratarot.com.ar" },
+  { id: 40, name: "IIDCA Social Club", detail: "Plataforma para encontrar clubes y espacios deportivos.", category: "Plataforma", url: "https://149.34.224.87" },
+  { id: 39, name: "Chatbot Zigo Dev", detail: "Chatbot de WhatsApp con centro operativo de atención.", category: "Plataforma", url: "https://chatbot.149.34.224.87.sslip.io" },
+  { id: 38, name: "BJ Automotores", detail: "Landing para compra de autos chocados, con deuda o fuera de uso.", category: "Landing", url: "https://bjautomotores.com.ar" },
+  { id: 37, name: "Sofía Tarot", detail: "Landing de tarot, lecturas y orientación espiritual.", category: "Landing", url: "https://sofiatarot.com.ar" },
+  { id: 36, name: "Mentes Modernas", detail: "Sitio para un estudio creativo de contenido y marketing.", category: "Landing", url: "https://mentestudio.com.ar" },
   { id: 35, name: "Brumma", detail: "Tienda online de espumas saborizadas, jarabes y kits para bebidas.", category: "E-commerce", url: "https://brumma.ar" },
   { id: 34, name: "Armentia Propiedades", detail: "Landing inmobiliaria con buscador y panel de administración.", category: "Plataforma", url: "https://armentiapropiedades.com" },
   { id: 33, name: "VIALCO", detail: "Sitio institucional para administración profesional de consorcios.", category: "Institucional", url: "https://vialco.site/" },
