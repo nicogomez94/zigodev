@@ -4,7 +4,7 @@ import { debugDefaults } from './crecer-debug.js';
 const params = new URLSearchParams(location.search);
 const DEBUG = ['localhost', '127.0.0.1'].includes(location.hostname) && params.get('debug') === '1';
 const pinnedNiche = Object.hasOwn(niches, params.get('n')) ? params.get('n') : '';
-const storageKey = DEBUG ? 'zigodev-crecer-debug-v1' : 'zigodev-crecer-v1';
+const storageKey = DEBUG ? 'zigodev-crecer-debug-v2' : 'zigodev-crecer-v2';
 const whatsapp = '5491178258076';
 const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
 

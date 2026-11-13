@@ -542,45 +542,13 @@ button, input {
 }
 
 /* Cinta y secciones */
-.ticker {
-  overflow: hidden;
+.campaign-band {
+  padding: 13px 18px;
   border-block: 1px solid #473060;
   background: #120b20;
   color: var(--accent);
-}
-
-.ticker-track, .ticker-group {
-  display: flex;
-  align-items: center;
-  width: max-content;
-}
-
-.ticker-track {
-  animation: ticker 42s linear infinite;
-}
-
-.ticker-group {
-  justify-content: space-around;
-  min-width: 100vw;
-  gap: 26px;
-  padding: 13px 26px 13px 0;
   font: 800 1.28rem/1.1 var(--display);
-  white-space: nowrap;
-}
-
-.ticker-group span:nth-of-type(even) {
-  color: var(--text);
-}
-
-.ticker-group i {
-  color: #b17afc;
-  font-size: .65em;
-}
-
-@keyframes ticker {
-  to {
-    transform: translateX(-50%);
-  }
+  text-align: center;
 }
 
 .campaign-section {
@@ -885,11 +853,6 @@ button, input {
     grid-template-columns: 1fr;
   }
 
-  .ticker-group {
-    gap: 18px;
-    padding-right: 18px;
-    font-size: 1rem;
-  }
 }
 
 @media (max-width: 360px) {

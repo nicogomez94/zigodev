@@ -36,139 +36,136 @@ export const general = {
   ]
 };
 
+// El orden de estas entradas define el orden del selector de rubros.
 export const niches = {
-  contable: {
+  inmobiliaria: {
     ...general,
-    name: 'Estudio contable',
-    audience: 'estudios contables',
+    name: 'Inmobiliaria',
+    audience: 'inmobiliarias',
     fit: [
-      'Sos dueño/a o socio/a del estudio',
-      'Tienen equipo y lugar para más clientes',
-      'Alguien contesta las consultas en el día'
+      'Querés captar propiedades o generar consultas de compradores e inquilinos',
+      'Tenés una zona de trabajo definida',
+      'Alguien puede responder y coordinar visitas'
     ],
     questions: [
-      titular('¿El estudio es tuyo?'),
+      titular('¿La inmobiliaria es tuya?', 'Sí, es mía'),
       {
-        label: 'Equipo',
-        title: '¿Cuántos son en el estudio?',
-        options: ['Solo yo', 'Somos de 2 a 4', 'Somos 5 o más']
-      },
-      {
-        label: 'Quiere vender',
-        title: '¿Qué servicio querés vender más?',
-        options: ['Monotributo e impuestos', 'Sueldos y cargas sociales', 'Contabilidad de empresas', 'Otro'],
+        label: 'Objetivo',
+        title: '¿Qué querés conseguir con la campaña?',
+        options: ['Captar propiedades', 'Más consultas para venta', 'Más consultas para alquiler', 'Otro'],
         customOption: true
       },
-      capacidad,
+      {
+        label: 'Tipo de propiedad',
+        title: '¿Con qué propiedades trabajás más?',
+        options: ['Departamentos y casas', 'Terrenos y desarrollos', 'Locales y oficinas', 'Otro'],
+        customOption: true
+      },
+      {
+        label: 'Zona',
+        title: '¿En qué ciudad o zona trabajás?',
+        placeholder: 'Ej: Rosario y alrededores'
+      },
       respuesta,
       presupuesto
     ]
   },
-  estetica: {
-    name: 'Clínica estética',
-    audience: 'clínicas estéticas',
-    customer: 'paciente',
-    customers: 'pacientes',
+  automotor: {
+    ...general,
+    name: 'Negocio automotor',
+    audience: 'negocios del rubro automotor',
     fit: [
-      'Tenés médico o médica a cargo',
-      'Querés vender tratamientos, no promos',
-      'Alguien contesta los mensajes en el día'
+      'Querés recibir consultas sobre vehículos o servicios automotores',
+      'Podés cotizar o coordinar visitas y turnos',
+      'Alguien responde los mensajes durante el día'
     ],
     questions: [
-      titular('¿La clínica es tuya?', 'Sí, es mía'),
+      titular('¿El negocio es tuyo?'),
       {
-        label: 'Profesionales',
-        title: '¿Cuántos profesionales atienden?',
-        options: ['Solo yo', '2 o 3 profesionales', '4 o más profesionales']
-      },
-      {
-        label: 'Médico/a a cargo',
-        title: '¿Hay un médico o una médica a cargo?',
-        options: ['Sí', 'No']
-      },
-      {
-        label: 'Quiere vender',
-        title: '¿Qué tratamiento querés vender más?',
-        options: ['Armonización y rellenos', 'Láser y depilación', 'Aparatología corporal', 'Tratamientos capilares', 'Otro'],
+        label: 'Actividad',
+        title: '¿A qué se dedica tu negocio?',
+        options: ['Venta de vehículos', 'Compra de vehículos', 'Detailing o ploteo', 'Taller o servicio técnico', 'Otro'],
         customOption: true
       },
       {
-        label: 'Responden',
-        title: '¿Quién contesta hoy los mensajes de pacientes?',
-        options: ['Yo, cuando puedo', 'Recepción, en el día', 'Recepción, en menos de 1 hora']
+        label: 'Objetivo',
+        title: '¿Qué querés que hagan las personas que te escriban?',
+        options: ['Consultar por un vehículo', 'Ofrecer su vehículo', 'Pedir un presupuesto', 'Reservar un turno', 'Otro'],
+        customOption: true
+      },
+      {
+        label: 'Zona',
+        title: '¿En qué ciudad o zona atendés?',
+        placeholder: 'Ej: Zona norte del Gran Buenos Aires'
+      },
+      respuesta,
+      presupuesto
+    ]
+  },
+  seguros: {
+    ...general,
+    name: 'Productor o broker de seguros',
+    audience: 'productores y brokers de seguros',
+    fit: [
+      'Querés sumar solicitudes de cotización',
+      'Tenés identificadas las coberturas que querés vender',
+      'Podés hacer seguimiento de las cotizaciones'
+    ],
+    questions: [
+      {
+        label: 'Actividad',
+        title: '¿Cuál es tu rol en el negocio?',
+        options: ['Soy productor/a asesor/a', 'Soy dueño/a o socio/a de un broker', 'Trabajo en el equipo comercial', 'Otro'],
+        customOption: true
+      },
+      {
+        label: 'Cobertura',
+        title: '¿Qué tipo de seguro querés vender más?',
+        options: ['Auto o moto', 'Hogar o comercio', 'Vida o salud', 'Seguros para empresas', 'Otro'],
+        customOption: true
+      },
+      {
+        label: 'Zona',
+        title: '¿En qué ciudades o provincias atendés?',
+        placeholder: 'Ej: Santa Fe y Córdoba'
+      },
+      capacidad,
+      {
+        label: 'Seguimiento',
+        title: '¿Cómo hacen el seguimiento de las cotizaciones?',
+        options: ['Lo hago por WhatsApp', 'Lo hace el equipo comercial', 'Usamos un sistema de seguimiento', 'Todavía no hacemos seguimiento']
       },
       presupuesto
     ]
   },
-  odonto: {
-    name: 'Consultorio odontológico',
-    audience: 'odontólogos',
-    customer: 'paciente',
-    customers: 'pacientes',
+  servicios: {
+    ...general,
+    name: 'Empresa de servicios técnicos',
+    audience: 'empresas de servicios técnicos',
     fit: [
-      'Tenés 2 sillones o más',
-      'Querés más pacientes particulares (implantes, ortodoncia)',
-      'Alguien hace el seguimiento de los presupuestos'
+      'Ofrecés instalaciones, reparaciones o mantenimiento',
+      'Tenés una zona de cobertura definida',
+      'Podés recibir nuevos pedidos de presupuesto'
     ],
     questions: [
-      titular('¿El consultorio es tuyo?'),
+      titular('¿La empresa es tuya?', 'Sí, es mía'),
       {
-        label: 'Sillones',
-        title: '¿Cuántos sillones tienen?',
-        options: ['1 sillón', '2 o 3 sillones', '4 o más sillones']
-      },
-      {
-        label: 'Quiere vender',
-        title: '¿Qué tratamiento querés vender más?',
-        options: ['Implantes', 'Ortodoncia o alineadores', 'Estética dental (carillas, blanqueamiento)', 'Otro'],
+        label: 'Servicio',
+        title: '¿Qué servicio querés promocionar?',
+        options: ['Instalaciones', 'Reparaciones', 'Mantenimiento', 'Otro'],
         customOption: true
       },
       {
-        label: 'Pacientes particulares',
-        title: '¿Qué parte de tus pacientes son particulares?',
-        options: ['Menos de la mitad', 'Más o menos la mitad', 'Más de la mitad']
+        label: 'Tipo de cliente',
+        title: '¿A quién le ofrecés el servicio?',
+        options: ['Particulares', 'Comercios y empresas', 'Consorcios', 'A varios tipos de clientes']
       },
       {
-        label: 'Seguimiento de presupuestos',
-        title: '¿Quién hace el seguimiento de los presupuestos?',
-        options: ['Nadie, por ahora', 'Yo, cuando puedo', 'Recepción, con fecha']
+        label: 'Zona',
+        title: '¿En qué zonas prestás el servicio?',
+        placeholder: 'Ej: CABA y Gran Buenos Aires'
       },
-      presupuesto
-    ]
-  },
-  viajes: {
-    name: 'Agencia de viajes',
-    audience: 'agencias de viajes',
-    customer: 'pasajero',
-    customers: 'pasajeros',
-    fit: [
-      'Tu agencia está habilitada',
-      'Vendés viajes de ticket medio o alto',
-      'Alguien contesta las consultas en el día'
-    ],
-    questions: [
-      titular('¿La agencia es tuya?', 'Sí, es mía'),
-      {
-        label: 'Vende más',
-        title: '¿Qué vendés más?',
-        options: ['Salidas grupales propias', 'Paquetes de mayoristas', 'Viajes a medida o lunas de miel', 'Viajes corporativos o de egresados', 'Otro'],
-        customOption: true
-      },
-      {
-        label: 'Gasto por pasajero',
-        title: '¿Cuánto gasta en promedio cada pasajero en un viaje?',
-        options: ['Menos de USD 1.000', 'Entre USD 1.000 y 3.000', 'Más de USD 3.000']
-      },
-      {
-        label: 'Atienden consultas',
-        title: '¿Cuántas personas responden consultas en la agencia?',
-        options: ['Solo yo', '2 o 3 personas', '4 o más personas']
-      },
-      {
-        label: 'Tiempo de respuesta',
-        title: '¿En cuánto contestan una consulta nueva?',
-        options: ['Al otro día o más', 'En el día', 'En menos de 1 hora']
-      },
+      respuesta,
       presupuesto
     ]
   },
