@@ -23,8 +23,25 @@
   display: inline;
 }
 
+.vertical-page .hero-eyebrow {
+  margin-bottom: 18px;
+  color: var(--accent);
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.vertical-page .hero-qualifier {
+  max-width: 36ch;
+  margin-top: 18px;
+  color: var(--text);
+  font: 700 1.1rem/1.35 var(--display);
+}
+
 .vertical-page .hero-description {
   max-width: 39ch;
+  margin-top: 14px;
 }
 
 .vertical-footer {
@@ -54,5 +71,9 @@
     grid-template-areas: 'copy' 'form';
     gap: 38px;
     padding-block: 36px 56px;
+  }
+
+  .vertical-page .hero-eyebrow {
+    margin-bottom: 13px;
   }
 }
