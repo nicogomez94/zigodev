@@ -1,0 +1,58 @@
+/* Páginas de captación por vertical */
+.vertical-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.vertical-page main {
+  flex: 1;
+}
+
+.vertical-page .campaign-hero {
+  min-height: min(760px, calc(100vh - var(--header-height)));
+}
+
+.vertical-page .hero-layout {
+  grid-template-areas: 'copy form';
+  align-items: center;
+  padding-block: 64px;
+}
+
+.vertical-page .hero-copy h1 > span {
+  display: inline;
+}
+
+.vertical-page .hero-description {
+  max-width: 39ch;
+}
+
+.vertical-footer {
+  display: grid;
+  gap: 10px;
+  padding-block: 24px calc(20px + env(safe-area-inset-bottom));
+  color: var(--muted);
+  font-size: .78rem;
+  text-align: center;
+}
+
+.vertical-footer .footer-credit {
+  grid-column: auto;
+  padding-top: 10px;
+}
+
+.vertical-footer a:hover {
+  color: var(--accent);
+}
+
+@media (max-width: 800px) {
+  .vertical-page .campaign-hero {
+    min-height: auto;
+  }
+
+  .vertical-page .hero-layout {
+    grid-template-areas: 'copy' 'form';
+    gap: 38px;
+    padding-block: 36px 56px;
+  }
+}

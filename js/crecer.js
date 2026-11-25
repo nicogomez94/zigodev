@@ -1,10 +1,15 @@
-import { general, niches } from './crecer-preguntas.js';
+import { general, niches as campaignNiches } from './crecer-preguntas.js';
+import { verticals } from './verticales-preguntas.js';
 import { debugDefaults } from './crecer-debug.js';
 
 const params = new URLSearchParams(location.search);
 const DEBUG = ['localhost', '127.0.0.1'].includes(location.hostname) && params.get('debug') === '1';
-const pinnedNiche = Object.hasOwn(niches, params.get('n')) ? params.get('n') : '';
-const storageKey = DEBUG ? 'zigodev-crecer-debug-v2' : 'zigodev-crecer-v2';
+const vertical = document.body.dataset.vertical;
+const niches = vertical ? verticals : campaignNiches;
+const pinnedNiche = vertical || (Object.hasOwn(niches, params.get('n')) ? params.get('n') : '');
+const storageKey = vertical
+  ? `zigodev-${vertical}${DEBUG ? '-debug' : ''}-v1`
+  : DEBUG ? 'zigodev-crecer-debug-v2' : 'zigodev-crecer-v2';
 const whatsapp = '5491178258076';
 const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
@@ -20,13 +25,21 @@ const fields = [
     max: 30,
     help: 'Con código de área, sin 0 ni 15. Ej: 11 1234 5678'
   },
-  {
-    name: 'instagram',
-    label: 'Instagram del negocio',
-    optional: true,
-    max: 60,
-    placeholder: '@tunegocio'
-  }
+  vertical
+    ? {
+        name: 'presencia',
+        label: 'Web o Instagram del negocio',
+        optional: true,
+        max: 100,
+        placeholder: 'Sitio web o @usuario'
+      }
+    : {
+        name: 'instagram',
+        label: 'Instagram del negocio',
+        optional: true,
+        max: 60,
+        placeholder: '@tunegocio'
+      }
 ];
 
 function loadDraft() {
@@ -294,11 +307,12 @@ function whatsappMessage() {
   const lines = [
     `Hola, soy ${contact.nombre} de ${contact.negocio} (${contact.ciudad}). Completé el formulario de ZigoDev:`
   ];
-  if (state.niche !== 'otro') lines.push(`• Rubro: ${niche.name}`);
+  if (state.niche !== 'otro') lines.push(`• ${vertical ? 'Consulta' : 'Rubro'}: ${niche.name}`);
   niche.questions.forEach((question, index) => {
     lines.push(`• ${question.label}: ${state.answers[index].value}`);
   });
   lines.push(`• WhatsApp: ${contact.whatsapp}`);
+  if (contact.presencia) lines.push(`• Web / Instagram: ${contact.presencia}`);
   if (contact.instagram) {
     const handle = contact.instagram.replace(/^.*instagram\.com\//i, '').replace(/^@+/, '').split(/[/?#]/)[0];
     if (handle) lines.push(`• Instagram: @${handle}`);
@@ -358,9 +372,9 @@ function render(focus = false) {
 
   if (displayedNiche !== state.niche) {
     const copy = niches[state.niche] || general;
-    for (const node of heroText) node.textContent = copy[node.dataset.niche];
-    fitList.replaceChildren(...copy.fit.map(text => element('li', {}, icon('check'), text)));
-    document.title = `Publicidad en redes para ${copy.audience} | ZigoDev`;
+    if (!vertical) for (const node of heroText) node.textContent = copy[node.dataset.niche];
+    if (fitList) fitList.replaceChildren(...copy.fit.map(text => element('li', {}, icon('check'), text)));
+    if (!vertical) document.title = `Publicidad en redes para ${copy.audience} | ZigoDev`;
     displayedNiche = state.niche;
   }
 
