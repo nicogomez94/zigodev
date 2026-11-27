@@ -1,6 +1,7 @@
 import { general, niches as campaignNiches } from './crecer-preguntas.js';
 import { verticals } from './verticales-preguntas.js';
 import { debugDefaults } from './crecer-debug.js';
+import { createLeadTracker } from './lead-tracking.js';
 
 const params = new URLSearchParams(location.search);
 const DEBUG = ['localhost', '127.0.0.1'].includes(location.hostname) && params.get('debug') === '1';
@@ -33,7 +34,6 @@ function trackingParams() {
 const fields = [
   { name: 'nombre', label: 'Tu nombre', autocomplete: 'name', max: 80 },
   { name: 'negocio', label: 'Nombre del negocio', autocomplete: 'organization', max: 100 },
-  { name: 'ciudad', label: 'Ciudad', autocomplete: 'address-level2', max: 80 },
   {
     name: 'whatsapp',
     label: 'Tu WhatsApp',
@@ -79,18 +79,22 @@ function loadDraft() {
 }
 
 const state = loadDraft();
+const trackProgress = vertical
+  ? createLeadTracker(DEBUG ? '' : document.body.dataset.trackingEndpoint, vertical, state, storageKey)
+  : () => {};
 const container = document.querySelector('#questionnaire');
 const card = document.querySelector('#filtro');
 const progress = document.querySelector('#form-progress');
 const fitList = document.querySelector('#fit-list');
 const heroText = document.querySelectorAll('[data-niche]');
 
-function saveDraft() {
+function saveDraft(immediate = false) {
   try {
     sessionStorage.setItem(storageKey, JSON.stringify(state));
   } catch {
     // Las respuestas siguen disponibles en memoria.
   }
+  trackProgress(immediate);
 }
 
 function element(tag, attributes = {}, ...children) {
@@ -296,7 +300,6 @@ function contactScreen() {
     const errors = {
       nombre: values.nombre.length < 2 && 'Poné tu nombre.',
       negocio: values.negocio.length < 2 && 'Poné el nombre del negocio.',
-      ciudad: values.ciudad.length < 2 && '¿En qué ciudad están?',
       whatsapp: !/^\d{8,15}$/.test(values.whatsapp.replace(/\D/g, '')) && 'Revisá el número: código de área + número.'
     };
     for (const { input, error } of controls) {
@@ -324,7 +327,7 @@ function whatsappMessage() {
   const niche = niches[state.niche];
   const contact = state.contact;
   const lines = [
-    `Hola, soy ${contact.nombre} de ${contact.negocio} (${contact.ciudad}). Completé el formulario de ZigoDev:`
+    `Hola, soy ${contact.nombre} de ${contact.negocio}. Completé el formulario de ZigoDev:`
   ];
   if (state.niche !== 'otro') lines.push(`• ${vertical ? 'Consulta' : 'Rubro'}: ${niche.name}`);
   niche.questions.forEach((question, index) => {
@@ -355,7 +358,7 @@ function reviewScreen() {
   link.addEventListener('click', () => {
     if (!state.openedWhatsApp) track('track', 'Lead', trackingParams(), { eventID: state.reference });
     state.openedWhatsApp = true;
-    saveDraft();
+    saveDraft(true);
     label.textContent = 'Abrir WhatsApp de nuevo';
     status.textContent = 'Si ya mandaste el mensaje, te respondemos por ahí.';
   });
@@ -398,7 +401,7 @@ function render(focus = false) {
     displayedNiche = state.niche;
   }
 
-  saveDraft();
+  saveDraft(true);
   if (focus) {
     const heading = container.querySelector('h3');
     heading.focus({ preventScroll: true });

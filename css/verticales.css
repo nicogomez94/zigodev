@@ -44,6 +44,14 @@
   margin-top: 14px;
 }
 
+.vertical-page .tracking-note {
+  max-width: 38ch;
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: .75rem;
+  line-height: 1.35;
+}
+
 .vertical-footer {
   display: grid;
   gap: 10px;
