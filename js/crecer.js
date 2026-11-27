@@ -13,6 +13,23 @@ const storageKey = vertical
 const whatsapp = '5491178258076';
 const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
+// Píxel de Meta: si fbq no cargó (bloqueador, etc.), el formulario sigue funcionando igual.
+function track(type, event, params = {}, options) {
+  try {
+    if (typeof window.fbq === 'function') window.fbq(type, event, params, options);
+  } catch {
+    // No frenamos el formulario por un error de medición.
+  }
+}
+
+function trackingParams() {
+  const niche = niches[state.niche];
+  const budgetIndex = niche?.questions.findIndex(question => question.label === 'Inversión estimada') ?? -1;
+  const params = { content_category: vertical || state.niche || 'general' };
+  if (budgetIndex >= 0 && state.answers[budgetIndex]) params.presupuesto = state.answers[budgetIndex].value;
+  return params;
+}
+
 const fields = [
   { name: 'nombre', label: 'Tu nombre', autocomplete: 'name', max: 80 },
   { name: 'negocio', label: 'Nombre del negocio', autocomplete: 'organization', max: 100 },
@@ -148,6 +165,7 @@ function nicheScreen() {
 function saveAnswer(value, custom = false) {
   const index = state.index;
   const questions = niches[state.niche].questions;
+  if (index === 0 && !state.answers[0]) track('trackCustom', 'EvaluacionIniciada', trackingParams());
   state.answers[index] = { value, custom };
   state.openedWhatsApp = false;
   if (index + 1 === questions.length) {
@@ -294,6 +312,7 @@ function contactScreen() {
     }
     if (JSON.stringify(values) !== JSON.stringify(state.contact)) state.openedWhatsApp = false;
     state.contact = values;
+    track('track', 'CompleteRegistration', trackingParams());
     openStage('review');
   });
 
@@ -334,6 +353,7 @@ function reviewScreen() {
     rel: 'noopener noreferrer'
   }, icon('whatsapp'), label);
   link.addEventListener('click', () => {
+    if (!state.openedWhatsApp) track('track', 'Lead', trackingParams(), { eventID: state.reference });
     state.openedWhatsApp = true;
     saveDraft();
     label.textContent = 'Abrir WhatsApp de nuevo';
